@@ -125,7 +125,10 @@ document.addEventListener("DOMContentLoaded", () => {
           observer.unobserve(entry.target);
         }
       });
-    }, { rootMargin: "0px 0px -8%", threshold: 0.08 });
+    // Un simple contact avec la zone visible suffit : sur mobile, une longue
+    // prière peut être plus de dix fois plus haute que l'écran et ne jamais
+    // atteindre un seuil calculé en pourcentage de sa hauteur totale.
+    }, { rootMargin: "0px 0px -8%", threshold: 0 });
 
     sections.forEach((section) => revealObserver.observe(section));
 
