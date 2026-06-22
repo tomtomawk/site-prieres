@@ -1,0 +1,352 @@
+/*
+ * Prières quotidiennes
+ * Une mise en page légère inspirée d'un missel traditionnel.
+ */
+
+:root {
+  --ivory: #f7f1e5;
+  --paper: #fffdf8;
+  --ink: #2e2923;
+  --muted: #73685b;
+  --rubric: #8b2f2d;
+  --rubric-dark: #682220;
+  --gold: #b99a62;
+  --line: #d9cdb9;
+  --nav-height: 4rem;
+  --reading-width: 45rem;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-height) + 1rem);
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 50% 0, rgb(255 255 255 / 70%), transparent 32rem),
+    var(--ivory);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1.1rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: 0.5rem;
+  left: 0.5rem;
+  padding: 0.6rem 0.85rem;
+  color: #fff;
+  background: var(--rubric-dark);
+  border-radius: 0.25rem;
+  transform: translateY(-150%);
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.main-nav {
+  position: fixed;
+  z-index: 50;
+  inset: 0 0 auto;
+  min-height: var(--nav-height);
+  background: rgb(247 241 229 / 94%);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 0.2rem 1.2rem rgb(65 48 31 / 7%);
+  backdrop-filter: blur(0.4rem);
+}
+
+.nav-inner {
+  display: flex;
+  min-height: var(--nav-height);
+  max-width: var(--reading-width);
+  margin: 0 auto;
+  padding: 0 1rem;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.45rem, 2vw, 1.5rem);
+}
+
+.nav-link {
+  position: relative;
+  padding: 0.65rem 0.15rem;
+  color: var(--muted);
+  font-size: clamp(0.78rem, 2.5vw, 0.92rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 180ms ease;
+}
+
+.nav-link::after {
+  position: absolute;
+  right: 0;
+  bottom: 0.45rem;
+  left: 0;
+  height: 2px;
+  background: var(--rubric);
+  content: "";
+  transform: scaleX(0);
+  transition: transform 180ms ease;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible,
+.nav-link.is-active {
+  color: var(--rubric-dark);
+}
+
+.nav-link.is-active::after {
+  transform: scaleX(1);
+}
+
+.nav-separator {
+  color: var(--gold);
+  font-size: 0.65rem;
+}
+
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 4px;
+}
+
+.site-header {
+  max-width: var(--reading-width);
+  margin: 0 auto;
+  padding: calc(var(--nav-height) + 4.25rem) 1.25rem 4.5rem;
+  text-align: center;
+}
+
+.cross {
+  margin: 0 0 0.75rem;
+  color: var(--rubric);
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+h1,
+h2 {
+  color: var(--rubric-dark);
+  font-weight: 400;
+  text-wrap: balance;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 8vw, 4.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+
+.subtitle {
+  max-width: 34rem;
+  margin: 1rem auto 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  font-style: italic;
+}
+
+.prayer-book {
+  width: min(calc(100% - 2rem), var(--reading-width));
+  margin: 0 auto;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: 0 1rem 3rem rgb(68 51 32 / 9%);
+}
+
+.prayer-section {
+  position: relative;
+  min-height: 70vh;
+  padding: clamp(3.5rem, 9vw, 6.5rem) clamp(1.35rem, 7vw, 4.5rem);
+  scroll-margin-top: calc(var(--nav-height) + 1rem);
+  text-align: center;
+}
+
+.prayer-section + .prayer-section {
+  border-top: 1px solid var(--line);
+}
+
+.prayer-section + .prayer-section::before {
+  position: absolute;
+  top: -0.45rem;
+  left: 50%;
+  width: 4rem;
+  height: 0.9rem;
+  background: var(--paper);
+  color: var(--gold);
+  content: "· ✦ ·";
+  font-size: 0.8rem;
+  line-height: 0.9rem;
+  transform: translateX(-50%);
+}
+
+.ornament {
+  margin-bottom: 1rem;
+  color: var(--gold);
+  font-size: 1rem;
+}
+
+.moment {
+  margin: 0 0 0.25rem;
+  color: var(--rubric);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+h2 {
+  margin: 0 0 2.2rem;
+  font-size: clamp(1.85rem, 6vw, 2.8rem);
+  line-height: 1.2;
+}
+
+.prayer-text {
+  max-width: 36rem;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.prayer-text p {
+  margin: 0 0 1.15em;
+}
+
+.prayer-text p:first-child::first-letter {
+  float: left;
+  margin: 0.08em 0.1em 0 0;
+  color: var(--rubric);
+  font-size: 3.15em;
+  line-height: 0.78;
+}
+
+.prayer-text .amen {
+  margin-top: 1.7rem;
+  color: var(--rubric-dark);
+  font-style: italic;
+  font-weight: 700;
+  text-align: center;
+}
+
+.site-footer {
+  padding: 3.5rem 1rem 6rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-style: italic;
+  text-align: center;
+}
+
+.back-to-top {
+  position: fixed;
+  z-index: 40;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  display: inline-flex;
+  padding: 0.55rem 0.8rem;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--rubric-dark);
+  background: rgb(255 253 248 / 94%);
+  border: 1px solid var(--line);
+  border-radius: 2rem;
+  box-shadow: 0 0.35rem 1.2rem rgb(68 51 32 / 12%);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 0.78rem;
+  text-decoration: none;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.75rem);
+  transition: opacity 180ms ease, transform 180ms ease, border-color 180ms ease;
+}
+
+.back-to-top:hover {
+  border-color: var(--gold);
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* L'animation n'est activée qu'après le chargement de JavaScript. */
+.js-enabled .prayer-section {
+  opacity: 0;
+  transform: translateY(1rem);
+  transition: opacity 550ms ease, transform 550ms ease;
+}
+
+.js-enabled .prayer-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 38rem) {
+  :root {
+    --nav-height: 3.65rem;
+  }
+
+  body {
+    font-size: 1.02rem;
+    line-height: 1.68;
+  }
+
+  .site-header {
+    padding-top: calc(var(--nav-height) + 3.5rem);
+    padding-bottom: 3.25rem;
+  }
+
+  .prayer-book {
+    width: min(calc(100% - 1rem), var(--reading-width));
+  }
+
+  .prayer-section {
+    min-height: 65vh;
+  }
+
+  .back-to-top span:last-child {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .back-to-top {
+    width: 2.6rem;
+    height: 2.6rem;
+    padding: 0;
+    justify-content: center;
+    font-size: 1.1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
