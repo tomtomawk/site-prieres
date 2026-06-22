@@ -13,8 +13,81 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const sections = [...document.querySelectorAll(".prayer-section")];
   const navLinks = [...document.querySelectorAll(".nav-link")];
+  const mainNavigation = document.querySelector(".main-nav");
   const backToTop = document.querySelector(".back-to-top");
+  const translationToggle = document.querySelector(".translation-toggle");
+  const languageOptions = [...translationToggle.querySelectorAll(".language-option")];
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const languageModes = ["french", "latin", "parallel"];
+  const languageModeDetails = {
+    french: {
+      label: "FR",
+      name: "français",
+      htmlLang: "fr",
+      pageTitle: "Prières quotidiennes",
+      navLabel: "Prières de la journée",
+      backLabel: "Retourner en haut de la page"
+    },
+    latin: {
+      label: "LAT",
+      name: "latin",
+      htmlLang: "la",
+      pageTitle: "Preces quotidianae",
+      navLabel: "Preces diei",
+      backLabel: "Ad summum paginae redire"
+    },
+    parallel: {
+      label: "FR | LAT",
+      name: "français et latin en vis-à-vis",
+      htmlLang: "fr",
+      pageTitle: "Prières quotidiennes — Français et latin",
+      navLabel: "Prières de la journée",
+      backLabel: "Retourner en haut de la page"
+    }
+  };
+
+  /** Applique le mode choisi et le conserve pour la prochaine visite. */
+  function setLanguageMode(mode) {
+    const safeMode = languageModes.includes(mode) ? mode : "french";
+    const details = languageModeDetails[safeMode];
+
+    document.documentElement.dataset.languageMode = safeMode;
+    document.documentElement.lang = details.htmlLang;
+    document.title = details.pageTitle;
+    mainNavigation.setAttribute("aria-label", details.navLabel);
+    backToTop.setAttribute("aria-label", details.backLabel);
+
+    languageOptions.forEach((option) => {
+      const isSelected = safeMode === option.dataset.mode;
+      option.classList.toggle("is-selected", isSelected);
+      option.setAttribute("aria-pressed", String(isSelected));
+    });
+
+    translationToggle.setAttribute("aria-label", `Langues affichées : ${details.name}`);
+
+    try {
+      localStorage.setItem("prayer-language-mode", safeMode);
+    } catch (error) {
+      // Le changement reste fonctionnel si le stockage local est indisponible.
+    }
+  }
+
+  let savedLanguageMode = "french";
+
+  try {
+    savedLanguageMode = localStorage.getItem("prayer-language-mode") || "french";
+  } catch (error) {
+    // Le français reste le mode par défaut.
+  }
+
+  setLanguageMode(savedLanguageMode);
+
+  languageOptions.forEach((option) => {
+    option.addEventListener("click", () => {
+      setLanguageMode(option.dataset.mode);
+    });
+  });
 
   /** Retourne l'identifiant de la prière adaptée à l'heure locale. */
   function getPrayerIdForHour(hour) {

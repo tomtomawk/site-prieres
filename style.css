@@ -59,6 +59,89 @@ a {
   transform: translateY(0);
 }
 
+.translation-toggle {
+  position: fixed;
+  z-index: 70;
+  top: 0.65rem;
+  right: max(0.75rem, env(safe-area-inset-right));
+  display: inline-flex;
+  min-width: 12.2rem;
+  min-height: 2.65rem;
+  padding: 0.45rem 0.7rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  color: var(--rubric-dark);
+  background: rgb(255 253 248 / 96%);
+  border: 1px solid var(--line);
+  border-radius: 2rem;
+  box-shadow: 0 0.25rem 1rem rgb(68 51 32 / 12%);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  transition: border-color 180ms ease, background 180ms ease;
+}
+
+.translation-toggle:focus-within,
+.translation-toggle:hover {
+  background: #fff;
+  border-color: var(--gold);
+}
+
+.translation-toggle-icon {
+  color: var(--gold);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.language-option {
+  min-width: 2.55rem;
+  padding: 0.28rem 0.42rem;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  border-radius: 1rem;
+  cursor: pointer;
+  font: 700 0.72rem/1 Georgia, "Times New Roman", Times, serif;
+  letter-spacing: 0.06em;
+  transition: color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.language-option-parallel {
+  min-width: 3.85rem;
+}
+
+.language-option:hover {
+  color: var(--rubric-dark);
+}
+
+.language-option.is-selected {
+  color: #fffdf8;
+  background: var(--rubric-dark);
+  box-shadow: 0 0.15rem 0.4rem rgb(68 51 32 / 18%);
+}
+
+.language-option:focus-visible {
+  outline-offset: 2px;
+}
+
+.translation-divider {
+  width: 1px;
+  height: 1.25rem;
+  background: var(--line);
+}
+
+.ui-la {
+  display: none;
+}
+
+html[data-language-mode="latin"] .ui-fr {
+  display: none;
+}
+
+html[data-language-mode="latin"] .ui-la {
+  display: inline;
+}
+
 .main-nav {
   position: fixed;
   z-index: 50;
@@ -222,6 +305,70 @@ h2 {
   text-align: left;
 }
 
+.prayer-pair {
+  display: grid;
+  gap: clamp(2rem, 6vw, 4.5rem);
+}
+
+.prayer-language {
+  min-width: 0;
+}
+
+.prayer-subtitle {
+  margin: 2.4rem 0 1rem;
+  color: var(--rubric-dark);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.prayer-subtitle:first-child {
+  margin-top: 0;
+}
+
+.prayer-list {
+  margin: 0 0 1.15em;
+  padding: 0;
+  list-style: none;
+}
+
+.prayer-list li + li {
+  margin-top: 0.35rem;
+}
+
+.prayer-la {
+  display: none;
+}
+
+html[data-language-mode="latin"] .prayer-fr {
+  display: none;
+}
+
+html[data-language-mode="latin"] .prayer-la {
+  display: block;
+}
+
+html[data-language-mode="parallel"] .prayer-book {
+  width: min(calc(100% - 2rem), 75rem);
+}
+
+html[data-language-mode="parallel"] .prayer-text {
+  max-width: 64rem;
+}
+
+html[data-language-mode="parallel"] .prayer-pair {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+html[data-language-mode="parallel"] .prayer-la {
+  display: block;
+  padding-left: clamp(2rem, 5vw, 4rem);
+  border-left: 1px solid var(--line);
+}
+
 .prayer-text p {
   margin: 0 0 1.15em;
 }
@@ -308,6 +455,23 @@ h2 {
   .site-header {
     padding-top: calc(var(--nav-height) + 3.5rem);
     padding-bottom: 3.25rem;
+  }
+
+  .translation-toggle {
+    top: 4.15rem;
+    min-width: 12rem;
+    min-height: 2.35rem;
+  }
+
+  html[data-language-mode="parallel"] .prayer-pair {
+    grid-template-columns: 1fr;
+  }
+
+  html[data-language-mode="parallel"] .prayer-la {
+    padding-top: 2rem;
+    padding-left: 0;
+    border-top: 1px solid var(--line);
+    border-left: 0;
   }
 
   .prayer-book {
