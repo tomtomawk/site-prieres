@@ -1,4 +1,4 @@
-import { readFile, readdir, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
@@ -6,6 +6,9 @@ const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "
 const prayersDirectory = path.join(projectRoot, "prieres");
 const templatePath = path.join(projectRoot, "templates", "index.template.html");
 const outputPath = path.join(projectRoot, "index.html");
+const publicDirectory = path.join(projectRoot, "public");
+const publicOutputPath = path.join(publicDirectory, "index.html");
+const staticAssets = ["script.js", "style.css"];
 const checkOnly = process.argv.includes("--check");
 
 const requiredMetadata = [
@@ -186,17 +189,32 @@ async function build() {
 
   if (checkOnly) {
     const currentHtml = await readFile(outputPath, "utf8");
+    const publicHtml = await readFile(publicOutputPath, "utf8");
 
-    if (currentHtml !== generatedHtml) {
+    if (currentHtml !== generatedHtml || publicHtml !== generatedHtml) {
       throw new Error("index.html n’est pas à jour. Lancez « npm run build ».");
     }
+
+    await Promise.all(staticAssets.map(async (filename) => {
+      const source = await readFile(path.join(projectRoot, filename), "utf8");
+      const published = await readFile(path.join(publicDirectory, filename), "utf8");
+
+      if (source !== published) {
+        throw new Error(`public/${filename} n’est pas à jour. Lancez « npm run build ».`);
+      }
+    }));
 
     console.log(`Vérification réussie : ${prayers.length} prières Markdown.`);
     return;
   }
 
+  await mkdir(publicDirectory, { recursive: true });
   await writeFile(outputPath, generatedHtml, "utf8");
-  console.log(`index.html généré à partir de ${prayers.length} prières Markdown.`);
+  await writeFile(publicOutputPath, generatedHtml, "utf8");
+  await Promise.all(staticAssets.map((filename) => (
+    copyFile(path.join(projectRoot, filename), path.join(publicDirectory, filename))
+  )));
+  console.log(`index.html et public/ générés à partir de ${prayers.length} prières Markdown.`);
 }
 
 build().catch((error) => {

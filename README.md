@@ -23,7 +23,7 @@ Après une modification, reconstruisez la page :
 npm run build
 ```
 
-Le fichier `index.html` est généré automatiquement. Il ne faut pas modifier directement les blocs de prières qu’il contient.
+Les fichiers `index.html` et `public/` sont générés automatiquement. Il ne faut pas modifier directement les blocs de prières qu’ils contiennent.
 
 Pour vérifier que le JavaScript et la page générée sont à jour :
 
@@ -34,7 +34,17 @@ npm run check
 ## Cloudflare Pages
 
 - Commande de build : `npm run build`
-- Dossier de sortie : `.`
+- Dossier de sortie : `public`
+
+## Cloudflare Workers Builds
+
+Le fichier `wrangler.jsonc` permet aussi le déploiement avec la commande utilisée par Cloudflare Workers Builds :
+
+```sh
+npx wrangler versions upload
+```
+
+Wrangler publie uniquement le contenu statique du dossier `public/`.
 
 ## Structure
 
@@ -42,3 +52,4 @@ npm run check
 - `templates/index.template.html` : structure générale de la page
 - `scripts/build-prayers.mjs` : générateur statique
 - `index.html` : page générée publiée
+- `public/` : assets statiques transmis à Cloudflare
