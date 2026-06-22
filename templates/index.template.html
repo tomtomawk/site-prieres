@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Prières catholiques pour sanctifier le matin, le repas et le soir.">
+  <meta name="theme-color" content="#f7f1e5">
+  <title>Prières quotidiennes</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body id="haut">
+  <!-- Ce fichier est généré par npm run build. Modifiez les fichiers de prieres/ plutôt que index.html. -->
+  <a class="skip-link" href="#contenu"><span class="ui-fr">Aller au contenu principal</span><span class="ui-la">Ad materiam principalem</span></a>
+
+  <div class="translation-toggle" role="group" aria-label="Langues affichées">
+    <span class="translation-toggle-icon" aria-hidden="true">Æ</span>
+    <button class="language-option is-selected" type="button" data-mode="french" aria-pressed="true" title="Afficher uniquement le français">FR</button>
+    <span class="translation-divider" aria-hidden="true"></span>
+    <button class="language-option language-option-parallel" type="button" data-mode="parallel" aria-pressed="false" title="Afficher le français et le latin en vis-à-vis">FR·LAT</button>
+    <span class="translation-divider" aria-hidden="true"></span>
+    <button class="language-option" type="button" data-mode="latin" aria-pressed="false" title="Afficher uniquement le latin">LAT</button>
+  </div>
+
+  <nav class="main-nav" aria-label="Prières de la journée">
+    <div class="nav-inner">
+{{PRAYER_NAVIGATION}}
+    </div>
+  </nav>
+
+  <header class="site-header">
+    <p class="cross" aria-hidden="true">✝</p>
+    <h1><span class="ui-fr">Prières quotidiennes</span><span class="ui-la">Preces quotidianae</span></h1>
+    <p class="subtitle"><span class="ui-fr">Sanctifiez votre journée par la prière.</span><span class="ui-la">Diem vestrum oratione sanctificate.</span></p>
+  </header>
+
+  <main id="contenu" class="prayer-book">
+{{PRAYER_SECTIONS}}
+  </main>
+
+  <footer class="site-footer">
+    <p><span class="ui-fr">Dans la paix et le recueillement.</span><span class="ui-la">In pace et recollectione.</span></p>
+  </footer>
+
+  <a class="back-to-top" href="#haut" aria-label="Retourner en haut de la page">
+    <span aria-hidden="true">↑</span>
+    <span><span class="ui-fr">Retour en haut</span><span class="ui-la">Ad summum</span></span>
+  </a>
+</body>
+</html>

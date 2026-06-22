@@ -41,6 +41,9 @@ build/Release
 node_modules/
 jspm_packages/
 
+# Photographies utilisées comme sources de transcription
+/prieres/Image/
+
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 

@@ -1,0 +1,10 @@
+{
+  "name": "site-prieres",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-prayers.mjs",
+    "check": "node --check script.js && node --check scripts/build-prayers.mjs && node scripts/build-prayers.mjs --check"
+  }
+}
