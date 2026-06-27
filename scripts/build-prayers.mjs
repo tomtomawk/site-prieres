@@ -138,7 +138,7 @@ function renderNavigation(prayers) {
 
 function renderPrayer(prayer) {
   return `    <section id="${prayer.id}" class="prayer-section" aria-labelledby="titre-${prayer.id}">
-      <div class="ornament" aria-hidden="true">✦</div>
+      <div class="ornament" aria-hidden="true">✝</div>
       <p class="moment"><span class="ui-fr">${escapeHtml(prayer.moment_fr)}</span><span class="ui-la">${escapeHtml(prayer.moment_la)}</span></p>
       <h2 id="titre-${prayer.id}"><span class="ui-fr">${escapeHtml(prayer.title_fr)}</span><span class="ui-la">${escapeHtml(prayer.title_la)}</span></h2>
       <div class="prayer-text prayer-pair">

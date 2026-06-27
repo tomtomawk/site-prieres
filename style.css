@@ -459,8 +459,24 @@ html[data-language-mode="parallel"] .prayer-la {
     min-height: 2.35rem;
   }
 
+  html[data-language-mode="parallel"] .prayer-book {
+    width: min(calc(100% - 0.5rem), 75rem);
+  }
+
+  html[data-language-mode="parallel"] .prayer-section {
+    padding-right: 0.55rem;
+    padding-left: 0.55rem;
+  }
+
+  html[data-language-mode="parallel"] .prayer-text {
+    max-width: none;
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+
   html[data-language-mode="parallel"] .prayer-pair {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 0.65rem;
   }
 
   html[data-language-mode="parallel"] .prayer-fr,
@@ -469,10 +485,28 @@ html[data-language-mode="parallel"] .prayer-la {
   }
 
   html[data-language-mode="parallel"] .prayer-la {
-    padding-top: 2rem;
-    padding-left: 0;
-    border-top: 1px solid var(--line);
-    border-left: 0;
+    padding-top: 0;
+    padding-left: 0.65rem;
+    border-top: 0;
+    border-left: 1px solid var(--line);
+  }
+
+  html[data-language-mode="parallel"] .prayer-subtitle {
+    margin: 1.45rem 0 0.55rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    line-height: 1.25;
+  }
+
+  html[data-language-mode="parallel"] .prayer-text p {
+    margin-bottom: 0.75em;
+  }
+
+  html[data-language-mode="parallel"] .prayer-text p:first-child::first-letter {
+    float: none;
+    margin: 0;
+    font-size: inherit;
+    line-height: inherit;
   }
 
   .prayer-book {
