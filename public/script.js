@@ -47,10 +47,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  function getLanguagesFromMode(mode) {
+    if (mode === "latin") {
+      return { fr: false, la: true };
+    }
+
+    if (mode === "parallel") {
+      return { fr: true, la: true };
+    }
+
+    return { fr: true, la: false };
+  }
+
+  function getModeFromLanguages(languages) {
+    if (languages.fr && languages.la) {
+      return "parallel";
+    }
+
+    if (languages.la) {
+      return "latin";
+    }
+
+    return "french";
+  }
+
   /** Applique le mode choisi et le conserve pour la prochaine visite. */
   function setLanguageMode(mode) {
     const safeMode = languageModes.includes(mode) ? mode : "french";
     const details = languageModeDetails[safeMode];
+    const displayedLanguages = getLanguagesFromMode(safeMode);
 
     document.documentElement.dataset.languageMode = safeMode;
     document.documentElement.lang = details.htmlLang;
@@ -59,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
     backToTop.setAttribute("aria-label", details.backLabel);
 
     languageOptions.forEach((option) => {
-      const isSelected = safeMode === option.dataset.mode;
+      const isSelected = Boolean(displayedLanguages[option.dataset.language]);
       option.classList.toggle("is-selected", isSelected);
       option.setAttribute("aria-pressed", String(isSelected));
     });
@@ -85,7 +110,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   languageOptions.forEach((option) => {
     option.addEventListener("click", () => {
-      setLanguageMode(option.dataset.mode);
+      const currentLanguages = getLanguagesFromMode(document.documentElement.dataset.languageMode);
+      const language = option.dataset.language;
+
+      currentLanguages[language] = !currentLanguages[language];
+
+      if (!currentLanguages.fr && !currentLanguages.la) {
+        currentLanguages[language] = true;
+      }
+
+      setLanguageMode(getModeFromLanguages(currentLanguages));
     });
   });
 

@@ -5,7 +5,6 @@ import path from "node:path";
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const prayersDirectory = path.join(projectRoot, "prieres");
 const templatePath = path.join(projectRoot, "templates", "index.template.html");
-const outputPath = path.join(projectRoot, "index.html");
 const publicDirectory = path.join(projectRoot, "public");
 const publicOutputPath = path.join(publicDirectory, "index.html");
 const staticAssets = ["script.js", "style.css"];
@@ -188,11 +187,10 @@ async function build() {
   }
 
   if (checkOnly) {
-    const currentHtml = await readFile(outputPath, "utf8");
     const publicHtml = await readFile(publicOutputPath, "utf8");
 
-    if (currentHtml !== generatedHtml || publicHtml !== generatedHtml) {
-      throw new Error("index.html n’est pas à jour. Lancez « npm run build ».");
+    if (publicHtml !== generatedHtml) {
+      throw new Error("public/index.html n’est pas à jour. Lancez « npm run build ».");
     }
 
     await Promise.all(staticAssets.map(async (filename) => {
@@ -209,12 +207,11 @@ async function build() {
   }
 
   await mkdir(publicDirectory, { recursive: true });
-  await writeFile(outputPath, generatedHtml, "utf8");
   await writeFile(publicOutputPath, generatedHtml, "utf8");
   await Promise.all(staticAssets.map((filename) => (
     copyFile(path.join(projectRoot, filename), path.join(publicDirectory, filename))
   )));
-  console.log(`index.html et public/ générés à partir de ${prayers.length} prières Markdown.`);
+  console.log(`public/ généré à partir de ${prayers.length} prières Markdown.`);
 }
 
 build().catch((error) => {

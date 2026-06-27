@@ -106,10 +106,6 @@ a {
   transition: color 160ms ease, background 160ms ease, box-shadow 160ms ease;
 }
 
-.language-option-parallel {
-  min-width: 3.85rem;
-}
-
 .language-option:hover {
   color: var(--rubric-dark);
 }

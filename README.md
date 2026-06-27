@@ -23,7 +23,7 @@ Après une modification, reconstruisez la page :
 npm run build
 ```
 
-Les fichiers `index.html` et `public/` sont générés automatiquement. Il ne faut pas modifier directement les blocs de prières qu’ils contiennent.
+Le dossier `public/` est généré automatiquement. Il ne faut pas modifier directement les blocs de prières contenus dans `public/index.html`.
 
 Pour vérifier que le JavaScript et la page générée sont à jour :
 
@@ -51,5 +51,4 @@ Wrangler publie uniquement le contenu statique du dossier `public/`.
 - `prieres/` : sources Markdown
 - `templates/index.template.html` : structure générale de la page
 - `scripts/build-prayers.mjs` : générateur statique
-- `index.html` : page générée publiée
-- `public/` : assets statiques transmis à Cloudflare
+- `public/` : page générée et assets statiques transmis à Cloudflare
