@@ -42,19 +42,19 @@ Ainsi soit-il.
 ℟. Et concepit de Spiritu Sancto.
 
 Ave Maria, gratia plena, Dominus tecum. Benedicta tu in mulieribus, et benedictus fructus ventris tui, Jesus.
-Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostrae. Amen.
+Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostræ. Amen.
 
 ℣. Ecce Ancilla Domini.
 ℟. Fiat mihi secundum Verbum tuum.
 
 Ave Maria, gratia plena, Dominus tecum. Benedicta tu in mulieribus, et benedictus fructus ventris tui, Jesus.
-Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostrae. Amen.
+Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostræ. Amen.
 
 ℣. Et Verbum caro factum est.
 ℟. Et habitavit in nobis.
 
 Ave Maria, gratia plena, Dominus tecum. Benedicta tu in mulieribus, et benedictus fructus ventris tui, Jesus.
-Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostrae. Amen.
+Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostræ. Amen.
 
 ℣. Ora pro nobis, Sancta Dei Genetrix.
 ℟. Ut digni efficiamur promissionibus Christi.

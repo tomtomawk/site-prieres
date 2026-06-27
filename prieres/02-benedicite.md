@@ -2,8 +2,8 @@
 id: benedicite
 order: 2
 nav_fr: Bénédicité
-nav_la: Benedictio
-moment_fr: Avant le repas
+nav_la: Benedicite
+moment_fr: Prière qu'on récite avant et après chaque repas
 moment_la: Ante mensam
 title_fr: Bénédicité
 title_la: Benedictio mensae
@@ -11,16 +11,31 @@ title_la: Benedictio mensae
 
 ## Français
 
-Bénissez-nous, Seigneur, bénissez ce repas, ceux qui l’ont préparé, et procurez du pain à ceux qui n’en ont pas.
+# Avant le repas
 
-Que cette nourriture soutienne nos forces afin que nous puissions mieux Vous servir et servir nos frères.
+℣. Bénissez. 
+℟. C'est au Seigneur à bénir.
+℣. Que la main de Jésus-Christ bénisse nos personnes et la nourriture que nous allons prendre.
+Au nom du Père, et du Fils, et du Saint-Esprit. Ainsi soit-il.
 
-Amen.
+# Après le repas
+
+Nous vous rendons grâces de tous vos buenfaits, ô Dieu tout-puissant, qui vivez et régnez dans tous les siècles des siècles.
+℟. Ainsi soit-il.
+℣. Que le seigneur nous donne sa paix et la vie éternelle.
+℟. Ainsi soit-il.
 
 ## Latin
 
-Benedic nos, Domine, benedic hanc mensam et eos qui eam paraverunt, atque panem tribue iis qui eo carent.
+# Avant le repas
 
-Hic cibus vires nostras sustineat, ut Tibi et fratribus nostris melius servire possimus.
+℣. Benedicite. 
+℟. Dominus.
+℣. Nos et ea quæ sumus sumpturi benedicat dextera Christi. In nomine Patris et Filii et Spiritus Sancti. Amen.
 
-Amen.
+# Après le repas
+
+Agimus tibi gratias omipotens Deus, pro universis beneficis tuis : qui vivis et régnas in sæcula sæcolorum.
+℟.Amen.
+℣.Dominus det nobis suam pacem et vitam æternam.
+℟.Amen.
