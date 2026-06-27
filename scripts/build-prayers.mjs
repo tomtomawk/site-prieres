@@ -37,7 +37,7 @@ function renderInlineMarkdown(value) {
     .replace(/\[([^\]]+)]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2">$1</a>');
 }
 
-function renderMarkdown(markdown) {
+function getMarkdownBlocks(markdown) {
   const blocks = markdown
     .trim()
     .split(/\r?\n\s*\r?\n/)
@@ -48,26 +48,50 @@ function renderMarkdown(markdown) {
     throw new Error("Une section de langue est vide.");
   }
 
-  return blocks
-    .map((block) => {
-      if (/^###\s+[^\r\n]+$/.test(block)) {
-        return `          <h3 class="prayer-subtitle">${renderInlineMarkdown(block.replace(/^###\s+/, ""))}</h3>`;
-      }
+  return blocks;
+}
 
-      const lines = block.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+function renderMarkdownBlock(block, indent = "          ") {
+  if (/^###\s+[^\r\n]+$/.test(block)) {
+    return `${indent}<h3 class="prayer-subtitle">${renderInlineMarkdown(block.replace(/^###\s+/, ""))}</h3>`;
+  }
 
-      if (lines.every((line) => line.startsWith("- "))) {
-        const items = lines
-          .map((line) => `            <li>${renderInlineMarkdown(line.slice(2))}</li>`)
-          .join("\n");
-        return `          <ul class="prayer-list">\n${items}\n          </ul>`;
-      }
+  const lines = block.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
 
-      const className = block.toLocaleLowerCase("fr") === "amen." ? ' class="amen"' : "";
-      const content = lines.map(renderInlineMarkdown).join("<br>\n            ");
-      return `          <p${className}>${content}</p>`;
-    })
-    .join("\n");
+  if (lines.every((line) => line.startsWith("- "))) {
+    const items = lines
+      .map((line) => `${indent}  <li>${renderInlineMarkdown(line.slice(2))}</li>`)
+      .join("\n");
+    return `${indent}<ul class="prayer-list">\n${items}\n${indent}</ul>`;
+  }
+
+  const className = block.toLocaleLowerCase("fr") === "amen." ? ' class="amen"' : "";
+  const content = lines.map(renderInlineMarkdown).join("<br>\n            ");
+  return `${indent}<p${className}>${content}</p>`;
+}
+
+function renderMarkdown(markdown) {
+  return getMarkdownBlocks(markdown).map((block) => renderMarkdownBlock(block)).join("\n");
+}
+
+function renderAlignedMarkdown(french, latin) {
+  const frenchBlocks = getMarkdownBlocks(french);
+  const latinBlocks = getMarkdownBlocks(latin);
+  const rowCount = Math.max(frenchBlocks.length, latinBlocks.length);
+
+  return Array.from({ length: rowCount }, (_, index) => {
+    const frenchBlock = frenchBlocks[index] ? renderMarkdownBlock(frenchBlocks[index], "            ") : "";
+    const latinBlock = latinBlocks[index] ? renderMarkdownBlock(latinBlocks[index], "            ") : "";
+
+    return `          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+${frenchBlock}
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+${latinBlock}
+            </div>
+          </div>`;
+  }).join("\n");
 }
 
 function parseFrontMatter(source, filename) {
@@ -147,6 +171,9 @@ ${renderMarkdown(prayer.french)}
         </div>
         <div class="prayer-language prayer-la" lang="la">
 ${renderMarkdown(prayer.latin)}
+        </div>
+        <div class="prayer-aligned">
+${renderAlignedMarkdown(prayer.french, prayer.latin)}
         </div>
       </div>
     </section>`;

@@ -310,6 +310,29 @@ h2 {
   min-width: 0;
 }
 
+.prayer-aligned {
+  display: none;
+}
+
+.prayer-aligned-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 5vw, 4rem);
+}
+
+.prayer-aligned-row + .prayer-aligned-row {
+  margin-top: 1.15em;
+}
+
+.prayer-aligned-cell {
+  min-width: 0;
+}
+
+.prayer-aligned-cell + .prayer-aligned-cell {
+  padding-left: clamp(2rem, 5vw, 4rem);
+  border-left: 1px solid var(--line);
+}
+
 .prayer-subtitle {
   margin: 2.4rem 0 1rem;
   color: var(--rubric-dark);
@@ -356,13 +379,25 @@ html[data-language-mode="parallel"] .prayer-text {
 }
 
 html[data-language-mode="parallel"] .prayer-pair {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: block;
+}
+
+html[data-language-mode="parallel"] .prayer-language {
+  display: none;
+}
+
+html[data-language-mode="parallel"] .prayer-aligned {
+  display: block;
 }
 
 html[data-language-mode="parallel"] .prayer-la {
   display: block;
   padding-left: clamp(2rem, 5vw, 4rem);
   border-left: 1px solid var(--line);
+}
+
+html[data-language-mode="parallel"] .prayer-language {
+  display: none;
 }
 
 .prayer-text p {
@@ -474,20 +509,13 @@ html[data-language-mode="parallel"] .prayer-la {
     line-height: 1.45;
   }
 
-  html[data-language-mode="parallel"] .prayer-pair {
+  html[data-language-mode="parallel"] .prayer-aligned-row {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 0.65rem;
   }
 
-  html[data-language-mode="parallel"] .prayer-fr,
-  html[data-language-mode="parallel"] .prayer-la {
-    display: block;
-  }
-
-  html[data-language-mode="parallel"] .prayer-la {
-    padding-top: 0;
+  html[data-language-mode="parallel"] .prayer-aligned-cell + .prayer-aligned-cell {
     padding-left: 0.65rem;
-    border-top: 0;
     border-left: 1px solid var(--line);
   }
 
