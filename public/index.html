@@ -25,11 +25,9 @@
     <div class="nav-inner">
       <a class="nav-link" href="#matin"><span class="ui-fr">Matin</span><span class="ui-la">Mane</span></a>
       <span class="nav-separator" aria-hidden="true">•</span>
-      <a class="nav-link" href="#benedicite"><span class="ui-fr">Bénédicité</span><span class="ui-la">Benedicite</span></a>
+      <a class="nav-link" href="#midi"><span class="ui-fr">Midi</span><span class="ui-la">Meridies</span></a>
       <span class="nav-separator" aria-hidden="true">•</span>
       <a class="nav-link" href="#soir"><span class="ui-fr">Soir</span><span class="ui-la">Vesperi</span></a>
-      <span class="nav-separator" aria-hidden="true">•</span>
-      <a class="nav-link" href="#angelus"><span class="ui-fr">Angelus</span><span class="ui-la">Angelus</span></a>
     </div>
   </nav>
 
@@ -40,10 +38,170 @@
   </header>
 
   <main id="contenu" class="prayer-book">
-    <section id="matin" class="prayer-section" aria-labelledby="titre-matin">
-      <div class="ornament" aria-hidden="true">✝</div>
+    <section id="matin" class="day-chapter" aria-labelledby="titre-matin">
+      <header class="chapter-header">
+        <div class="ornament" aria-hidden="true">✝</div>
+        <p class="moment"><span class="ui-fr">Temps de prière</span><span class="ui-la">Tempus orationis</span></p>
+        <h2 id="titre-matin"><span class="ui-fr">Matin</span><span class="ui-la">Mane</span></h2>
+        <nav class="chapter-schedule" aria-label="Prières du Matin">
+          <a class="chapter-schedule-link" href="#angelus-matin">
+            <time datetime="06:00">06h00</time>
+            <span><span class="ui-fr">Angelus</span><span class="ui-la">Angelus Domini</span></span>
+          </a>
+          <a class="chapter-schedule-link" href="#priere-matin">
+            <time datetime="06:30">06h30</time>
+            <span><span class="ui-fr">Prière du matin</span><span class="ui-la">Oratio matutina</span></span>
+          </a>
+          <a class="chapter-schedule-link" href="#repas-matin">
+            <time datetime="07:00">07h00</time>
+            <span><span class="ui-fr">Bénédicité et action de grâce</span><span class="ui-la">Benedicite et gratiarum actio</span></span>
+          </a>
+        </nav>
+      </header>
+      <section id="angelus-matin" class="prayer-section prayer-time" aria-labelledby="titre-angelus-matin" data-chapter="matin">
+        <div class="prayer-time-marker" aria-hidden="true">
+          <span class="prayer-time-dot">✝</span>
+          <time datetime="06:00">06h00</time>
+        </div>
+        <div class="prayer-time-content">
+      <p class="moment"><span class="ui-fr">Matin, midi et soir</span><span class="ui-la">Mane, meridie et vespere</span></p>
+      <h3 id="titre-angelus-matin"><span class="ui-fr">Angelus</span><span class="ui-la">Angelus Domini</span></h3>
+      <div class="prayer-text prayer-pair">
+        <div class="prayer-language prayer-fr" lang="fr">
+          <p>℣. L&#39;Ange du Seigneur annonça à Marie.<br>
+            ℟. Et elle conçut du Saint-Esprit.</p>
+          <p>Je vous salue, Marie, pleine de grâce ; le Seigneur est avec vous ; vous êtes bénie entre toutes les femmes, et Jésus, le fruit de vos entrailles, est béni.<br>
+            Sainte Marie, Mère de Dieu, priez pour nous pauvres pécheurs, maintenant et à l&#39;heure de notre mort. Ainsi soit-il.</p>
+          <p>℣. Voici la servante du Seigneur.<br>
+            ℟. Qu&#39;il me soit fait selon votre parole.</p>
+          <p>Je vous salue, Marie, pleine de grâce ; le Seigneur est avec vous ; vous êtes bénie entre toutes les femmes, et Jésus, le fruit de vos entrailles, est béni.<br>
+            Sainte Marie, Mère de Dieu, priez pour nous pauvres pécheurs, maintenant et à l&#39;heure de notre mort. Ainsi soit-il.</p>
+          <p>℣. Et le Verbe s&#39;est fait chair.<br>
+            ℟. Et il a habité parmi nous.</p>
+          <p>Je vous salue, Marie, pleine de grâce ; le Seigneur est avec vous ; vous êtes bénie entre toutes les femmes, et Jésus, le fruit de vos entrailles, est béni.<br>
+            Sainte Marie, Mère de Dieu, priez pour nous pauvres pécheurs, maintenant et à l&#39;heure de notre mort. Ainsi soit-il.</p>
+          <p>℣. Priez pour nous, sainte Mère de Dieu.<br>
+            ℟. Afin que nous soyons rendus dignes des promesses de Jésus-Christ.</p>
+          <p>Prions. Nous vous supplions, Seigneur, de répandre votre grâce dans nos âmes, afin qu&#39;ayant connu, par la voix de l&#39;Ange, l&#39;Incarnation de Jésus-Christ, votre Fils, nous arrivions, par sa Passion et par sa Croix, à la gloire de sa Résurrection. Par le même Jésus-Christ Notre-Seigneur.</p>
+          <p>Ainsi soit-il.</p>
+        </div>
+        <div class="prayer-language prayer-la" lang="la">
+          <p>℣. Angelus Domini nuntiavit Mariae.<br>
+            ℟. Et concepit de Spiritu Sancto.</p>
+          <p>Ave Maria, gratia plena, Dominus tecum. Benedicta tu in mulieribus, et benedictus fructus ventris tui, Jesus.<br>
+            Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostræ. Amen.</p>
+          <p>℣. Ecce Ancilla Domini.<br>
+            ℟. Fiat mihi secundum Verbum tuum.</p>
+          <p>Ave Maria, gratia plena, Dominus tecum. Benedicta tu in mulieribus, et benedictus fructus ventris tui, Jesus.<br>
+            Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostræ. Amen.</p>
+          <p>℣. Et Verbum caro factum est.<br>
+            ℟. Et habitavit in nobis.</p>
+          <p>Ave Maria, gratia plena, Dominus tecum. Benedicta tu in mulieribus, et benedictus fructus ventris tui, Jesus.<br>
+            Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostræ. Amen.</p>
+          <p>℣. Ora pro nobis, Sancta Dei Genetrix.<br>
+            ℟. Ut digni efficiamur promissionibus Christi.</p>
+          <p>Oremus. Gratiam tuam quaesumus, Domine, mentibus nostris infunde ; ut qui, angelo nuntiante, Christi Filii tui Incarnationem cognovimus, per passionem eius et crucem, ad resurrectionis gloriam perducamur. Per eundem Christum Dominum nostrum.</p>
+          <p class="amen">Amen.</p>
+        </div>
+        <div class="prayer-aligned">
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>℣. L&#39;Ange du Seigneur annonça à Marie.<br>
+            ℟. Et elle conçut du Saint-Esprit.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>℣. Angelus Domini nuntiavit Mariae.<br>
+            ℟. Et concepit de Spiritu Sancto.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Je vous salue, Marie, pleine de grâce ; le Seigneur est avec vous ; vous êtes bénie entre toutes les femmes, et Jésus, le fruit de vos entrailles, est béni.<br>
+            Sainte Marie, Mère de Dieu, priez pour nous pauvres pécheurs, maintenant et à l&#39;heure de notre mort. Ainsi soit-il.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Ave Maria, gratia plena, Dominus tecum. Benedicta tu in mulieribus, et benedictus fructus ventris tui, Jesus.<br>
+            Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostræ. Amen.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>℣. Voici la servante du Seigneur.<br>
+            ℟. Qu&#39;il me soit fait selon votre parole.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>℣. Ecce Ancilla Domini.<br>
+            ℟. Fiat mihi secundum Verbum tuum.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Je vous salue, Marie, pleine de grâce ; le Seigneur est avec vous ; vous êtes bénie entre toutes les femmes, et Jésus, le fruit de vos entrailles, est béni.<br>
+            Sainte Marie, Mère de Dieu, priez pour nous pauvres pécheurs, maintenant et à l&#39;heure de notre mort. Ainsi soit-il.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Ave Maria, gratia plena, Dominus tecum. Benedicta tu in mulieribus, et benedictus fructus ventris tui, Jesus.<br>
+            Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostræ. Amen.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>℣. Et le Verbe s&#39;est fait chair.<br>
+            ℟. Et il a habité parmi nous.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>℣. Et Verbum caro factum est.<br>
+            ℟. Et habitavit in nobis.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Je vous salue, Marie, pleine de grâce ; le Seigneur est avec vous ; vous êtes bénie entre toutes les femmes, et Jésus, le fruit de vos entrailles, est béni.<br>
+            Sainte Marie, Mère de Dieu, priez pour nous pauvres pécheurs, maintenant et à l&#39;heure de notre mort. Ainsi soit-il.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Ave Maria, gratia plena, Dominus tecum. Benedicta tu in mulieribus, et benedictus fructus ventris tui, Jesus.<br>
+            Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostræ. Amen.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>℣. Priez pour nous, sainte Mère de Dieu.<br>
+            ℟. Afin que nous soyons rendus dignes des promesses de Jésus-Christ.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>℣. Ora pro nobis, Sancta Dei Genetrix.<br>
+            ℟. Ut digni efficiamur promissionibus Christi.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Prions. Nous vous supplions, Seigneur, de répandre votre grâce dans nos âmes, afin qu&#39;ayant connu, par la voix de l&#39;Ange, l&#39;Incarnation de Jésus-Christ, votre Fils, nous arrivions, par sa Passion et par sa Croix, à la gloire de sa Résurrection. Par le même Jésus-Christ Notre-Seigneur.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Oremus. Gratiam tuam quaesumus, Domine, mentibus nostris infunde ; ut qui, angelo nuntiante, Christi Filii tui Incarnationem cognovimus, per passionem eius et crucem, ad resurrectionis gloriam perducamur. Per eundem Christum Dominum nostrum.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Ainsi soit-il.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p class="amen">Amen.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </section>
+      <section id="priere-matin" class="prayer-section prayer-time" aria-labelledby="titre-priere-matin" data-chapter="matin">
+        <div class="prayer-time-marker" aria-hidden="true">
+          <span class="prayer-time-dot">✝</span>
+          <time datetime="06:30">06h30</time>
+        </div>
+        <div class="prayer-time-content">
       <p class="moment"><span class="ui-fr">Au commencement du jour</span><span class="ui-la">Initio diei</span></p>
-      <h2 id="titre-matin"><span class="ui-fr">Prière du matin</span><span class="ui-la">Oratio matutina</span></h2>
+      <h3 id="titre-priere-matin"><span class="ui-fr">Prière du matin</span><span class="ui-la">Oratio matutina</span></h3>
       <div class="prayer-text prayer-pair">
         <div class="prayer-language prayer-fr" lang="fr">
           <h3 class="prayer-subtitle">Signe de la croix</h3>
@@ -986,12 +1144,16 @@
           </div>
         </div>
       </div>
-    </section>
-
-    <section id="benedicite" class="prayer-section" aria-labelledby="titre-benedicite">
-      <div class="ornament" aria-hidden="true">✝</div>
+        </div>
+      </section>
+      <section id="repas-matin" class="prayer-section prayer-time" aria-labelledby="titre-repas-matin" data-chapter="matin">
+        <div class="prayer-time-marker" aria-hidden="true">
+          <span class="prayer-time-dot">✝</span>
+          <time datetime="07:00">07h00</time>
+        </div>
+        <div class="prayer-time-content">
       <p class="moment"><span class="ui-fr">Prière qu&#39;on récite avant et après chaque repas</span><span class="ui-la">Ante et post mensam</span></p>
-      <h2 id="titre-benedicite"><span class="ui-fr">Bénédicité</span><span class="ui-la">Benedictio mensae</span></h2>
+      <h3 id="titre-repas-matin"><span class="ui-fr">Bénédicité et action de grâce</span><span class="ui-la">Benedicite et gratiarum actio</span></h3>
       <div class="prayer-text prayer-pair">
         <div class="prayer-language prayer-fr" lang="fr">
           <h3 class="prayer-subtitle">Avant le repas</h3>
@@ -1062,66 +1224,34 @@
           </div>
         </div>
       </div>
+        </div>
+      </section>
     </section>
 
-    <section id="soir" class="prayer-section" aria-labelledby="titre-soir">
-      <div class="ornament" aria-hidden="true">✝</div>
-      <p class="moment"><span class="ui-fr">Au terme du jour</span><span class="ui-la">Fine diei</span></p>
-      <h2 id="titre-soir"><span class="ui-fr">Prière du soir</span><span class="ui-la">Oratio vespertina</span></h2>
-      <div class="prayer-text prayer-pair">
-        <div class="prayer-language prayer-fr" lang="fr">
-          <p>Seigneur, je Vous remercie pour cette journée, pour les grâces reçues et pour les personnes placées sur mon chemin.</p>
-          <p>Pardonnez mes fautes, gardez ceux que j’aime et accordez le repos à ceux qui en ont besoin.</p>
-          <p>Entre Vos mains, je remets mon esprit et Vous confie la nuit qui vient.</p>
-          <p class="amen">Amen.</p>
+    <section id="midi" class="day-chapter" aria-labelledby="titre-midi">
+      <header class="chapter-header">
+        <div class="ornament" aria-hidden="true">✝</div>
+        <p class="moment"><span class="ui-fr">Temps de prière</span><span class="ui-la">Tempus orationis</span></p>
+        <h2 id="titre-midi"><span class="ui-fr">Midi</span><span class="ui-la">Meridies</span></h2>
+        <nav class="chapter-schedule" aria-label="Prières du Midi">
+          <a class="chapter-schedule-link" href="#angelus-midi">
+            <time datetime="12:00">12h00</time>
+            <span><span class="ui-fr">Angelus</span><span class="ui-la">Angelus Domini</span></span>
+          </a>
+          <a class="chapter-schedule-link" href="#repas-midi">
+            <time datetime="12:15">12h15</time>
+            <span><span class="ui-fr">Bénédicité et action de grâce</span><span class="ui-la">Benedicite et gratiarum actio</span></span>
+          </a>
+        </nav>
+      </header>
+      <section id="angelus-midi" class="prayer-section prayer-time" aria-labelledby="titre-angelus-midi" data-chapter="midi">
+        <div class="prayer-time-marker" aria-hidden="true">
+          <span class="prayer-time-dot">✝</span>
+          <time datetime="12:00">12h00</time>
         </div>
-        <div class="prayer-language prayer-la" lang="la">
-          <p>Domine, gratias Tibi ago pro hoc die, pro gratiis acceptis et pro hominibus in via mea positis.</p>
-          <p>Delicta mea dimitte, custodi eos quos amo et requiem concede iis qui ea indigent.</p>
-          <p>In manus Tuas spiritum meum commendo et noctem venturam Tibi confido.</p>
-          <p class="amen">Amen.</p>
-        </div>
-        <div class="prayer-aligned">
-          <div class="prayer-aligned-row">
-            <div class="prayer-aligned-cell" lang="fr">
-            <p>Seigneur, je Vous remercie pour cette journée, pour les grâces reçues et pour les personnes placées sur mon chemin.</p>
-            </div>
-            <div class="prayer-aligned-cell" lang="la">
-            <p>Domine, gratias Tibi ago pro hoc die, pro gratiis acceptis et pro hominibus in via mea positis.</p>
-            </div>
-          </div>
-          <div class="prayer-aligned-row">
-            <div class="prayer-aligned-cell" lang="fr">
-            <p>Pardonnez mes fautes, gardez ceux que j’aime et accordez le repos à ceux qui en ont besoin.</p>
-            </div>
-            <div class="prayer-aligned-cell" lang="la">
-            <p>Delicta mea dimitte, custodi eos quos amo et requiem concede iis qui ea indigent.</p>
-            </div>
-          </div>
-          <div class="prayer-aligned-row">
-            <div class="prayer-aligned-cell" lang="fr">
-            <p>Entre Vos mains, je remets mon esprit et Vous confie la nuit qui vient.</p>
-            </div>
-            <div class="prayer-aligned-cell" lang="la">
-            <p>In manus Tuas spiritum meum commendo et noctem venturam Tibi confido.</p>
-            </div>
-          </div>
-          <div class="prayer-aligned-row">
-            <div class="prayer-aligned-cell" lang="fr">
-            <p class="amen">Amen.</p>
-            </div>
-            <div class="prayer-aligned-cell" lang="la">
-            <p class="amen">Amen.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="angelus" class="prayer-section" aria-labelledby="titre-angelus">
-      <div class="ornament" aria-hidden="true">✝</div>
+        <div class="prayer-time-content">
       <p class="moment"><span class="ui-fr">Matin, midi et soir</span><span class="ui-la">Mane, meridie et vespere</span></p>
-      <h2 id="titre-angelus"><span class="ui-fr">Angelus</span><span class="ui-la">Angelus Domini</span></h2>
+      <h3 id="titre-angelus-midi"><span class="ui-fr">Angelus</span><span class="ui-la">Angelus Domini</span></h3>
       <div class="prayer-text prayer-pair">
         <div class="prayer-language prayer-fr" lang="fr">
           <p>℣. L&#39;Ange du Seigneur annonça à Marie.<br>
@@ -1248,6 +1378,384 @@
           </div>
         </div>
       </div>
+        </div>
+      </section>
+      <section id="repas-midi" class="prayer-section prayer-time" aria-labelledby="titre-repas-midi" data-chapter="midi">
+        <div class="prayer-time-marker" aria-hidden="true">
+          <span class="prayer-time-dot">✝</span>
+          <time datetime="12:15">12h15</time>
+        </div>
+        <div class="prayer-time-content">
+      <p class="moment"><span class="ui-fr">Prière qu&#39;on récite avant et après chaque repas</span><span class="ui-la">Ante et post mensam</span></p>
+      <h3 id="titre-repas-midi"><span class="ui-fr">Bénédicité et action de grâce</span><span class="ui-la">Benedicite et gratiarum actio</span></h3>
+      <div class="prayer-text prayer-pair">
+        <div class="prayer-language prayer-fr" lang="fr">
+          <h3 class="prayer-subtitle">Avant le repas</h3>
+          <p>℣. Bénissez.<br>
+            ℟. C&#39;est au Seigneur à bénir.<br>
+            ℣. Que la main de Jésus-Christ bénisse nos personnes et la nourriture que nous allons prendre.<br>
+            Au nom du Père, et du Fils, et du Saint-Esprit. Ainsi soit-il.</p>
+          <h3 class="prayer-subtitle">Après le repas</h3>
+          <p>Nous vous rendons grâces de tous vos bienfaits, ô Dieu tout-puissant, qui vivez et régnez dans tous les siècles des siècles.<br>
+            ℟. Ainsi soit-il.<br>
+            ℣. Que le Seigneur nous donne sa paix et la vie éternelle.<br>
+            ℟. Ainsi soit-il.</p>
+        </div>
+        <div class="prayer-language prayer-la" lang="la">
+          <h3 class="prayer-subtitle">Avant le repas</h3>
+          <p>℣. Benedicite.<br>
+            ℟. Dominus.<br>
+            ℣. Nos et ea quæ sumus sumpturi benedicat dextera Christi. In nomine Patris et Filii et Spiritus Sancti. Amen.</p>
+          <h3 class="prayer-subtitle">Après le repas</h3>
+          <p>Agimus tibi gratias, omnipotens Deus, pro universis beneficiis tuis : qui vivis et regnas in sæcula sæculorum.<br>
+            ℟. Amen.<br>
+            ℣. Dominus det nobis suam pacem et vitam æternam.<br>
+            ℟. Amen.</p>
+        </div>
+        <div class="prayer-aligned">
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <h3 class="prayer-subtitle">Avant le repas</h3>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <h3 class="prayer-subtitle">Avant le repas</h3>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>℣. Bénissez.<br>
+            ℟. C&#39;est au Seigneur à bénir.<br>
+            ℣. Que la main de Jésus-Christ bénisse nos personnes et la nourriture que nous allons prendre.<br>
+            Au nom du Père, et du Fils, et du Saint-Esprit. Ainsi soit-il.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>℣. Benedicite.<br>
+            ℟. Dominus.<br>
+            ℣. Nos et ea quæ sumus sumpturi benedicat dextera Christi. In nomine Patris et Filii et Spiritus Sancti. Amen.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <h3 class="prayer-subtitle">Après le repas</h3>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <h3 class="prayer-subtitle">Après le repas</h3>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Nous vous rendons grâces de tous vos bienfaits, ô Dieu tout-puissant, qui vivez et régnez dans tous les siècles des siècles.<br>
+            ℟. Ainsi soit-il.<br>
+            ℣. Que le Seigneur nous donne sa paix et la vie éternelle.<br>
+            ℟. Ainsi soit-il.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Agimus tibi gratias, omnipotens Deus, pro universis beneficiis tuis : qui vivis et regnas in sæcula sæculorum.<br>
+            ℟. Amen.<br>
+            ℣. Dominus det nobis suam pacem et vitam æternam.<br>
+            ℟. Amen.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </section>
+    </section>
+
+    <section id="soir" class="day-chapter" aria-labelledby="titre-soir">
+      <header class="chapter-header">
+        <div class="ornament" aria-hidden="true">✝</div>
+        <p class="moment"><span class="ui-fr">Temps de prière</span><span class="ui-la">Tempus orationis</span></p>
+        <h2 id="titre-soir"><span class="ui-fr">Soir</span><span class="ui-la">Vesperi</span></h2>
+        <nav class="chapter-schedule" aria-label="Prières du Soir">
+          <a class="chapter-schedule-link" href="#angelus-soir">
+            <time datetime="18:00">18h00</time>
+            <span><span class="ui-fr">Angelus</span><span class="ui-la">Angelus Domini</span></span>
+          </a>
+          <a class="chapter-schedule-link" href="#repas-soir">
+            <time datetime="19:30">19h30</time>
+            <span><span class="ui-fr">Bénédicité et action de grâce</span><span class="ui-la">Benedicite et gratiarum actio</span></span>
+          </a>
+          <a class="chapter-schedule-link" href="#priere-soir">
+            <time datetime="21:30">21h30</time>
+            <span><span class="ui-fr">Prière du soir</span><span class="ui-la">Oratio vespertina</span></span>
+          </a>
+        </nav>
+      </header>
+      <section id="angelus-soir" class="prayer-section prayer-time" aria-labelledby="titre-angelus-soir" data-chapter="soir">
+        <div class="prayer-time-marker" aria-hidden="true">
+          <span class="prayer-time-dot">✝</span>
+          <time datetime="18:00">18h00</time>
+        </div>
+        <div class="prayer-time-content">
+      <p class="moment"><span class="ui-fr">Matin, midi et soir</span><span class="ui-la">Mane, meridie et vespere</span></p>
+      <h3 id="titre-angelus-soir"><span class="ui-fr">Angelus</span><span class="ui-la">Angelus Domini</span></h3>
+      <div class="prayer-text prayer-pair">
+        <div class="prayer-language prayer-fr" lang="fr">
+          <p>℣. L&#39;Ange du Seigneur annonça à Marie.<br>
+            ℟. Et elle conçut du Saint-Esprit.</p>
+          <p>Je vous salue, Marie, pleine de grâce ; le Seigneur est avec vous ; vous êtes bénie entre toutes les femmes, et Jésus, le fruit de vos entrailles, est béni.<br>
+            Sainte Marie, Mère de Dieu, priez pour nous pauvres pécheurs, maintenant et à l&#39;heure de notre mort. Ainsi soit-il.</p>
+          <p>℣. Voici la servante du Seigneur.<br>
+            ℟. Qu&#39;il me soit fait selon votre parole.</p>
+          <p>Je vous salue, Marie, pleine de grâce ; le Seigneur est avec vous ; vous êtes bénie entre toutes les femmes, et Jésus, le fruit de vos entrailles, est béni.<br>
+            Sainte Marie, Mère de Dieu, priez pour nous pauvres pécheurs, maintenant et à l&#39;heure de notre mort. Ainsi soit-il.</p>
+          <p>℣. Et le Verbe s&#39;est fait chair.<br>
+            ℟. Et il a habité parmi nous.</p>
+          <p>Je vous salue, Marie, pleine de grâce ; le Seigneur est avec vous ; vous êtes bénie entre toutes les femmes, et Jésus, le fruit de vos entrailles, est béni.<br>
+            Sainte Marie, Mère de Dieu, priez pour nous pauvres pécheurs, maintenant et à l&#39;heure de notre mort. Ainsi soit-il.</p>
+          <p>℣. Priez pour nous, sainte Mère de Dieu.<br>
+            ℟. Afin que nous soyons rendus dignes des promesses de Jésus-Christ.</p>
+          <p>Prions. Nous vous supplions, Seigneur, de répandre votre grâce dans nos âmes, afin qu&#39;ayant connu, par la voix de l&#39;Ange, l&#39;Incarnation de Jésus-Christ, votre Fils, nous arrivions, par sa Passion et par sa Croix, à la gloire de sa Résurrection. Par le même Jésus-Christ Notre-Seigneur.</p>
+          <p>Ainsi soit-il.</p>
+        </div>
+        <div class="prayer-language prayer-la" lang="la">
+          <p>℣. Angelus Domini nuntiavit Mariae.<br>
+            ℟. Et concepit de Spiritu Sancto.</p>
+          <p>Ave Maria, gratia plena, Dominus tecum. Benedicta tu in mulieribus, et benedictus fructus ventris tui, Jesus.<br>
+            Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostræ. Amen.</p>
+          <p>℣. Ecce Ancilla Domini.<br>
+            ℟. Fiat mihi secundum Verbum tuum.</p>
+          <p>Ave Maria, gratia plena, Dominus tecum. Benedicta tu in mulieribus, et benedictus fructus ventris tui, Jesus.<br>
+            Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostræ. Amen.</p>
+          <p>℣. Et Verbum caro factum est.<br>
+            ℟. Et habitavit in nobis.</p>
+          <p>Ave Maria, gratia plena, Dominus tecum. Benedicta tu in mulieribus, et benedictus fructus ventris tui, Jesus.<br>
+            Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostræ. Amen.</p>
+          <p>℣. Ora pro nobis, Sancta Dei Genetrix.<br>
+            ℟. Ut digni efficiamur promissionibus Christi.</p>
+          <p>Oremus. Gratiam tuam quaesumus, Domine, mentibus nostris infunde ; ut qui, angelo nuntiante, Christi Filii tui Incarnationem cognovimus, per passionem eius et crucem, ad resurrectionis gloriam perducamur. Per eundem Christum Dominum nostrum.</p>
+          <p class="amen">Amen.</p>
+        </div>
+        <div class="prayer-aligned">
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>℣. L&#39;Ange du Seigneur annonça à Marie.<br>
+            ℟. Et elle conçut du Saint-Esprit.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>℣. Angelus Domini nuntiavit Mariae.<br>
+            ℟. Et concepit de Spiritu Sancto.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Je vous salue, Marie, pleine de grâce ; le Seigneur est avec vous ; vous êtes bénie entre toutes les femmes, et Jésus, le fruit de vos entrailles, est béni.<br>
+            Sainte Marie, Mère de Dieu, priez pour nous pauvres pécheurs, maintenant et à l&#39;heure de notre mort. Ainsi soit-il.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Ave Maria, gratia plena, Dominus tecum. Benedicta tu in mulieribus, et benedictus fructus ventris tui, Jesus.<br>
+            Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostræ. Amen.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>℣. Voici la servante du Seigneur.<br>
+            ℟. Qu&#39;il me soit fait selon votre parole.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>℣. Ecce Ancilla Domini.<br>
+            ℟. Fiat mihi secundum Verbum tuum.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Je vous salue, Marie, pleine de grâce ; le Seigneur est avec vous ; vous êtes bénie entre toutes les femmes, et Jésus, le fruit de vos entrailles, est béni.<br>
+            Sainte Marie, Mère de Dieu, priez pour nous pauvres pécheurs, maintenant et à l&#39;heure de notre mort. Ainsi soit-il.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Ave Maria, gratia plena, Dominus tecum. Benedicta tu in mulieribus, et benedictus fructus ventris tui, Jesus.<br>
+            Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostræ. Amen.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>℣. Et le Verbe s&#39;est fait chair.<br>
+            ℟. Et il a habité parmi nous.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>℣. Et Verbum caro factum est.<br>
+            ℟. Et habitavit in nobis.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Je vous salue, Marie, pleine de grâce ; le Seigneur est avec vous ; vous êtes bénie entre toutes les femmes, et Jésus, le fruit de vos entrailles, est béni.<br>
+            Sainte Marie, Mère de Dieu, priez pour nous pauvres pécheurs, maintenant et à l&#39;heure de notre mort. Ainsi soit-il.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Ave Maria, gratia plena, Dominus tecum. Benedicta tu in mulieribus, et benedictus fructus ventris tui, Jesus.<br>
+            Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostræ. Amen.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>℣. Priez pour nous, sainte Mère de Dieu.<br>
+            ℟. Afin que nous soyons rendus dignes des promesses de Jésus-Christ.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>℣. Ora pro nobis, Sancta Dei Genetrix.<br>
+            ℟. Ut digni efficiamur promissionibus Christi.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Prions. Nous vous supplions, Seigneur, de répandre votre grâce dans nos âmes, afin qu&#39;ayant connu, par la voix de l&#39;Ange, l&#39;Incarnation de Jésus-Christ, votre Fils, nous arrivions, par sa Passion et par sa Croix, à la gloire de sa Résurrection. Par le même Jésus-Christ Notre-Seigneur.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Oremus. Gratiam tuam quaesumus, Domine, mentibus nostris infunde ; ut qui, angelo nuntiante, Christi Filii tui Incarnationem cognovimus, per passionem eius et crucem, ad resurrectionis gloriam perducamur. Per eundem Christum Dominum nostrum.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Ainsi soit-il.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p class="amen">Amen.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </section>
+      <section id="repas-soir" class="prayer-section prayer-time" aria-labelledby="titre-repas-soir" data-chapter="soir">
+        <div class="prayer-time-marker" aria-hidden="true">
+          <span class="prayer-time-dot">✝</span>
+          <time datetime="19:30">19h30</time>
+        </div>
+        <div class="prayer-time-content">
+      <p class="moment"><span class="ui-fr">Prière qu&#39;on récite avant et après chaque repas</span><span class="ui-la">Ante et post mensam</span></p>
+      <h3 id="titre-repas-soir"><span class="ui-fr">Bénédicité et action de grâce</span><span class="ui-la">Benedicite et gratiarum actio</span></h3>
+      <div class="prayer-text prayer-pair">
+        <div class="prayer-language prayer-fr" lang="fr">
+          <h3 class="prayer-subtitle">Avant le repas</h3>
+          <p>℣. Bénissez.<br>
+            ℟. C&#39;est au Seigneur à bénir.<br>
+            ℣. Que la main de Jésus-Christ bénisse nos personnes et la nourriture que nous allons prendre.<br>
+            Au nom du Père, et du Fils, et du Saint-Esprit. Ainsi soit-il.</p>
+          <h3 class="prayer-subtitle">Après le repas</h3>
+          <p>Nous vous rendons grâces de tous vos bienfaits, ô Dieu tout-puissant, qui vivez et régnez dans tous les siècles des siècles.<br>
+            ℟. Ainsi soit-il.<br>
+            ℣. Que le Seigneur nous donne sa paix et la vie éternelle.<br>
+            ℟. Ainsi soit-il.</p>
+        </div>
+        <div class="prayer-language prayer-la" lang="la">
+          <h3 class="prayer-subtitle">Avant le repas</h3>
+          <p>℣. Benedicite.<br>
+            ℟. Dominus.<br>
+            ℣. Nos et ea quæ sumus sumpturi benedicat dextera Christi. In nomine Patris et Filii et Spiritus Sancti. Amen.</p>
+          <h3 class="prayer-subtitle">Après le repas</h3>
+          <p>Agimus tibi gratias, omnipotens Deus, pro universis beneficiis tuis : qui vivis et regnas in sæcula sæculorum.<br>
+            ℟. Amen.<br>
+            ℣. Dominus det nobis suam pacem et vitam æternam.<br>
+            ℟. Amen.</p>
+        </div>
+        <div class="prayer-aligned">
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <h3 class="prayer-subtitle">Avant le repas</h3>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <h3 class="prayer-subtitle">Avant le repas</h3>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>℣. Bénissez.<br>
+            ℟. C&#39;est au Seigneur à bénir.<br>
+            ℣. Que la main de Jésus-Christ bénisse nos personnes et la nourriture que nous allons prendre.<br>
+            Au nom du Père, et du Fils, et du Saint-Esprit. Ainsi soit-il.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>℣. Benedicite.<br>
+            ℟. Dominus.<br>
+            ℣. Nos et ea quæ sumus sumpturi benedicat dextera Christi. In nomine Patris et Filii et Spiritus Sancti. Amen.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <h3 class="prayer-subtitle">Après le repas</h3>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <h3 class="prayer-subtitle">Après le repas</h3>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Nous vous rendons grâces de tous vos bienfaits, ô Dieu tout-puissant, qui vivez et régnez dans tous les siècles des siècles.<br>
+            ℟. Ainsi soit-il.<br>
+            ℣. Que le Seigneur nous donne sa paix et la vie éternelle.<br>
+            ℟. Ainsi soit-il.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Agimus tibi gratias, omnipotens Deus, pro universis beneficiis tuis : qui vivis et regnas in sæcula sæculorum.<br>
+            ℟. Amen.<br>
+            ℣. Dominus det nobis suam pacem et vitam æternam.<br>
+            ℟. Amen.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </section>
+      <section id="priere-soir" class="prayer-section prayer-time" aria-labelledby="titre-priere-soir" data-chapter="soir">
+        <div class="prayer-time-marker" aria-hidden="true">
+          <span class="prayer-time-dot">✝</span>
+          <time datetime="21:30">21h30</time>
+        </div>
+        <div class="prayer-time-content">
+      <p class="moment"><span class="ui-fr">Au terme du jour</span><span class="ui-la">Fine diei</span></p>
+      <h3 id="titre-priere-soir"><span class="ui-fr">Prière du soir</span><span class="ui-la">Oratio vespertina</span></h3>
+      <div class="prayer-text prayer-pair">
+        <div class="prayer-language prayer-fr" lang="fr">
+          <p>Seigneur, je Vous remercie pour cette journée, pour les grâces reçues et pour les personnes placées sur mon chemin.</p>
+          <p>Pardonnez mes fautes, gardez ceux que j’aime et accordez le repos à ceux qui en ont besoin.</p>
+          <p>Entre Vos mains, je remets mon esprit et Vous confie la nuit qui vient.</p>
+          <p class="amen">Amen.</p>
+        </div>
+        <div class="prayer-language prayer-la" lang="la">
+          <p>Domine, gratias Tibi ago pro hoc die, pro gratiis acceptis et pro hominibus in via mea positis.</p>
+          <p>Delicta mea dimitte, custodi eos quos amo et requiem concede iis qui ea indigent.</p>
+          <p>In manus Tuas spiritum meum commendo et noctem venturam Tibi confido.</p>
+          <p class="amen">Amen.</p>
+        </div>
+        <div class="prayer-aligned">
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Seigneur, je Vous remercie pour cette journée, pour les grâces reçues et pour les personnes placées sur mon chemin.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Domine, gratias Tibi ago pro hoc die, pro gratiis acceptis et pro hominibus in via mea positis.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Pardonnez mes fautes, gardez ceux que j’aime et accordez le repos à ceux qui en ont besoin.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Delicta mea dimitte, custodi eos quos amo et requiem concede iis qui ea indigent.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Entre Vos mains, je remets mon esprit et Vous confie la nuit qui vient.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>In manus Tuas spiritum meum commendo et noctem venturam Tibi confido.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p class="amen">Amen.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p class="amen">Amen.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </section>
     </section>
   </main>
 

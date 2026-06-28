@@ -10,6 +10,38 @@ const publicOutputPath = path.join(publicDirectory, "index.html");
 const staticAssets = ["script.js", "style.css"];
 const checkOnly = process.argv.includes("--check");
 
+const dayChapters = [
+  {
+    id: "matin",
+    title_fr: "Matin",
+    title_la: "Mane",
+    entries: [
+      { id: "angelus-matin", prayerId: "angelus", time: "06h00" },
+      { id: "priere-matin", prayerId: "matin", time: "06h30" },
+      { id: "repas-matin", prayerId: "benedicite", time: "07h00", title_fr: "Bénédicité et action de grâce", title_la: "Benedicite et gratiarum actio" }
+    ]
+  },
+  {
+    id: "midi",
+    title_fr: "Midi",
+    title_la: "Meridies",
+    entries: [
+      { id: "angelus-midi", prayerId: "angelus", time: "12h00" },
+      { id: "repas-midi", prayerId: "benedicite", time: "12h15", title_fr: "Bénédicité et action de grâce", title_la: "Benedicite et gratiarum actio" }
+    ]
+  },
+  {
+    id: "soir",
+    title_fr: "Soir",
+    title_la: "Vesperi",
+    entries: [
+      { id: "angelus-soir", prayerId: "angelus", time: "18h00" },
+      { id: "repas-soir", prayerId: "benedicite", time: "19h30", title_fr: "Bénédicité et action de grâce", title_la: "Benedicite et gratiarum actio" },
+      { id: "priere-soir", prayerId: "soir", time: "21h30" }
+    ]
+  }
+];
+
 const requiredMetadata = [
   "id",
   "order",
@@ -148,23 +180,38 @@ function parseLanguages(content, filename) {
   };
 }
 
-function renderNavigation(prayers) {
-  return prayers
-    .map((prayer, index) => {
-      const separator = index === prayers.length - 1
+function renderNavigation(chapters) {
+  return chapters
+    .map((chapter, index) => {
+      const separator = index === chapters.length - 1
         ? ""
         : '\n      <span class="nav-separator" aria-hidden="true">•</span>';
 
-      return `      <a class="nav-link" href="#${prayer.id}"><span class="ui-fr">${escapeHtml(prayer.nav_fr)}</span><span class="ui-la">${escapeHtml(prayer.nav_la)}</span></a>${separator}`;
+      return `      <a class="nav-link" href="#${chapter.id}"><span class="ui-fr">${escapeHtml(chapter.title_fr)}</span><span class="ui-la">${escapeHtml(chapter.title_la)}</span></a>${separator}`;
     })
     .join("\n");
 }
 
-function renderPrayer(prayer) {
-  return `    <section id="${prayer.id}" class="prayer-section" aria-labelledby="titre-${prayer.id}">
-      <div class="ornament" aria-hidden="true">✝</div>
+function renderChapterSchedule(chapter) {
+  return chapter.entries
+    .map((entry) => `          <a class="chapter-schedule-link" href="#${entry.id}">
+            <time datetime="${entry.time.replace("h", ":")}">${escapeHtml(entry.time)}</time>
+            <span><span class="ui-fr">${escapeHtml(entry.title_fr || entry.prayer.title_fr)}</span><span class="ui-la">${escapeHtml(entry.title_la || entry.prayer.title_la)}</span></span>
+          </a>`)
+    .join("\n");
+}
+
+function renderPrayerEntry(entry) {
+  const prayer = entry.prayer;
+
+  return `      <section id="${entry.id}" class="prayer-section prayer-time" aria-labelledby="titre-${entry.id}" data-chapter="${entry.chapterId}">
+        <div class="prayer-time-marker" aria-hidden="true">
+          <span class="prayer-time-dot">✝</span>
+          <time datetime="${entry.time.replace("h", ":")}">${escapeHtml(entry.time)}</time>
+        </div>
+        <div class="prayer-time-content">
       <p class="moment"><span class="ui-fr">${escapeHtml(prayer.moment_fr)}</span><span class="ui-la">${escapeHtml(prayer.moment_la)}</span></p>
-      <h2 id="titre-${prayer.id}"><span class="ui-fr">${escapeHtml(prayer.title_fr)}</span><span class="ui-la">${escapeHtml(prayer.title_la)}</span></h2>
+      <h3 id="titre-${entry.id}"><span class="ui-fr">${escapeHtml(entry.title_fr || prayer.title_fr)}</span><span class="ui-la">${escapeHtml(entry.title_la || prayer.title_la)}</span></h3>
       <div class="prayer-text prayer-pair">
         <div class="prayer-language prayer-fr" lang="fr">
 ${renderMarkdown(prayer.french)}
@@ -176,6 +223,21 @@ ${renderMarkdown(prayer.latin)}
 ${renderAlignedMarkdown(prayer.french, prayer.latin)}
         </div>
       </div>
+        </div>
+      </section>`;
+}
+
+function renderChapter(chapter) {
+  return `    <section id="${chapter.id}" class="day-chapter" aria-labelledby="titre-${chapter.id}">
+      <header class="chapter-header">
+        <div class="ornament" aria-hidden="true">✝</div>
+        <p class="moment"><span class="ui-fr">Temps de prière</span><span class="ui-la">Tempus orationis</span></p>
+        <h2 id="titre-${chapter.id}"><span class="ui-fr">${escapeHtml(chapter.title_fr)}</span><span class="ui-la">${escapeHtml(chapter.title_la)}</span></h2>
+        <nav class="chapter-schedule" aria-label="Prières du ${escapeHtml(chapter.title_fr)}">
+${renderChapterSchedule(chapter)}
+        </nav>
+      </header>
+${chapter.entries.map(renderPrayerEntry).join("\n")}
     </section>`;
 }
 
@@ -204,10 +266,24 @@ async function build() {
     throw new Error(`Identifiant de prière en double : ${duplicateId}`);
   }
 
+  const prayersById = new Map(prayers.map((prayer) => [prayer.id, prayer]));
+  const chapters = dayChapters.map((chapter) => ({
+    ...chapter,
+    entries: chapter.entries.map((entry) => {
+      const prayer = prayersById.get(entry.prayerId);
+
+      if (!prayer) {
+        throw new Error(`Prière introuvable pour ${entry.id} : ${entry.prayerId}`);
+      }
+
+      return { ...entry, chapterId: chapter.id, prayer };
+    })
+  }));
+
   const template = await readFile(templatePath, "utf8");
   const generatedHtml = template
-    .replace("{{PRAYER_NAVIGATION}}", renderNavigation(prayers))
-    .replace("{{PRAYER_SECTIONS}}", prayers.map(renderPrayer).join("\n\n"));
+    .replace("{{PRAYER_NAVIGATION}}", renderNavigation(chapters))
+    .replace("{{PRAYER_SECTIONS}}", chapters.map(renderChapter).join("\n\n"));
 
   if (generatedHtml.includes("{{PRAYER_")) {
     throw new Error("Un emplacement du modèle HTML n’a pas été remplacé.");

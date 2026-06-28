@@ -11,7 +11,7 @@ document.documentElement.classList.add("js-enabled");
 document.addEventListener("DOMContentLoaded", () => {
   "use strict";
 
-  const sections = [...document.querySelectorAll(".prayer-section")];
+  const sections = [...document.querySelectorAll(".prayer-time")];
   const navLinks = [...document.querySelectorAll(".nav-link")];
   const mainNavigation = document.querySelector(".main-nav");
   const backToTop = document.querySelector(".back-to-top");
@@ -124,22 +124,47 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /** Retourne l'identifiant de la prière adaptée à l'heure locale. */
-  function getPrayerIdForHour(hour) {
-    if (hour >= 5 && hour < 12) {
-      return "matin";
+  function getPrayerIdForDate(date) {
+    const minutes = date.getHours() * 60 + date.getMinutes();
+
+    if (minutes >= 330 && minutes < 390) {
+      return "angelus-matin";
     }
 
-    if (hour >= 12 && hour < 19) {
-      return "benedicite";
+    if (minutes >= 390 && minutes < 420) {
+      return "priere-matin";
     }
 
-    return "soir";
+    if (minutes >= 420 && minutes < 720) {
+      return "repas-matin";
+    }
+
+    if (minutes >= 720 && minutes < 735) {
+      return "angelus-midi";
+    }
+
+    if (minutes >= 735 && minutes < 1080) {
+      return "repas-midi";
+    }
+
+    if (minutes >= 1080 && minutes < 1170) {
+      return "angelus-soir";
+    }
+
+    if (minutes >= 1170 && minutes < 1290) {
+      return "repas-soir";
+    }
+
+    return "priere-soir";
   }
 
   /** Met à jour le lien actif et son information pour les lecteurs d'écran. */
   function setActiveSection(sectionId) {
+    const activeSection = document.getElementById(sectionId);
+    const activeChapterId = activeSection?.dataset.chapter || sectionId;
+
     navLinks.forEach((link) => {
-      const isActive = link.getAttribute("href") === `#${sectionId}`;
+      const isActive = link.getAttribute("href") === `#${activeChapterId}`;
       link.classList.toggle("is-active", isActive);
 
       if (isActive) {
@@ -147,6 +172,10 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         link.removeAttribute("aria-current");
       }
+    });
+
+    sections.forEach((section) => {
+      section.classList.toggle("is-active", section.id === sectionId);
     });
   }
 
@@ -194,12 +223,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // Les liens du menu reflètent immédiatement le choix de l'utilisateur.
   navLinks.forEach((link) => {
     link.addEventListener("click", () => {
-      setActiveSection(link.getAttribute("href").slice(1));
+      const chapterId = link.getAttribute("href").slice(1);
+      const firstPrayer = document.querySelector(`.prayer-time[data-chapter="${chapterId}"]`);
+      setActiveSection(firstPrayer?.id || chapterId);
     });
   });
 
   // Oriente la page vers la prière correspondant à l'heure locale.
-  const prayerId = getPrayerIdForHour(new Date().getHours());
+  const prayerId = getPrayerIdForDate(new Date());
   const targetSection = document.getElementById(prayerId);
   setActiveSection(prayerId);
 
