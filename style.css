@@ -277,8 +277,10 @@ html[data-language-mode="latin"] .ui-la {
 }
 
 .nav-inner .settings-toggle {
-  margin-left: clamp(0.15rem, 1vw, 0.5rem);
-  flex: 0 0 auto;
+  position: absolute;
+  top: 50%;
+  right: max(0.75rem, env(safe-area-inset-right));
+  transform: translateY(-50%);
 }
 
 .nav-link {
@@ -726,6 +728,8 @@ html[data-language-mode="parallel"] .prayer-language {
 
   .nav-inner {
     gap: 0.8rem;
+    padding-right: 3.2rem;
+    padding-left: 0.8rem;
     justify-content: center;
   }
 
