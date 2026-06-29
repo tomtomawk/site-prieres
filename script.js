@@ -24,13 +24,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const defaultPrayerSettings = {
-    enabled: true,
-    morning: "06:00",
+    enabled: false,
+    morning: "07:05",
     morningPrayer: "06:30",
-    morningMeal: "07:00",
-    noon: "12:00",
-    noonMeal: "12:15",
-    evening: "18:00",
+    morningMeal: "06:45",
+    noon: "12:05",
+    noonMeal: "12:30",
+    evening: "18:05",
     eveningMeal: "19:30",
     eveningPrayer: "21:30"
   };
