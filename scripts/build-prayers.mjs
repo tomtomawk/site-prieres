@@ -203,15 +203,20 @@ function renderChapterSchedule(chapter) {
 
 function renderPrayerEntry(entry) {
   const prayer = entry.prayer;
+  const titleFr = entry.title_fr || prayer.title_fr;
+  const titleLa = entry.title_la || prayer.title_la;
 
-  return `      <section id="${entry.id}" class="prayer-section prayer-time" aria-labelledby="titre-${entry.id}" data-chapter="${entry.chapterId}">
+  return `      <section id="${entry.id}" class="prayer-section prayer-time" aria-labelledby="titre-${entry.id}" data-chapter="${entry.chapterId}" data-title-fr="${escapeHtml(titleFr)}" data-title-la="${escapeHtml(titleLa)}">
         <div class="prayer-time-marker" aria-hidden="true">
           <span class="prayer-time-dot">✝</span>
           <time datetime="${entry.time.replace("h", ":")}">${escapeHtml(entry.time)}</time>
         </div>
         <div class="prayer-time-content">
       <p class="moment"><span class="ui-fr">${escapeHtml(prayer.moment_fr)}</span><span class="ui-la">${escapeHtml(prayer.moment_la)}</span></p>
-      <h3 id="titre-${entry.id}"><span class="ui-fr">${escapeHtml(entry.title_fr || prayer.title_fr)}</span><span class="ui-la">${escapeHtml(entry.title_la || prayer.title_la)}</span></h3>
+      <div class="prayer-title-row">
+        <h3 id="titre-${entry.id}"><span class="ui-fr">${escapeHtml(titleFr)}</span><span class="ui-la">${escapeHtml(titleLa)}</span></h3>
+        <button class="speech-toggle" type="button" data-speech-target="${entry.id}" title="Lire la prière">Lire</button>
+      </div>
       <div class="prayer-text prayer-pair">
         <div class="prayer-language prayer-fr" lang="fr">
 ${renderMarkdown(prayer.french)}

@@ -21,6 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const settingsPanel = document.querySelector(".settings-panel");
   const settingsClose = document.querySelector(".settings-close");
   const settingsForm = document.querySelector(".settings-form");
+  const notificationPermission = document.querySelector(".notification-permission");
+  const speechButtons = [...document.querySelectorAll(".speech-toggle")];
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const defaultPrayerSettings = {
@@ -32,7 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
     noonMeal: "12:30",
     evening: "18:05",
     eveningMeal: "19:30",
-    eveningPrayer: "21:30"
+    eveningPrayer: "21:30",
+    notificationsEnabled: false
   };
 
   const angelusEntries = {
@@ -125,7 +128,10 @@ document.addEventListener("DOMContentLoaded", () => {
       noonMeal: parseTimeToMinutes(settings.noonMeal) === null ? defaultPrayerSettings.noonMeal : settings.noonMeal,
       evening: parseTimeToMinutes(settings.evening) === null ? defaultPrayerSettings.evening : settings.evening,
       eveningMeal: parseTimeToMinutes(settings.eveningMeal) === null ? defaultPrayerSettings.eveningMeal : settings.eveningMeal,
-      eveningPrayer: parseTimeToMinutes(settings.eveningPrayer) === null ? defaultPrayerSettings.eveningPrayer : settings.eveningPrayer
+      eveningPrayer: parseTimeToMinutes(settings.eveningPrayer) === null ? defaultPrayerSettings.eveningPrayer : settings.eveningPrayer,
+      notificationsEnabled: typeof settings.notificationsEnabled === "boolean"
+        ? settings.notificationsEnabled
+        : defaultPrayerSettings.notificationsEnabled
     };
   }
 
@@ -204,8 +210,121 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".day-chapter").forEach(sortChapterPrayers);
   }
 
+  function getSectionTitle(section) {
+    const mode = document.documentElement.dataset.languageMode;
+
+    if (mode === "latin") {
+      return section.dataset.titleLa || section.dataset.titleFr || "Prière";
+    }
+
+    return section.dataset.titleFr || section.dataset.titleLa || "Prière";
+  }
+
+  function getNotificationSchedule() {
+    return [...document.querySelectorAll(".prayer-time:not(.is-hidden-by-settings)")]
+      .map((section) => ({
+        id: section.id,
+        title: getSectionTitle(section),
+        minutes: parseTimeToMinutes(getPrayerTime(section))
+      }))
+      .filter((entry) => Number.isFinite(entry.minutes));
+  }
+
+  let notificationTimer = null;
+  let lastNotificationKey = "";
+
+  function updateNotificationPermissionState() {
+    const isSupported = "Notification" in window;
+    const permission = isSupported ? Notification.permission : "unsupported";
+
+    notificationPermission.disabled = !isSupported || permission === "granted";
+    notificationPermission.textContent = permission === "granted"
+      ? "Autorisées"
+      : "Autoriser";
+  }
+
+  function maybeNotifyCurrentPrayer() {
+    if (!prayerSettings.notificationsEnabled || !("Notification" in window) || Notification.permission !== "granted") {
+      return;
+    }
+
+    const now = new Date();
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+    const currentPrayer = getNotificationSchedule().find((entry) => entry.minutes === currentMinutes);
+    const notificationKey = currentPrayer ? `${currentPrayer.id}-${now.toDateString()}-${currentMinutes}` : "";
+
+    if (!currentPrayer || notificationKey === lastNotificationKey) {
+      return;
+    }
+
+    lastNotificationKey = notificationKey;
+    new Notification("Temps de prière", {
+      body: currentPrayer.title,
+      tag: currentPrayer.id
+    });
+  }
+
+  function restartNotificationTimer() {
+    if (notificationTimer) {
+      window.clearInterval(notificationTimer);
+      notificationTimer = null;
+    }
+
+    if (!prayerSettings.notificationsEnabled) {
+      return;
+    }
+
+    maybeNotifyCurrentPrayer();
+    notificationTimer = window.setInterval(maybeNotifyCurrentPrayer, 30000);
+  }
+
+  function getSpeechText(section) {
+    const mode = document.documentElement.dataset.languageMode;
+    const selectors = mode === "latin"
+      ? [".prayer-la"]
+      : mode === "parallel"
+        ? [".prayer-fr", ".prayer-la"]
+        : [".prayer-fr"];
+
+    return selectors
+      .map((selector) => section.querySelector(selector)?.textContent.trim())
+      .filter(Boolean)
+      .join("\n\n");
+  }
+
+  function updateSpeechButtons(activeButton = null) {
+    speechButtons.forEach((button) => {
+      const isActive = button === activeButton;
+      button.classList.toggle("is-speaking", isActive);
+      button.textContent = isActive ? "Stop" : "Lire";
+    });
+  }
+
+  function speakPrayer(section, button) {
+    if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) {
+      button.textContent = "Indisponible";
+      return;
+    }
+
+    if (button.classList.contains("is-speaking")) {
+      window.speechSynthesis.cancel();
+      updateSpeechButtons();
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(getSpeechText(section));
+    utterance.lang = document.documentElement.dataset.languageMode === "latin" ? "la" : "fr-FR";
+    utterance.rate = 0.92;
+    utterance.onend = () => updateSpeechButtons();
+    utterance.onerror = () => updateSpeechButtons();
+    updateSpeechButtons(button);
+    window.speechSynthesis.speak(utterance);
+  }
+
   function applyAngelusSettings() {
     settingsForm.elements.angelusEnabled.checked = prayerSettings.enabled;
+    settingsForm.elements.notificationsEnabled.checked = prayerSettings.notificationsEnabled;
     settingsForm.elements.angelusMorning.value = prayerSettings.morning;
     settingsForm.elements.morningPrayer.value = prayerSettings.morningPrayer;
     settingsForm.elements.morningMeal.value = prayerSettings.morningMeal;
@@ -229,6 +348,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     sortPrayersBySettings();
+    restartNotificationTimer();
   }
 
   /** Applique le mode choisi et le conserve pour la prochaine visite. */
@@ -256,6 +376,11 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (error) {
       // Le changement reste fonctionnel si le stockage local est indisponible.
     }
+
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+      updateSpeechButtons();
+    }
   }
 
   let savedLanguageMode = "french";
@@ -268,6 +393,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setLanguageMode(savedLanguageMode);
   applyAngelusSettings();
+  updateNotificationPermissionState();
 
   settingsToggle.addEventListener("click", () => {
     setSettingsPanelOpen(settingsPanel.hidden);
@@ -287,7 +413,8 @@ document.addEventListener("DOMContentLoaded", () => {
       noonMeal: settingsForm.elements.noonMeal.value,
       evening: settingsForm.elements.angelusEvening.value,
       eveningMeal: settingsForm.elements.eveningMeal.value,
-      eveningPrayer: settingsForm.elements.eveningPrayer.value
+      eveningPrayer: settingsForm.elements.eveningPrayer.value,
+      notificationsEnabled: settingsForm.elements.notificationsEnabled.checked
     });
     applyAngelusSettings();
     setActiveSection(getPrayerIdForDate(new Date()));
@@ -299,6 +426,27 @@ document.addEventListener("DOMContentLoaded", () => {
     applyAngelusSettings();
     setActiveSection(getPrayerIdForDate(new Date()));
     savePrayerSettings(prayerSettings);
+  });
+
+  notificationPermission.addEventListener("click", async () => {
+    if (!("Notification" in window)) {
+      updateNotificationPermissionState();
+      return;
+    }
+
+    await Notification.requestPermission();
+    updateNotificationPermissionState();
+    restartNotificationTimer();
+  });
+
+  speechButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const section = document.getElementById(button.dataset.speechTarget);
+
+      if (section) {
+        speakPrayer(section, button);
+      }
+    });
   });
 
   languageOptions.forEach((option) => {

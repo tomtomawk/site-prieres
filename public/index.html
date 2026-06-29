@@ -73,6 +73,16 @@
           </div>
         </div>
       </fieldset>
+      <fieldset class="settings-angelus settings-notifications">
+        <legend>
+          <label class="settings-check">
+            <input type="checkbox" name="notificationsEnabled">
+            <span>Activer les notifications</span>
+          </label>
+        </legend>
+        <p class="settings-note">Les rappels fonctionnent tant que cette page reste ouverte.</p>
+        <button class="notification-permission" type="button">Autoriser</button>
+      </fieldset>
       <button class="settings-reset" type="button">Réinitialiser</button>
     </form>
   </aside>
@@ -115,14 +125,17 @@
           </a>
         </nav>
       </header>
-      <section id="angelus-matin" class="prayer-section prayer-time" aria-labelledby="titre-angelus-matin" data-chapter="matin">
+      <section id="angelus-matin" class="prayer-section prayer-time" aria-labelledby="titre-angelus-matin" data-chapter="matin" data-title-fr="Angelus" data-title-la="Angelus Domini">
         <div class="prayer-time-marker" aria-hidden="true">
           <span class="prayer-time-dot">✝</span>
           <time datetime="06:00">06h00</time>
         </div>
         <div class="prayer-time-content">
       <p class="moment"><span class="ui-fr">Matin, midi et soir</span><span class="ui-la">Mane, meridie et vespere</span></p>
-      <h3 id="titre-angelus-matin"><span class="ui-fr">Angelus</span><span class="ui-la">Angelus Domini</span></h3>
+      <div class="prayer-title-row">
+        <h3 id="titre-angelus-matin"><span class="ui-fr">Angelus</span><span class="ui-la">Angelus Domini</span></h3>
+        <button class="speech-toggle" type="button" data-speech-target="angelus-matin" title="Lire la prière">Lire</button>
+      </div>
       <div class="prayer-text prayer-pair">
         <div class="prayer-language prayer-fr" lang="fr">
           <p>℣. L&#39;Ange du Seigneur annonça à Marie.<br>
@@ -251,14 +264,17 @@
       </div>
         </div>
       </section>
-      <section id="priere-matin" class="prayer-section prayer-time" aria-labelledby="titre-priere-matin" data-chapter="matin">
+      <section id="priere-matin" class="prayer-section prayer-time" aria-labelledby="titre-priere-matin" data-chapter="matin" data-title-fr="Prière du matin" data-title-la="Oratio matutina">
         <div class="prayer-time-marker" aria-hidden="true">
           <span class="prayer-time-dot">✝</span>
           <time datetime="06:30">06h30</time>
         </div>
         <div class="prayer-time-content">
       <p class="moment"><span class="ui-fr">Au commencement du jour</span><span class="ui-la">Initio diei</span></p>
-      <h3 id="titre-priere-matin"><span class="ui-fr">Prière du matin</span><span class="ui-la">Oratio matutina</span></h3>
+      <div class="prayer-title-row">
+        <h3 id="titre-priere-matin"><span class="ui-fr">Prière du matin</span><span class="ui-la">Oratio matutina</span></h3>
+        <button class="speech-toggle" type="button" data-speech-target="priere-matin" title="Lire la prière">Lire</button>
+      </div>
       <div class="prayer-text prayer-pair">
         <div class="prayer-language prayer-fr" lang="fr">
           <h3 class="prayer-subtitle">Signe de la croix</h3>
@@ -1203,14 +1219,17 @@
       </div>
         </div>
       </section>
-      <section id="repas-matin" class="prayer-section prayer-time" aria-labelledby="titre-repas-matin" data-chapter="matin">
+      <section id="repas-matin" class="prayer-section prayer-time" aria-labelledby="titre-repas-matin" data-chapter="matin" data-title-fr="Bénédicité et action de grâce" data-title-la="Benedicite et gratiarum actio">
         <div class="prayer-time-marker" aria-hidden="true">
           <span class="prayer-time-dot">✝</span>
           <time datetime="07:00">07h00</time>
         </div>
         <div class="prayer-time-content">
       <p class="moment"><span class="ui-fr">Prière qu&#39;on récite avant et après chaque repas</span><span class="ui-la">Ante et post mensam</span></p>
-      <h3 id="titre-repas-matin"><span class="ui-fr">Bénédicité et action de grâce</span><span class="ui-la">Benedicite et gratiarum actio</span></h3>
+      <div class="prayer-title-row">
+        <h3 id="titre-repas-matin"><span class="ui-fr">Bénédicité et action de grâce</span><span class="ui-la">Benedicite et gratiarum actio</span></h3>
+        <button class="speech-toggle" type="button" data-speech-target="repas-matin" title="Lire la prière">Lire</button>
+      </div>
       <div class="prayer-text prayer-pair">
         <div class="prayer-language prayer-fr" lang="fr">
           <h3 class="prayer-subtitle">Avant le repas</h3>
@@ -1301,14 +1320,17 @@
           </a>
         </nav>
       </header>
-      <section id="angelus-midi" class="prayer-section prayer-time" aria-labelledby="titre-angelus-midi" data-chapter="midi">
+      <section id="angelus-midi" class="prayer-section prayer-time" aria-labelledby="titre-angelus-midi" data-chapter="midi" data-title-fr="Angelus" data-title-la="Angelus Domini">
         <div class="prayer-time-marker" aria-hidden="true">
           <span class="prayer-time-dot">✝</span>
           <time datetime="12:00">12h00</time>
         </div>
         <div class="prayer-time-content">
       <p class="moment"><span class="ui-fr">Matin, midi et soir</span><span class="ui-la">Mane, meridie et vespere</span></p>
-      <h3 id="titre-angelus-midi"><span class="ui-fr">Angelus</span><span class="ui-la">Angelus Domini</span></h3>
+      <div class="prayer-title-row">
+        <h3 id="titre-angelus-midi"><span class="ui-fr">Angelus</span><span class="ui-la">Angelus Domini</span></h3>
+        <button class="speech-toggle" type="button" data-speech-target="angelus-midi" title="Lire la prière">Lire</button>
+      </div>
       <div class="prayer-text prayer-pair">
         <div class="prayer-language prayer-fr" lang="fr">
           <p>℣. L&#39;Ange du Seigneur annonça à Marie.<br>
@@ -1437,14 +1459,17 @@
       </div>
         </div>
       </section>
-      <section id="repas-midi" class="prayer-section prayer-time" aria-labelledby="titre-repas-midi" data-chapter="midi">
+      <section id="repas-midi" class="prayer-section prayer-time" aria-labelledby="titre-repas-midi" data-chapter="midi" data-title-fr="Bénédicité et action de grâce" data-title-la="Benedicite et gratiarum actio">
         <div class="prayer-time-marker" aria-hidden="true">
           <span class="prayer-time-dot">✝</span>
           <time datetime="12:15">12h15</time>
         </div>
         <div class="prayer-time-content">
       <p class="moment"><span class="ui-fr">Prière qu&#39;on récite avant et après chaque repas</span><span class="ui-la">Ante et post mensam</span></p>
-      <h3 id="titre-repas-midi"><span class="ui-fr">Bénédicité et action de grâce</span><span class="ui-la">Benedicite et gratiarum actio</span></h3>
+      <div class="prayer-title-row">
+        <h3 id="titre-repas-midi"><span class="ui-fr">Bénédicité et action de grâce</span><span class="ui-la">Benedicite et gratiarum actio</span></h3>
+        <button class="speech-toggle" type="button" data-speech-target="repas-midi" title="Lire la prière">Lire</button>
+      </div>
       <div class="prayer-text prayer-pair">
         <div class="prayer-language prayer-fr" lang="fr">
           <h3 class="prayer-subtitle">Avant le repas</h3>
@@ -1539,14 +1564,17 @@
           </a>
         </nav>
       </header>
-      <section id="angelus-soir" class="prayer-section prayer-time" aria-labelledby="titre-angelus-soir" data-chapter="soir">
+      <section id="angelus-soir" class="prayer-section prayer-time" aria-labelledby="titre-angelus-soir" data-chapter="soir" data-title-fr="Angelus" data-title-la="Angelus Domini">
         <div class="prayer-time-marker" aria-hidden="true">
           <span class="prayer-time-dot">✝</span>
           <time datetime="18:00">18h00</time>
         </div>
         <div class="prayer-time-content">
       <p class="moment"><span class="ui-fr">Matin, midi et soir</span><span class="ui-la">Mane, meridie et vespere</span></p>
-      <h3 id="titre-angelus-soir"><span class="ui-fr">Angelus</span><span class="ui-la">Angelus Domini</span></h3>
+      <div class="prayer-title-row">
+        <h3 id="titre-angelus-soir"><span class="ui-fr">Angelus</span><span class="ui-la">Angelus Domini</span></h3>
+        <button class="speech-toggle" type="button" data-speech-target="angelus-soir" title="Lire la prière">Lire</button>
+      </div>
       <div class="prayer-text prayer-pair">
         <div class="prayer-language prayer-fr" lang="fr">
           <p>℣. L&#39;Ange du Seigneur annonça à Marie.<br>
@@ -1675,14 +1703,17 @@
       </div>
         </div>
       </section>
-      <section id="repas-soir" class="prayer-section prayer-time" aria-labelledby="titre-repas-soir" data-chapter="soir">
+      <section id="repas-soir" class="prayer-section prayer-time" aria-labelledby="titre-repas-soir" data-chapter="soir" data-title-fr="Bénédicité et action de grâce" data-title-la="Benedicite et gratiarum actio">
         <div class="prayer-time-marker" aria-hidden="true">
           <span class="prayer-time-dot">✝</span>
           <time datetime="19:30">19h30</time>
         </div>
         <div class="prayer-time-content">
       <p class="moment"><span class="ui-fr">Prière qu&#39;on récite avant et après chaque repas</span><span class="ui-la">Ante et post mensam</span></p>
-      <h3 id="titre-repas-soir"><span class="ui-fr">Bénédicité et action de grâce</span><span class="ui-la">Benedicite et gratiarum actio</span></h3>
+      <div class="prayer-title-row">
+        <h3 id="titre-repas-soir"><span class="ui-fr">Bénédicité et action de grâce</span><span class="ui-la">Benedicite et gratiarum actio</span></h3>
+        <button class="speech-toggle" type="button" data-speech-target="repas-soir" title="Lire la prière">Lire</button>
+      </div>
       <div class="prayer-text prayer-pair">
         <div class="prayer-language prayer-fr" lang="fr">
           <h3 class="prayer-subtitle">Avant le repas</h3>
@@ -1755,14 +1786,17 @@
       </div>
         </div>
       </section>
-      <section id="priere-soir" class="prayer-section prayer-time" aria-labelledby="titre-priere-soir" data-chapter="soir">
+      <section id="priere-soir" class="prayer-section prayer-time" aria-labelledby="titre-priere-soir" data-chapter="soir" data-title-fr="Prière du soir" data-title-la="Oratio vespertina">
         <div class="prayer-time-marker" aria-hidden="true">
           <span class="prayer-time-dot">✝</span>
           <time datetime="21:30">21h30</time>
         </div>
         <div class="prayer-time-content">
       <p class="moment"><span class="ui-fr">Au terme du jour</span><span class="ui-la">Fine diei</span></p>
-      <h3 id="titre-priere-soir"><span class="ui-fr">Prière du soir</span><span class="ui-la">Oratio vespertina</span></h3>
+      <div class="prayer-title-row">
+        <h3 id="titre-priere-soir"><span class="ui-fr">Prière du soir</span><span class="ui-la">Oratio vespertina</span></h3>
+        <button class="speech-toggle" type="button" data-speech-target="priere-soir" title="Lire la prière">Lire</button>
+      </div>
       <div class="prayer-text prayer-pair">
         <div class="prayer-language prayer-fr" lang="fr">
           <p>Seigneur, je Vous remercie pour cette journée, pour les grâces reçues et pour les personnes placées sur mon chemin.</p>
