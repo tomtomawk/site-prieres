@@ -17,7 +17,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const backToTop = document.querySelector(".back-to-top");
   const translationToggle = document.querySelector(".translation-toggle");
   const languageOptions = [...translationToggle.querySelectorAll(".language-option")];
+  const settingsToggle = document.querySelector(".settings-toggle");
+  const settingsPanel = document.querySelector(".settings-panel");
+  const settingsClose = document.querySelector(".settings-close");
+  const settingsForm = document.querySelector(".settings-form");
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const defaultAngelusSettings = {
+    enabled: true,
+    morning: "06:00",
+    noon: "12:00",
+    evening: "18:00"
+  };
+
+  const angelusEntries = {
+    morning: { id: "angelus-matin", inputName: "angelusMorning", duration: 30 },
+    noon: { id: "angelus-midi", inputName: "angelusNoon", duration: 15 },
+    evening: { id: "angelus-soir", inputName: "angelusEvening", duration: 90 }
+  };
 
   const languageModes = ["french", "latin", "parallel"];
   const languageModeDetails = {
@@ -71,6 +88,84 @@ document.addEventListener("DOMContentLoaded", () => {
     return "french";
   }
 
+  function parseTimeToMinutes(value) {
+    const match = /^([01]\d|2[0-3]):([0-5]\d)$/.exec(value);
+
+    if (!match) {
+      return null;
+    }
+
+    return Number(match[1]) * 60 + Number(match[2]);
+  }
+
+  function formatTimeLabel(value) {
+    return value.replace(":", "h");
+  }
+
+  function sanitizeAngelusSettings(settings) {
+    return {
+      enabled: typeof settings.enabled === "boolean" ? settings.enabled : defaultAngelusSettings.enabled,
+      morning: parseTimeToMinutes(settings.morning) === null ? defaultAngelusSettings.morning : settings.morning,
+      noon: parseTimeToMinutes(settings.noon) === null ? defaultAngelusSettings.noon : settings.noon,
+      evening: parseTimeToMinutes(settings.evening) === null ? defaultAngelusSettings.evening : settings.evening
+    };
+  }
+
+  function loadAngelusSettings() {
+    try {
+      const savedSettings = JSON.parse(localStorage.getItem("prayer-angelus-settings") || "{}");
+      return sanitizeAngelusSettings({ ...defaultAngelusSettings, ...savedSettings });
+    } catch (error) {
+      return defaultAngelusSettings;
+    }
+  }
+
+  function saveAngelusSettings(settings) {
+    try {
+      localStorage.setItem("prayer-angelus-settings", JSON.stringify(settings));
+    } catch (error) {
+      // Les paramètres restent appliqués pour la session courante.
+    }
+  }
+
+  let angelusSettings = loadAngelusSettings();
+
+  function setSettingsPanelOpen(isOpen) {
+    settingsPanel.hidden = !isOpen;
+    settingsToggle.setAttribute("aria-expanded", String(isOpen));
+  }
+
+  function updateAngelusTime(entryId, value) {
+    const label = formatTimeLabel(value);
+    const sectionTime = document.querySelector(`#${entryId} .prayer-time-marker time`);
+    const scheduleTime = document.querySelector(`.chapter-schedule-link[href="#${entryId}"] time`);
+
+    [sectionTime, scheduleTime].forEach((timeElement) => {
+      if (!timeElement) {
+        return;
+      }
+
+      timeElement.textContent = label;
+      timeElement.setAttribute("datetime", value);
+    });
+  }
+
+  function applyAngelusSettings() {
+    settingsForm.elements.angelusEnabled.checked = angelusSettings.enabled;
+    settingsForm.elements.angelusMorning.value = angelusSettings.morning;
+    settingsForm.elements.angelusNoon.value = angelusSettings.noon;
+    settingsForm.elements.angelusEvening.value = angelusSettings.evening;
+
+    Object.entries(angelusEntries).forEach(([key, entry]) => {
+      const section = document.getElementById(entry.id);
+      const scheduleLink = document.querySelector(`.chapter-schedule-link[href="#${entry.id}"]`);
+
+      section?.classList.toggle("is-hidden-by-settings", !angelusSettings.enabled);
+      scheduleLink?.classList.toggle("is-hidden-by-settings", !angelusSettings.enabled);
+      updateAngelusTime(entry.id, angelusSettings[key]);
+    });
+  }
+
   /** Applique le mode choisi et le conserve pour la prochaine visite. */
   function setLanguageMode(mode) {
     const safeMode = languageModes.includes(mode) ? mode : "french";
@@ -107,6 +202,34 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   setLanguageMode(savedLanguageMode);
+  applyAngelusSettings();
+
+  settingsToggle.addEventListener("click", () => {
+    setSettingsPanelOpen(settingsPanel.hidden);
+  });
+
+  settingsClose.addEventListener("click", () => {
+    setSettingsPanelOpen(false);
+  });
+
+  settingsForm.addEventListener("input", () => {
+    angelusSettings = sanitizeAngelusSettings({
+      enabled: settingsForm.elements.angelusEnabled.checked,
+      morning: settingsForm.elements.angelusMorning.value,
+      noon: settingsForm.elements.angelusNoon.value,
+      evening: settingsForm.elements.angelusEvening.value
+    });
+    applyAngelusSettings();
+    setActiveSection(getPrayerIdForDate(new Date()));
+    saveAngelusSettings(angelusSettings);
+  });
+
+  settingsForm.querySelector(".settings-reset").addEventListener("click", () => {
+    angelusSettings = { ...defaultAngelusSettings };
+    applyAngelusSettings();
+    setActiveSection(getPrayerIdForDate(new Date()));
+    saveAngelusSettings(angelusSettings);
+  });
 
   languageOptions.forEach((option) => {
     option.addEventListener("click", () => {
@@ -126,32 +249,47 @@ document.addEventListener("DOMContentLoaded", () => {
   /** Retourne l'identifiant de la prière adaptée à l'heure locale. */
   function getPrayerIdForDate(date) {
     const minutes = date.getHours() * 60 + date.getMinutes();
+    const morningAngelus = parseTimeToMinutes(angelusSettings.morning);
+    const noonAngelus = parseTimeToMinutes(angelusSettings.noon);
+    const eveningAngelus = parseTimeToMinutes(angelusSettings.evening);
 
-    if (minutes >= 330 && minutes < 390) {
+    if (
+      angelusSettings.enabled &&
+      minutes >= morningAngelus &&
+      minutes < morningAngelus + angelusEntries.morning.duration
+    ) {
       return "angelus-matin";
+    }
+
+    if (
+      angelusSettings.enabled &&
+      minutes >= noonAngelus &&
+      minutes < noonAngelus + angelusEntries.noon.duration
+    ) {
+      return "angelus-midi";
+    }
+
+    if (
+      angelusSettings.enabled &&
+      minutes >= eveningAngelus &&
+      minutes < eveningAngelus + angelusEntries.evening.duration
+    ) {
+      return "angelus-soir";
     }
 
     if (minutes >= 390 && minutes < 420) {
       return "priere-matin";
     }
 
-    if (minutes >= 420 && minutes < 720) {
+    if (minutes >= 330 && minutes < 720) {
       return "repas-matin";
     }
 
-    if (minutes >= 720 && minutes < 735) {
-      return "angelus-midi";
-    }
-
-    if (minutes >= 735 && minutes < 1080) {
+    if (minutes >= 720 && minutes < 1080) {
       return "repas-midi";
     }
 
-    if (minutes >= 1080 && minutes < 1170) {
-      return "angelus-soir";
-    }
-
-    if (minutes >= 1170 && minutes < 1290) {
+    if (minutes >= 1080 && minutes < 1290) {
       return "repas-soir";
     }
 

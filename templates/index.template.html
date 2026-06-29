@@ -14,12 +14,41 @@
   <!-- Ce fichier est généré par npm run build. Modifiez les fichiers de prieres/ plutôt que index.html. -->
   <a class="skip-link" href="#contenu"><span class="ui-fr">Aller au contenu principal</span><span class="ui-la">Ad materiam principalem</span></a>
 
-  <div class="translation-toggle" role="group" aria-label="Langues affichées">
-    <span class="translation-toggle-icon" aria-hidden="true">Æ</span>
-    <button class="language-option is-selected" type="button" data-language="fr" aria-pressed="true" title="Afficher le français">FR</button>
-    <span class="translation-divider" aria-hidden="true"></span>
-    <button class="language-option" type="button" data-language="la" aria-pressed="false" title="Afficher le latin">LAT</button>
+  <div class="utility-controls">
+    <div class="translation-toggle" role="group" aria-label="Langues affichées">
+      <span class="translation-toggle-icon" aria-hidden="true">Æ</span>
+      <button class="language-option is-selected" type="button" data-language="fr" aria-pressed="true" title="Afficher le français">FR</button>
+      <span class="translation-divider" aria-hidden="true"></span>
+      <button class="language-option" type="button" data-language="la" aria-pressed="false" title="Afficher le latin">LAT</button>
+    </div>
+    <button class="settings-toggle" type="button" aria-expanded="false" aria-controls="angelus-settings" title="Paramètres">⚙</button>
   </div>
+
+  <aside id="angelus-settings" class="settings-panel" aria-labelledby="angelus-settings-title" hidden>
+    <form class="settings-form">
+      <div class="settings-panel-header">
+        <h2 id="angelus-settings-title">Paramètres</h2>
+        <button class="settings-close" type="button" title="Fermer">×</button>
+      </div>
+      <label class="settings-check">
+        <input type="checkbox" name="angelusEnabled" checked>
+        <span>Afficher l’Angélus</span>
+      </label>
+      <div class="settings-field">
+        <label for="angelus-morning-time">Angélus du matin</label>
+        <input id="angelus-morning-time" type="time" name="angelusMorning" value="06:00">
+      </div>
+      <div class="settings-field">
+        <label for="angelus-noon-time">Angélus de midi</label>
+        <input id="angelus-noon-time" type="time" name="angelusNoon" value="12:00">
+      </div>
+      <div class="settings-field">
+        <label for="angelus-evening-time">Angélus du soir</label>
+        <input id="angelus-evening-time" type="time" name="angelusEvening" value="18:00">
+      </div>
+      <button class="settings-reset" type="button">Réinitialiser</button>
+    </form>
+  </aside>
 
   <nav class="main-nav" aria-label="Prières de la journée">
     <div class="nav-inner">
