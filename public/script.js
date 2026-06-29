@@ -23,11 +23,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const settingsForm = document.querySelector(".settings-form");
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const defaultAngelusSettings = {
+  const defaultPrayerSettings = {
     enabled: true,
     morning: "06:00",
+    morningPrayer: "06:30",
+    morningMeal: "07:00",
     noon: "12:00",
-    evening: "18:00"
+    noonMeal: "12:15",
+    evening: "18:00",
+    eveningMeal: "19:30",
+    eveningPrayer: "21:30"
   };
 
   const angelusEntries = {
@@ -36,12 +41,12 @@ document.addEventListener("DOMContentLoaded", () => {
     evening: { id: "angelus-soir", inputName: "angelusEvening", duration: 90 }
   };
 
-  const fixedPrayerTimes = {
-    "priere-matin": "06:30",
-    "repas-matin": "07:00",
-    "repas-midi": "12:15",
-    "repas-soir": "19:30",
-    "priere-soir": "21:30"
+  const prayerTimeFields = {
+    "priere-matin": "morningPrayer",
+    "repas-matin": "morningMeal",
+    "repas-midi": "noonMeal",
+    "repas-soir": "eveningMeal",
+    "priere-soir": "eveningPrayer"
   };
 
   const languageModes = ["french", "latin", "parallel"];
@@ -110,40 +115,46 @@ document.addEventListener("DOMContentLoaded", () => {
     return value.replace(":", "h");
   }
 
-  function sanitizeAngelusSettings(settings) {
+  function sanitizePrayerSettings(settings) {
     return {
-      enabled: typeof settings.enabled === "boolean" ? settings.enabled : defaultAngelusSettings.enabled,
-      morning: parseTimeToMinutes(settings.morning) === null ? defaultAngelusSettings.morning : settings.morning,
-      noon: parseTimeToMinutes(settings.noon) === null ? defaultAngelusSettings.noon : settings.noon,
-      evening: parseTimeToMinutes(settings.evening) === null ? defaultAngelusSettings.evening : settings.evening
+      enabled: typeof settings.enabled === "boolean" ? settings.enabled : defaultPrayerSettings.enabled,
+      morning: parseTimeToMinutes(settings.morning) === null ? defaultPrayerSettings.morning : settings.morning,
+      morningPrayer: parseTimeToMinutes(settings.morningPrayer) === null ? defaultPrayerSettings.morningPrayer : settings.morningPrayer,
+      morningMeal: parseTimeToMinutes(settings.morningMeal) === null ? defaultPrayerSettings.morningMeal : settings.morningMeal,
+      noon: parseTimeToMinutes(settings.noon) === null ? defaultPrayerSettings.noon : settings.noon,
+      noonMeal: parseTimeToMinutes(settings.noonMeal) === null ? defaultPrayerSettings.noonMeal : settings.noonMeal,
+      evening: parseTimeToMinutes(settings.evening) === null ? defaultPrayerSettings.evening : settings.evening,
+      eveningMeal: parseTimeToMinutes(settings.eveningMeal) === null ? defaultPrayerSettings.eveningMeal : settings.eveningMeal,
+      eveningPrayer: parseTimeToMinutes(settings.eveningPrayer) === null ? defaultPrayerSettings.eveningPrayer : settings.eveningPrayer
     };
   }
 
-  function loadAngelusSettings() {
+  function loadPrayerSettings() {
     try {
-      const savedSettings = JSON.parse(localStorage.getItem("prayer-angelus-settings") || "{}");
-      return sanitizeAngelusSettings({ ...defaultAngelusSettings, ...savedSettings });
+      const savedSettings = JSON.parse(localStorage.getItem("prayer-schedule-settings") || "{}");
+      const legacySettings = JSON.parse(localStorage.getItem("prayer-angelus-settings") || "{}");
+      return sanitizePrayerSettings({ ...defaultPrayerSettings, ...legacySettings, ...savedSettings });
     } catch (error) {
-      return defaultAngelusSettings;
+      return defaultPrayerSettings;
     }
   }
 
-  function saveAngelusSettings(settings) {
+  function savePrayerSettings(settings) {
     try {
-      localStorage.setItem("prayer-angelus-settings", JSON.stringify(settings));
+      localStorage.setItem("prayer-schedule-settings", JSON.stringify(settings));
     } catch (error) {
       // Les paramètres restent appliqués pour la session courante.
     }
   }
 
-  let angelusSettings = loadAngelusSettings();
+  let prayerSettings = loadPrayerSettings();
 
   function setSettingsPanelOpen(isOpen) {
     settingsPanel.hidden = !isOpen;
     settingsToggle.setAttribute("aria-expanded", String(isOpen));
   }
 
-  function updateAngelusTime(entryId, value) {
+  function updatePrayerTime(entryId, value) {
     const label = formatTimeLabel(value);
     const sectionTime = document.querySelector(`#${entryId} .prayer-time-marker time`);
     const scheduleTime = document.querySelector(`.chapter-schedule-link[href="#${entryId}"] time`);
@@ -162,10 +173,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const key = Object.entries(angelusEntries).find(([, entry]) => entry.id === section.id)?.[0];
 
     if (key) {
-      return angelusSettings[key];
+      return prayerSettings[key];
     }
 
-    return fixedPrayerTimes[section.id] || "23:59";
+    return prayerSettings[prayerTimeFields[section.id]] || "23:59";
   }
 
   function sortChapterPrayers(chapter) {
@@ -194,18 +205,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function applyAngelusSettings() {
-    settingsForm.elements.angelusEnabled.checked = angelusSettings.enabled;
-    settingsForm.elements.angelusMorning.value = angelusSettings.morning;
-    settingsForm.elements.angelusNoon.value = angelusSettings.noon;
-    settingsForm.elements.angelusEvening.value = angelusSettings.evening;
+    settingsForm.elements.angelusEnabled.checked = prayerSettings.enabled;
+    settingsForm.elements.angelusMorning.value = prayerSettings.morning;
+    settingsForm.elements.morningPrayer.value = prayerSettings.morningPrayer;
+    settingsForm.elements.morningMeal.value = prayerSettings.morningMeal;
+    settingsForm.elements.angelusNoon.value = prayerSettings.noon;
+    settingsForm.elements.noonMeal.value = prayerSettings.noonMeal;
+    settingsForm.elements.angelusEvening.value = prayerSettings.evening;
+    settingsForm.elements.eveningMeal.value = prayerSettings.eveningMeal;
+    settingsForm.elements.eveningPrayer.value = prayerSettings.eveningPrayer;
 
     Object.entries(angelusEntries).forEach(([key, entry]) => {
       const section = document.getElementById(entry.id);
       const scheduleLink = document.querySelector(`.chapter-schedule-link[href="#${entry.id}"]`);
 
-      section?.classList.toggle("is-hidden-by-settings", !angelusSettings.enabled);
-      scheduleLink?.classList.toggle("is-hidden-by-settings", !angelusSettings.enabled);
-      updateAngelusTime(entry.id, angelusSettings[key]);
+      section?.classList.toggle("is-hidden-by-settings", !prayerSettings.enabled);
+      scheduleLink?.classList.toggle("is-hidden-by-settings", !prayerSettings.enabled);
+      updatePrayerTime(entry.id, prayerSettings[key]);
+    });
+
+    Object.keys(prayerTimeFields).forEach((entryId) => {
+      updatePrayerTime(entryId, prayerSettings[prayerTimeFields[entryId]]);
     });
 
     sortPrayersBySettings();
@@ -258,22 +278,27 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   settingsForm.addEventListener("input", () => {
-    angelusSettings = sanitizeAngelusSettings({
+    prayerSettings = sanitizePrayerSettings({
       enabled: settingsForm.elements.angelusEnabled.checked,
       morning: settingsForm.elements.angelusMorning.value,
+      morningPrayer: settingsForm.elements.morningPrayer.value,
+      morningMeal: settingsForm.elements.morningMeal.value,
       noon: settingsForm.elements.angelusNoon.value,
-      evening: settingsForm.elements.angelusEvening.value
+      noonMeal: settingsForm.elements.noonMeal.value,
+      evening: settingsForm.elements.angelusEvening.value,
+      eveningMeal: settingsForm.elements.eveningMeal.value,
+      eveningPrayer: settingsForm.elements.eveningPrayer.value
     });
     applyAngelusSettings();
     setActiveSection(getPrayerIdForDate(new Date()));
-    saveAngelusSettings(angelusSettings);
+    savePrayerSettings(prayerSettings);
   });
 
   settingsForm.querySelector(".settings-reset").addEventListener("click", () => {
-    angelusSettings = { ...defaultAngelusSettings };
+    prayerSettings = { ...defaultPrayerSettings };
     applyAngelusSettings();
     setActiveSection(getPrayerIdForDate(new Date()));
-    saveAngelusSettings(angelusSettings);
+    savePrayerSettings(prayerSettings);
   });
 
   languageOptions.forEach((option) => {

@@ -33,17 +33,39 @@
         <input type="checkbox" name="angelusEnabled" checked>
         <span>Afficher l’Angélus</span>
       </label>
-      <div class="settings-field">
-        <label for="angelus-morning-time">Angélus du matin</label>
-        <input id="angelus-morning-time" type="time" name="angelusMorning" value="06:00">
-      </div>
-      <div class="settings-field">
-        <label for="angelus-noon-time">Angélus de midi</label>
-        <input id="angelus-noon-time" type="time" name="angelusNoon" value="12:00">
-      </div>
-      <div class="settings-field">
-        <label for="angelus-evening-time">Angélus du soir</label>
-        <input id="angelus-evening-time" type="time" name="angelusEvening" value="18:00">
+      <div class="settings-grid">
+        <div class="settings-field">
+          <label for="angelus-morning-time">Angélus matin</label>
+          <input id="angelus-morning-time" type="time" name="angelusMorning" value="06:00">
+        </div>
+        <div class="settings-field">
+          <label for="morning-prayer-time">Prière matin</label>
+          <input id="morning-prayer-time" type="time" name="morningPrayer" value="06:30">
+        </div>
+        <div class="settings-field">
+          <label for="morning-meal-time">Repas matin</label>
+          <input id="morning-meal-time" type="time" name="morningMeal" value="07:00">
+        </div>
+        <div class="settings-field">
+          <label for="angelus-noon-time">Angélus midi</label>
+          <input id="angelus-noon-time" type="time" name="angelusNoon" value="12:00">
+        </div>
+        <div class="settings-field">
+          <label for="noon-meal-time">Repas midi</label>
+          <input id="noon-meal-time" type="time" name="noonMeal" value="12:15">
+        </div>
+        <div class="settings-field">
+          <label for="angelus-evening-time">Angélus soir</label>
+          <input id="angelus-evening-time" type="time" name="angelusEvening" value="18:00">
+        </div>
+        <div class="settings-field">
+          <label for="evening-meal-time">Repas soir</label>
+          <input id="evening-meal-time" type="time" name="eveningMeal" value="19:30">
+        </div>
+        <div class="settings-field">
+          <label for="evening-prayer-time">Prière soir</label>
+          <input id="evening-prayer-time" type="time" name="eveningPrayer" value="21:30">
+        </div>
       </div>
       <button class="settings-reset" type="button">Réinitialiser</button>
     </form>
