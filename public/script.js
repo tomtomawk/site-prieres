@@ -36,6 +36,14 @@ document.addEventListener("DOMContentLoaded", () => {
     evening: { id: "angelus-soir", inputName: "angelusEvening", duration: 90 }
   };
 
+  const fixedPrayerTimes = {
+    "priere-matin": "06:30",
+    "repas-matin": "07:00",
+    "repas-midi": "12:15",
+    "repas-soir": "19:30",
+    "priere-soir": "21:30"
+  };
+
   const languageModes = ["french", "latin", "parallel"];
   const languageModeDetails = {
     french: {
@@ -150,6 +158,41 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  function getPrayerTime(section) {
+    const key = Object.entries(angelusEntries).find(([, entry]) => entry.id === section.id)?.[0];
+
+    if (key) {
+      return angelusSettings[key];
+    }
+
+    return fixedPrayerTimes[section.id] || "23:59";
+  }
+
+  function sortChapterPrayers(chapter) {
+    const header = chapter.querySelector(".chapter-header");
+    const schedule = chapter.querySelector(".chapter-schedule");
+    const chapterSections = [...chapter.querySelectorAll(".prayer-time")];
+
+    chapterSections
+      .sort((first, second) => (
+        parseTimeToMinutes(getPrayerTime(first)) - parseTimeToMinutes(getPrayerTime(second))
+      ))
+      .forEach((section) => {
+        chapter.append(section);
+        const scheduleLink = schedule.querySelector(`.chapter-schedule-link[href="#${section.id}"]`);
+
+        if (scheduleLink) {
+          schedule.append(scheduleLink);
+        }
+      });
+
+    chapter.prepend(header);
+  }
+
+  function sortPrayersBySettings() {
+    document.querySelectorAll(".day-chapter").forEach(sortChapterPrayers);
+  }
+
   function applyAngelusSettings() {
     settingsForm.elements.angelusEnabled.checked = angelusSettings.enabled;
     settingsForm.elements.angelusMorning.value = angelusSettings.morning;
@@ -164,6 +207,8 @@ document.addEventListener("DOMContentLoaded", () => {
       scheduleLink?.classList.toggle("is-hidden-by-settings", !angelusSettings.enabled);
       updateAngelusTime(entry.id, angelusSettings[key]);
     });
+
+    sortPrayersBySettings();
   }
 
   /** Applique le mode choisi et le conserve pour la prochaine visite. */
@@ -249,51 +294,12 @@ document.addEventListener("DOMContentLoaded", () => {
   /** Retourne l'identifiant de la prière adaptée à l'heure locale. */
   function getPrayerIdForDate(date) {
     const minutes = date.getHours() * 60 + date.getMinutes();
-    const morningAngelus = parseTimeToMinutes(angelusSettings.morning);
-    const noonAngelus = parseTimeToMinutes(angelusSettings.noon);
-    const eveningAngelus = parseTimeToMinutes(angelusSettings.evening);
+    const orderedPrayers = [...document.querySelectorAll(".prayer-time:not(.is-hidden-by-settings)")]
+      .map((section) => ({ id: section.id, minutes: parseTimeToMinutes(getPrayerTime(section)) }))
+      .sort((first, second) => first.minutes - second.minutes);
+    const activePrayer = orderedPrayers.filter((prayer) => prayer.minutes <= minutes).at(-1);
 
-    if (
-      angelusSettings.enabled &&
-      minutes >= morningAngelus &&
-      minutes < morningAngelus + angelusEntries.morning.duration
-    ) {
-      return "angelus-matin";
-    }
-
-    if (
-      angelusSettings.enabled &&
-      minutes >= noonAngelus &&
-      minutes < noonAngelus + angelusEntries.noon.duration
-    ) {
-      return "angelus-midi";
-    }
-
-    if (
-      angelusSettings.enabled &&
-      minutes >= eveningAngelus &&
-      minutes < eveningAngelus + angelusEntries.evening.duration
-    ) {
-      return "angelus-soir";
-    }
-
-    if (minutes >= 390 && minutes < 420) {
-      return "priere-matin";
-    }
-
-    if (minutes >= 330 && minutes < 720) {
-      return "repas-matin";
-    }
-
-    if (minutes >= 720 && minutes < 1080) {
-      return "repas-midi";
-    }
-
-    if (minutes >= 1080 && minutes < 1290) {
-      return "repas-soir";
-    }
-
-    return "priere-soir";
+    return activePrayer?.id || orderedPrayers.at(-1)?.id || "priere-soir";
   }
 
   /** Met à jour le lien actif et son information pour les lecteurs d'écran. */
