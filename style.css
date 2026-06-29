@@ -62,7 +62,7 @@ a {
 .utility-controls {
   position: fixed;
   z-index: 70;
-  top: 0.65rem;
+  top: calc(var(--nav-height) + 0.65rem);
   right: max(0.75rem, env(safe-area-inset-right));
   display: inline-flex;
   align-items: center;
