@@ -5,42 +5,11 @@ import path from "node:path";
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const prayersDirectory = path.join(projectRoot, "prieres");
 const templatePath = path.join(projectRoot, "templates", "index.template.html");
+const schedulePath = path.join(projectRoot, "prayer-schedule.json");
 const publicDirectory = path.join(projectRoot, "public");
 const publicOutputPath = path.join(publicDirectory, "index.html");
 const staticAssets = ["script.js", "style.css"];
 const checkOnly = process.argv.includes("--check");
-
-const dayChapters = [
-  {
-    id: "matin",
-    title_fr: "Matin",
-    title_la: "Mane",
-    entries: [
-      { id: "angelus-matin", prayerId: "angelus", time: "06h00" },
-      { id: "priere-matin", prayerId: "matin", time: "06h30" },
-      { id: "repas-matin", prayerId: "benedicite", time: "07h00", title_fr: "Bénédicité et action de grâce", title_la: "Benedicite et gratiarum actio" }
-    ]
-  },
-  {
-    id: "midi",
-    title_fr: "Midi",
-    title_la: "Meridies",
-    entries: [
-      { id: "angelus-midi", prayerId: "angelus", time: "12h00" },
-      { id: "repas-midi", prayerId: "benedicite", time: "12h15", title_fr: "Bénédicité et action de grâce", title_la: "Benedicite et gratiarum actio" }
-    ]
-  },
-  {
-    id: "soir",
-    title_fr: "Soir",
-    title_la: "Vesperi",
-    entries: [
-      { id: "angelus-soir", prayerId: "angelus", time: "18h00" },
-      { id: "repas-soir", prayerId: "benedicite", time: "19h30", title_fr: "Bénédicité et action de grâce", title_la: "Benedicite et gratiarum actio" },
-      { id: "priere-soir", prayerId: "soir", time: "21h30" }
-    ]
-  }
-];
 
 const requiredMetadata = [
   "id",
@@ -60,6 +29,43 @@ function escapeHtml(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
+}
+
+function isSafeId(value) {
+  return /^[a-z0-9-]+$/.test(value);
+}
+
+function isValidTimeLabel(value) {
+  return /^([01]\d|2[0-3])h([0-5]\d)$/.test(value);
+}
+
+function renderDataAttributes(attributes) {
+  return Object.entries(attributes)
+    .filter(([, value]) => value !== undefined && value !== null && value !== "")
+    .map(([name, value]) => ` ${name}="${escapeHtml(String(value))}"`)
+    .join("");
+}
+
+async function readSchedule() {
+  const schedule = JSON.parse(await readFile(schedulePath, "utf8"));
+
+  if (!Array.isArray(schedule.chapters) || schedule.chapters.length === 0) {
+    throw new Error("prayer-schedule.json doit contenir une liste chapters non vide.");
+  }
+
+  schedule.chapters.forEach((chapter) => {
+    if (!isSafeId(chapter.id) || !chapter.title_fr || !chapter.title_la || !Array.isArray(chapter.entries)) {
+      throw new Error(`Chapitre invalide dans prayer-schedule.json : ${chapter.id || "sans identifiant"}`);
+    }
+
+    chapter.entries.forEach((entry) => {
+      if (!isSafeId(entry.id) || !isSafeId(entry.prayerId) || !isValidTimeLabel(entry.time)) {
+        throw new Error(`Entree de planning invalide : ${entry.id || "sans identifiant"}`);
+      }
+    });
+  });
+
+  return schedule.chapters;
 }
 
 function renderInlineMarkdown(value) {
@@ -194,7 +200,11 @@ function renderNavigation(chapters) {
 
 function renderChapterSchedule(chapter) {
   return chapter.entries
-    .map((entry) => `          <a class="chapter-schedule-link" href="#${entry.id}">
+    .map((entry) => `          <a class="chapter-schedule-link" href="#${entry.id}"${renderDataAttributes({
+              "data-schedule-target": entry.id,
+              "data-setting-key": entry.settingKey,
+              "data-default-time": entry.time.replace("h", ":")
+            })}>
             <time datetime="${entry.time.replace("h", ":")}">${escapeHtml(entry.time)}</time>
             <span><span class="ui-fr">${escapeHtml(entry.title_fr || entry.prayer.title_fr)}</span><span class="ui-la">${escapeHtml(entry.title_la || entry.prayer.title_la)}</span></span>
           </a>`)
@@ -206,7 +216,16 @@ function renderPrayerEntry(entry) {
   const titleFr = entry.title_fr || prayer.title_fr;
   const titleLa = entry.title_la || prayer.title_la;
 
-  return `      <section id="${entry.id}" class="prayer-section prayer-time" aria-labelledby="titre-${entry.id}" data-chapter="${entry.chapterId}" data-title-fr="${escapeHtml(titleFr)}" data-title-la="${escapeHtml(titleLa)}">
+  return `      <section id="${entry.id}" class="prayer-section prayer-time" aria-labelledby="titre-${entry.id}"${renderDataAttributes({
+          "data-chapter": entry.chapterId,
+          "data-title-fr": titleFr,
+          "data-title-la": titleLa,
+          "data-setting-key": entry.settingKey,
+          "data-input-name": entry.inputName,
+          "data-default-time": entry.time.replace("h", ":"),
+          "data-angelus-key": entry.angelusKey,
+          "data-angelus-duration": entry.duration
+        })}>
         <div class="prayer-time-marker" aria-hidden="true">
           <span class="prayer-time-dot">✝</span>
           <time datetime="${entry.time.replace("h", ":")}">${escapeHtml(entry.time)}</time>
@@ -215,7 +234,13 @@ function renderPrayerEntry(entry) {
       <p class="moment"><span class="ui-fr">${escapeHtml(prayer.moment_fr)}</span><span class="ui-la">${escapeHtml(prayer.moment_la)}</span></p>
       <div class="prayer-title-row">
         <h3 id="titre-${entry.id}"><span class="ui-fr">${escapeHtml(titleFr)}</span><span class="ui-la">${escapeHtml(titleLa)}</span></h3>
-        <button class="speech-toggle" type="button" data-speech-target="${entry.id}" title="Lire la prière">Lire</button>
+        <button class="speech-toggle" type="button" data-speech-target="${entry.id}" data-speech-title-fr="${escapeHtml(titleFr)}" data-speech-title-la="${escapeHtml(titleLa)}" aria-label="Écouter ${escapeHtml(titleFr)}" aria-pressed="false" title="Écouter ${escapeHtml(titleFr)}">
+          <span class="speech-icon" aria-hidden="true">♪</span>
+          <span class="speech-button-text">
+            <span class="ui-fr"><span class="speech-action-fr">Écouter</span> ${escapeHtml(titleFr)}</span>
+            <span class="ui-la"><span class="speech-action-la">Audire</span> ${escapeHtml(titleLa)}</span>
+          </span>
+        </button>
       </div>
       <div class="prayer-text prayer-pair">
         <div class="prayer-language prayer-fr" lang="fr">
@@ -271,6 +296,7 @@ async function build() {
     throw new Error(`Identifiant de prière en double : ${duplicateId}`);
   }
 
+  const dayChapters = await readSchedule();
   const prayersById = new Map(prayers.map((prayer) => [prayer.id, prayer]));
   const chapters = dayChapters.map((chapter) => ({
     ...chapter,

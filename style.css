@@ -98,12 +98,15 @@ a {
 
 .settings-toggle {
   display: inline-grid;
-  width: 2rem;
-  height: 2rem;
+  width: 2.65rem;
+  height: 2.65rem;
   place-items: center;
-  border-radius: 50%;
+  color: var(--rubric-dark);
+  background: transparent;
+  border-color: transparent;
+  border-radius: 0.35rem;
   box-shadow: none;
-  font-size: 0.82rem;
+  font-size: 1.35rem;
 }
 
 .settings-toggle:hover,
@@ -114,6 +117,11 @@ a {
 .settings-reset:focus-visible {
   background: #fff;
   border-color: var(--gold);
+}
+
+.settings-toggle:hover,
+.settings-toggle:focus-visible {
+  background: rgb(255 253 248 / 74%);
 }
 
 .settings-panel {
@@ -413,6 +421,42 @@ h1 {
   font-style: italic;
 }
 
+.current-prayer {
+  display: inline-flex;
+  margin: 1.15rem auto 0;
+  padding: 0.32rem 0.7rem;
+  align-items: baseline;
+  gap: 0.45rem;
+  color: var(--muted);
+  background: rgb(255 253 248 / 72%);
+  border: 1px solid var(--line);
+  border-radius: 2rem;
+  font-size: 0.78rem;
+  line-height: 1.3;
+}
+
+.current-prayer[hidden] {
+  display: none;
+}
+
+.current-prayer-label {
+  color: var(--rubric);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.current-prayer-link {
+  color: var(--rubric-dark);
+  text-decoration: none;
+}
+
+.current-prayer-link:hover,
+.current-prayer-link:focus-visible {
+  text-decoration: underline;
+}
+
 .prayer-book {
   width: min(calc(100% - 2rem), var(--reading-width));
   margin: 0 auto;
@@ -486,7 +530,12 @@ h1 {
 }
 
 .chapter-schedule-link:hover,
-.chapter-schedule-link:focus-visible {
+.chapter-schedule-link:focus-visible,
+.chapter-schedule-link.is-active {
+  color: var(--rubric-dark);
+}
+
+.chapter-schedule-link.is-active time {
   color: var(--rubric-dark);
 }
 
@@ -587,10 +636,27 @@ h3 {
 }
 
 .speech-toggle {
-  margin: -1rem 0 1.4rem;
-  padding: 0.35rem 0.7rem;
+  display: inline-flex;
+  max-width: min(100%, 22rem);
+  margin: -0.75rem 0 1.4rem;
+  padding: 0.42rem 0.78rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
   color: var(--muted);
-  font-size: 0.76rem;
+  font-size: 0.78rem;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.speech-icon {
+  color: var(--gold);
+  font-size: 0.88rem;
+  line-height: 1;
+}
+
+.speech-button-text {
+  min-width: 0;
 }
 
 .speech-toggle.is-speaking {
@@ -819,9 +885,9 @@ html[data-language-mode="parallel"] .prayer-language {
   }
 
   .settings-toggle {
-    width: 1.85rem;
-    height: 1.85rem;
-    font-size: 0.76rem;
+    width: 2.45rem;
+    height: 2.45rem;
+    font-size: 1.25rem;
   }
 
   .settings-panel {

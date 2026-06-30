@@ -27,7 +27,7 @@
     <form class="settings-form">
       <div class="settings-panel-header">
         <h2 id="angelus-settings-title">Paramètres</h2>
-        <button class="settings-close" type="button" title="Fermer">×</button>
+        <button class="settings-close" type="button" title="Fermer" aria-label="Fermer les paramètres">×</button>
       </div>
       <div class="settings-grid">
         <div class="settings-field">
@@ -90,7 +90,7 @@
   <nav class="main-nav" aria-label="Prières de la journée">
     <div class="nav-inner">
 {{PRAYER_NAVIGATION}}
-      <button class="settings-toggle" type="button" aria-expanded="false" aria-controls="angelus-settings" title="Paramètres">⚙</button>
+      <button class="settings-toggle" type="button" aria-expanded="false" aria-controls="angelus-settings" title="Paramètres" aria-label="Ouvrir les paramètres">⚙</button>
     </div>
   </nav>
 
@@ -98,6 +98,10 @@
     <p class="cross" aria-hidden="true">✝</p>
     <h1><span class="ui-fr">Prières quotidiennes</span><span class="ui-la">Preces quotidianae</span></h1>
     <p class="subtitle"><span class="ui-fr">Sanctifiez votre journée par la prière.</span><span class="ui-la">Diem vestrum oratione sanctificate.</span></p>
+    <p class="current-prayer" aria-live="polite" hidden>
+      <span class="current-prayer-label"><span class="ui-fr">Prière active</span><span class="ui-la">Prex lecta</span></span>
+      <a class="current-prayer-link" href="#contenu"></a>
+    </p>
   </header>
 
   <main id="contenu" class="prayer-book">

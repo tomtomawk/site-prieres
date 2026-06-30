@@ -1,54 +1,159 @@
-# Site de prières
+# Site de prières quotidiennes
 
-Site statique bilingue de prières et de ressources catholiques traditionnelles.
+Site statique de prières catholiques en français et en latin, pensé comme un petit missel numérique consultable sans framework.
 
-## Stack
+## Fonctionnalités
 
-- Markdown pour les textes des prières
-- HTML, CSS et JavaScript sans framework
-- Génération statique avec Node.js
-- Hébergement sur Cloudflare Pages
+- Prières organisées par moments de la journée : matin, midi et soir.
+- Affichage français, latin, ou français/latin en vis-à-vis.
+- Indication discrète de la prière active.
+- Horaires personnalisables depuis le panneau de paramètres.
+- Angélus activable ou masquable selon l’usage.
+- Notifications locales optionnelles, tant que la page reste ouverte.
+- Lecture vocale via les capacités du navigateur.
+- Génération statique dans `public/` pour Cloudflare Pages ou Workers Builds.
 
-## Modifier ou ajouter une prière
+## Structure
 
-Les textes se trouvent dans [`prieres/`](prieres/). Chaque fichier Markdown contient :
+- `prieres/` : textes sources des prières en Markdown.
+- `prayer-schedule.json` : planning de la journée, horaires par défaut et rattachement des prières aux chapitres.
+- `templates/index.template.html` : structure HTML générale.
+- `scripts/build-prayers.mjs` : générateur statique.
+- `script.js` : interactions côté navigateur.
+- `style.css` : mise en page et thème graphique.
+- `public/` : site généré à publier.
+- `AUDIT.md` : audit graphique et technique utilisé pour guider les corrections.
+- `consigne suite AUDIT.md` : décisions de correction après audit.
 
-- les titres et libellés français/latin dans le bloc placé entre `---` ;
-- une section `## Français` ;
-- une section `## Latin`.
+## Installation
 
-Après une modification, reconstruisez la page :
+Le projet utilise Node.js pour générer la page.
+
+```sh
+npm install
+```
+
+Si `npm` n’est pas disponible dans l’environnement local, il reste possible de lancer directement le script avec Node :
+
+```sh
+node scripts/build-prayers.mjs
+```
+
+## Générer le site
+
+Après modification d’une prière, du planning, du template, du CSS ou du JS :
 
 ```sh
 npm run build
 ```
 
-Le dossier `public/` est généré automatiquement. Il ne faut pas modifier directement les blocs de prières contenus dans `public/index.html`.
+Cette commande génère :
 
-Pour vérifier que le JavaScript et la page générée sont à jour :
+- `public/index.html`
+- `public/style.css`
+- `public/script.js`
+
+Ne modifiez pas directement les blocs de prières dans `public/index.html` : ils sont régénérés depuis `prieres/`, `prayer-schedule.json` et `templates/index.template.html`.
+
+## Vérifier
 
 ```sh
 npm run check
 ```
 
-## Cloudflare Pages
+Le check vérifie :
 
-- Commande de build : `npm run build`
-- Dossier de sortie : `public`
+- la syntaxe de `script.js` ;
+- la syntaxe de `scripts/build-prayers.mjs` ;
+- la synchronisation entre les sources et le dossier `public/`.
 
-## Cloudflare Workers Builds
+## Ajouter ou modifier une prière
 
-Le fichier `wrangler.jsonc` permet aussi le déploiement avec la commande utilisée par Cloudflare Workers Builds :
+Les fichiers Markdown de `prieres/` commencent par un bloc de métadonnées :
+
+```md
+---
+id: matin
+order: 1
+nav_fr: Matin
+nav_la: Mane
+moment_fr: Au commencement du jour
+moment_la: Initio diei
+title_fr: Prière du matin
+title_la: Oratio matutina
+---
+```
+
+Chaque fichier doit ensuite contenir deux sections dans cet ordre :
+
+```md
+## Français
+
+Texte français.
+
+## Latin
+
+Texte latin.
+```
+
+Format Markdown accepté par le générateur :
+
+- titres `###` ;
+- paragraphes simples ;
+- listes simples commençant par `- ` ;
+- emphase `*texte*` ;
+- gras `**texte**` ;
+- liens HTTP ou HTTPS.
+
+Le générateur maison ne gère pas volontairement tout Markdown : évitez les tableaux, citations, listes imbriquées et HTML brut.
+
+## Modifier le planning
+
+Le planning se trouve dans `prayer-schedule.json`.
+
+Chaque entrée indique :
+
+- `id` : identifiant HTML unique de l’entrée ;
+- `prayerId` : prière source à utiliser depuis `prieres/` ;
+- `time` : horaire par défaut au format `HHhMM` ;
+- `settingKey` : clé utilisée par le JavaScript pour les réglages ;
+- `inputName` : champ correspondant dans le panneau de paramètres ;
+- `angelusKey` et `duration` pour les entrées d’Angélus.
+
+Après une modification :
+
+```sh
+npm run build
+npm run check
+```
+
+## Comportements navigateur
+
+Le site mémorise localement :
+
+- le mode de langue choisi ;
+- les horaires personnalisés ;
+- l’activation de l’Angélus ;
+- l’activation des notifications ;
+- le fait que la première visite a déjà eu lieu.
+
+À la première visite, la page ne défile plus automatiquement vers la prière de l’heure courante. Aux visites suivantes, elle peut rejoindre directement la prière correspondant à l’heure locale.
+
+Les notifications utilisent l’API `Notification` du navigateur. Elles ne fonctionnent pas comme un service en arrière-plan : la page doit rester ouverte.
+
+La lecture vocale utilise `speechSynthesis`. La qualité et la disponibilité des voix, surtout en latin, dépendent du navigateur et du système.
+
+## Déploiement Cloudflare
+
+Cloudflare Pages :
+
+- commande de build : `npm run build`
+- dossier de sortie : `public`
+
+Cloudflare Workers Builds peut utiliser `wrangler.jsonc` :
 
 ```sh
 npx wrangler versions upload
 ```
 
 Wrangler publie uniquement le contenu statique du dossier `public/`.
-
-## Structure
-
-- `prieres/` : sources Markdown
-- `templates/index.template.html` : structure générale de la page
-- `scripts/build-prayers.mjs` : générateur statique
-- `public/` : page générée et assets statiques transmis à Cloudflare

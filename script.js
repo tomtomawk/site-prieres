@@ -13,8 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const sections = [...document.querySelectorAll(".prayer-time")];
   const navLinks = [...document.querySelectorAll(".nav-link")];
+  const scheduleLinks = [...document.querySelectorAll(".chapter-schedule-link")];
   const mainNavigation = document.querySelector(".main-nav");
   const backToTop = document.querySelector(".back-to-top");
+  const currentPrayer = document.querySelector(".current-prayer");
+  const currentPrayerLink = document.querySelector(".current-prayer-link");
   const translationToggle = document.querySelector(".translation-toggle");
   const languageOptions = [...translationToggle.querySelectorAll(".language-option")];
   const settingsToggle = document.querySelector(".settings-toggle");
@@ -24,33 +27,34 @@ document.addEventListener("DOMContentLoaded", () => {
   const notificationPermission = document.querySelector(".notification-permission");
   const speechButtons = [...document.querySelectorAll(".speech-toggle")];
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const firstVisitStorageKey = "prayer-has-visited";
 
   const defaultPrayerSettings = {
     enabled: false,
-    morning: "07:05",
-    morningPrayer: "06:30",
-    morningMeal: "06:45",
-    noon: "12:05",
-    noonMeal: "12:30",
-    evening: "18:05",
-    eveningMeal: "19:30",
-    eveningPrayer: "21:30",
     notificationsEnabled: false
   };
 
-  const angelusEntries = {
-    morning: { id: "angelus-matin", inputName: "angelusMorning", duration: 30 },
-    noon: { id: "angelus-midi", inputName: "angelusNoon", duration: 15 },
-    evening: { id: "angelus-soir", inputName: "angelusEvening", duration: 90 }
-  };
+  const timeInputsBySettingKey = {};
+  const angelusEntries = {};
 
-  const prayerTimeFields = {
-    "priere-matin": "morningPrayer",
-    "repas-matin": "morningMeal",
-    "repas-midi": "noonMeal",
-    "repas-soir": "eveningMeal",
-    "priere-soir": "eveningPrayer"
-  };
+  sections.forEach((section) => {
+    const { settingKey, inputName, defaultTime, angelusKey, angelusDuration } = section.dataset;
+
+    if (!settingKey || !inputName || parseTimeToMinutes(defaultTime) === null) {
+      return;
+    }
+
+    defaultPrayerSettings[settingKey] = defaultTime;
+    timeInputsBySettingKey[settingKey] = inputName;
+
+    if (angelusKey) {
+      angelusEntries[angelusKey] = {
+        id: section.id,
+        inputName,
+        duration: Number(angelusDuration) || 0
+      };
+    }
+  });
 
   const languageModes = ["french", "latin", "parallel"];
   const languageModeDetails = {
@@ -119,20 +123,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function sanitizePrayerSettings(settings) {
-    return {
-      enabled: typeof settings.enabled === "boolean" ? settings.enabled : defaultPrayerSettings.enabled,
-      morning: parseTimeToMinutes(settings.morning) === null ? defaultPrayerSettings.morning : settings.morning,
-      morningPrayer: parseTimeToMinutes(settings.morningPrayer) === null ? defaultPrayerSettings.morningPrayer : settings.morningPrayer,
-      morningMeal: parseTimeToMinutes(settings.morningMeal) === null ? defaultPrayerSettings.morningMeal : settings.morningMeal,
-      noon: parseTimeToMinutes(settings.noon) === null ? defaultPrayerSettings.noon : settings.noon,
-      noonMeal: parseTimeToMinutes(settings.noonMeal) === null ? defaultPrayerSettings.noonMeal : settings.noonMeal,
-      evening: parseTimeToMinutes(settings.evening) === null ? defaultPrayerSettings.evening : settings.evening,
-      eveningMeal: parseTimeToMinutes(settings.eveningMeal) === null ? defaultPrayerSettings.eveningMeal : settings.eveningMeal,
-      eveningPrayer: parseTimeToMinutes(settings.eveningPrayer) === null ? defaultPrayerSettings.eveningPrayer : settings.eveningPrayer,
-      notificationsEnabled: typeof settings.notificationsEnabled === "boolean"
-        ? settings.notificationsEnabled
-        : defaultPrayerSettings.notificationsEnabled
-    };
+    return Object.fromEntries(Object.entries(defaultPrayerSettings).map(([key, defaultValue]) => {
+      if (typeof defaultValue === "boolean") {
+        return [key, typeof settings[key] === "boolean" ? settings[key] : defaultValue];
+      }
+
+      return [
+        key,
+        parseTimeToMinutes(settings[key]) === null ? defaultValue : settings[key]
+      ];
+    }));
   }
 
   function loadPrayerSettings() {
@@ -155,9 +155,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let prayerSettings = loadPrayerSettings();
 
-  function setSettingsPanelOpen(isOpen) {
+  function setSettingsPanelOpen(isOpen, options = {}) {
     settingsPanel.hidden = !isOpen;
     settingsToggle.setAttribute("aria-expanded", String(isOpen));
+    settingsToggle.setAttribute("aria-label", isOpen ? "Paramètres ouverts" : "Ouvrir les paramètres");
+
+    if (isOpen && options.focusPanel) {
+      settingsClose.focus();
+    }
+
+    if (!isOpen && options.restoreFocus) {
+      settingsToggle.focus();
+    }
   }
 
   function updatePrayerTime(entryId, value) {
@@ -176,13 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function getPrayerTime(section) {
-    const key = Object.entries(angelusEntries).find(([, entry]) => entry.id === section.id)?.[0];
-
-    if (key) {
-      return prayerSettings[key];
-    }
-
-    return prayerSettings[prayerTimeFields[section.id]] || "23:59";
+    return prayerSettings[section.dataset.settingKey] || section.dataset.defaultTime || "23:59";
   }
 
   function sortChapterPrayers(chapter) {
@@ -295,14 +298,40 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateSpeechButtons(activeButton = null) {
     speechButtons.forEach((button) => {
       const isActive = button === activeButton;
+      const isLatin = document.documentElement.dataset.languageMode === "latin";
+      const title = isLatin ? button.dataset.speechTitleLa : button.dataset.speechTitleFr;
+      const actionFr = button.querySelector(".speech-action-fr");
+      const actionLa = button.querySelector(".speech-action-la");
+
       button.classList.toggle("is-speaking", isActive);
-      button.textContent = isActive ? "Stop" : "Lire";
+      button.setAttribute("aria-pressed", String(isActive));
+      button.setAttribute("aria-label", `${isActive ? "Arrêter la lecture de" : "Écouter"} ${title}`);
+      button.title = `${isActive ? "Arrêter" : "Écouter"} ${title}`;
+
+      if (actionFr) {
+        actionFr.textContent = isActive ? "Arrêter" : "Écouter";
+      }
+
+      if (actionLa) {
+        actionLa.textContent = isActive ? "Sistere" : "Audire";
+      }
     });
   }
 
   function speakPrayer(section, button) {
     if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) {
-      button.textContent = "Indisponible";
+      const actionFr = button.querySelector(".speech-action-fr");
+      const actionLa = button.querySelector(".speech-action-la");
+
+      if (actionFr) {
+        actionFr.textContent = "Indisponible";
+      }
+
+      if (actionLa) {
+        actionLa.textContent = "Indisponibile";
+      }
+
+      button.setAttribute("aria-label", "Lecture vocale indisponible");
       return;
     }
 
@@ -325,14 +354,12 @@ document.addEventListener("DOMContentLoaded", () => {
   function applyAngelusSettings() {
     settingsForm.elements.angelusEnabled.checked = prayerSettings.enabled;
     settingsForm.elements.notificationsEnabled.checked = prayerSettings.notificationsEnabled;
-    settingsForm.elements.angelusMorning.value = prayerSettings.morning;
-    settingsForm.elements.morningPrayer.value = prayerSettings.morningPrayer;
-    settingsForm.elements.morningMeal.value = prayerSettings.morningMeal;
-    settingsForm.elements.angelusNoon.value = prayerSettings.noon;
-    settingsForm.elements.noonMeal.value = prayerSettings.noonMeal;
-    settingsForm.elements.angelusEvening.value = prayerSettings.evening;
-    settingsForm.elements.eveningMeal.value = prayerSettings.eveningMeal;
-    settingsForm.elements.eveningPrayer.value = prayerSettings.eveningPrayer;
+
+    Object.entries(timeInputsBySettingKey).forEach(([settingKey, inputName]) => {
+      if (settingsForm.elements[inputName]) {
+        settingsForm.elements[inputName].value = prayerSettings[settingKey];
+      }
+    });
 
     Object.entries(angelusEntries).forEach(([key, entry]) => {
       const section = document.getElementById(entry.id);
@@ -343,8 +370,8 @@ document.addEventListener("DOMContentLoaded", () => {
       updatePrayerTime(entry.id, prayerSettings[key]);
     });
 
-    Object.keys(prayerTimeFields).forEach((entryId) => {
-      updatePrayerTime(entryId, prayerSettings[prayerTimeFields[entryId]]);
+    sections.forEach((section) => {
+      updatePrayerTime(section.id, getPrayerTime(section));
     });
 
     sortPrayersBySettings();
@@ -379,8 +406,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if ("speechSynthesis" in window) {
       window.speechSynthesis.cancel();
-      updateSpeechButtons();
     }
+
+    updateSpeechButtons();
+    updateCurrentPrayerIndicator(document.querySelector(".prayer-time.is-active"));
   }
 
   let savedLanguageMode = "french";
@@ -396,26 +425,43 @@ document.addEventListener("DOMContentLoaded", () => {
   updateNotificationPermissionState();
 
   settingsToggle.addEventListener("click", () => {
-    setSettingsPanelOpen(settingsPanel.hidden);
+    const shouldOpen = settingsPanel.hidden;
+    setSettingsPanelOpen(shouldOpen, { focusPanel: shouldOpen, restoreFocus: !shouldOpen });
   });
 
   settingsClose.addEventListener("click", () => {
+    setSettingsPanelOpen(false, { restoreFocus: true });
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !settingsPanel.hidden) {
+      setSettingsPanelOpen(false, { restoreFocus: true });
+    }
+  });
+
+  document.addEventListener("pointerdown", (event) => {
+    if (
+      settingsPanel.hidden
+      || settingsPanel.contains(event.target)
+      || settingsToggle.contains(event.target)
+    ) {
+      return;
+    }
+
     setSettingsPanelOpen(false);
   });
 
   settingsForm.addEventListener("input", () => {
-    prayerSettings = sanitizePrayerSettings({
+    const nextSettings = {
       enabled: settingsForm.elements.angelusEnabled.checked,
-      morning: settingsForm.elements.angelusMorning.value,
-      morningPrayer: settingsForm.elements.morningPrayer.value,
-      morningMeal: settingsForm.elements.morningMeal.value,
-      noon: settingsForm.elements.angelusNoon.value,
-      noonMeal: settingsForm.elements.noonMeal.value,
-      evening: settingsForm.elements.angelusEvening.value,
-      eveningMeal: settingsForm.elements.eveningMeal.value,
-      eveningPrayer: settingsForm.elements.eveningPrayer.value,
       notificationsEnabled: settingsForm.elements.notificationsEnabled.checked
+    };
+
+    Object.entries(timeInputsBySettingKey).forEach(([settingKey, inputName]) => {
+      nextSettings[settingKey] = settingsForm.elements[inputName]?.value;
     });
+
+    prayerSettings = sanitizePrayerSettings(nextSettings);
     applyAngelusSettings();
     setActiveSection(getPrayerIdForDate(new Date()));
     savePrayerSettings(prayerSettings);
@@ -475,6 +521,16 @@ document.addEventListener("DOMContentLoaded", () => {
     return activePrayer?.id || orderedPrayers.at(-1)?.id || "priere-soir";
   }
 
+  function updateCurrentPrayerIndicator(section) {
+    if (!currentPrayer || !currentPrayerLink || !section) {
+      return;
+    }
+
+    currentPrayer.hidden = false;
+    currentPrayerLink.href = `#${section.id}`;
+    currentPrayerLink.textContent = getSectionTitle(section);
+  }
+
   /** Met à jour le lien actif et son information pour les lecteurs d'écran. */
   function setActiveSection(sectionId) {
     const activeSection = document.getElementById(sectionId);
@@ -494,6 +550,19 @@ document.addEventListener("DOMContentLoaded", () => {
     sections.forEach((section) => {
       section.classList.toggle("is-active", section.id === sectionId);
     });
+
+    scheduleLinks.forEach((link) => {
+      const isActive = link.getAttribute("href") === `#${sectionId}`;
+      link.classList.toggle("is-active", isActive);
+
+      if (isActive) {
+        link.setAttribute("aria-current", "true");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+
+    updateCurrentPrayerIndicator(activeSection);
   }
 
   // Active l'animation progressive sans masquer le contenu si JS est coupé.
@@ -531,7 +600,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Le bouton reste discret tant que le visiteur est proche du haut de page.
   function updateBackToTop() {
-    backToTop.classList.toggle("is-visible", window.scrollY > 500);
+    backToTop.classList.toggle("is-visible", window.scrollY > 1200);
   }
 
   window.addEventListener("scroll", updateBackToTop, { passive: true });
@@ -546,12 +615,30 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Oriente la page vers la prière correspondant à l'heure locale.
+  function hasVisitedBefore() {
+    try {
+      return localStorage.getItem(firstVisitStorageKey) === "true";
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function rememberVisit() {
+    try {
+      localStorage.setItem(firstVisitStorageKey, "true");
+    } catch (error) {
+      // La visite courante reste fonctionnelle sans stockage local.
+    }
+  }
+
+  // Oriente la page vers la prière correspondant à l'heure locale après la première visite.
   const prayerId = getPrayerIdForDate(new Date());
   const targetSection = document.getElementById(prayerId);
+  const shouldAutoScroll = hasVisitedBefore();
   setActiveSection(prayerId);
+  rememberVisit();
 
-  if (targetSection) {
+  if (targetSection && shouldAutoScroll) {
     // Deux images d'animation laissent le navigateur terminer sa mise en page.
     window.requestAnimationFrame(() => {
       window.requestAnimationFrame(() => {

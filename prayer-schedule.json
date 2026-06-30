@@ -1,0 +1,93 @@
+{
+  "chapters": [
+    {
+      "id": "matin",
+      "title_fr": "Matin",
+      "title_la": "Mane",
+      "entries": [
+        {
+          "id": "angelus-matin",
+          "prayerId": "angelus",
+          "time": "07h05",
+          "settingKey": "morning",
+          "inputName": "angelusMorning",
+          "angelusKey": "morning",
+          "duration": 30
+        },
+        {
+          "id": "priere-matin",
+          "prayerId": "matin",
+          "time": "06h30",
+          "settingKey": "morningPrayer",
+          "inputName": "morningPrayer"
+        },
+        {
+          "id": "repas-matin",
+          "prayerId": "benedicite",
+          "time": "06h45",
+          "settingKey": "morningMeal",
+          "inputName": "morningMeal",
+          "title_fr": "Bénédicité et action de grâce",
+          "title_la": "Benedicite et gratiarum actio"
+        }
+      ]
+    },
+    {
+      "id": "midi",
+      "title_fr": "Midi",
+      "title_la": "Meridies",
+      "entries": [
+        {
+          "id": "angelus-midi",
+          "prayerId": "angelus",
+          "time": "12h05",
+          "settingKey": "noon",
+          "inputName": "angelusNoon",
+          "angelusKey": "noon",
+          "duration": 15
+        },
+        {
+          "id": "repas-midi",
+          "prayerId": "benedicite",
+          "time": "12h30",
+          "settingKey": "noonMeal",
+          "inputName": "noonMeal",
+          "title_fr": "Bénédicité et action de grâce",
+          "title_la": "Benedicite et gratiarum actio"
+        }
+      ]
+    },
+    {
+      "id": "soir",
+      "title_fr": "Soir",
+      "title_la": "Vesperi",
+      "entries": [
+        {
+          "id": "angelus-soir",
+          "prayerId": "angelus",
+          "time": "18h05",
+          "settingKey": "evening",
+          "inputName": "angelusEvening",
+          "angelusKey": "evening",
+          "duration": 90
+        },
+        {
+          "id": "repas-soir",
+          "prayerId": "benedicite",
+          "time": "19h30",
+          "settingKey": "eveningMeal",
+          "inputName": "eveningMeal",
+          "title_fr": "Bénédicité et action de grâce",
+          "title_la": "Benedicite et gratiarum actio"
+        },
+        {
+          "id": "priere-soir",
+          "prayerId": "soir",
+          "time": "21h30",
+          "settingKey": "eveningPrayer",
+          "inputName": "eveningPrayer"
+        }
+      ]
+    }
+  ]
+}
