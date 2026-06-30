@@ -13,7 +13,6 @@ const checkOnly = process.argv.includes("--check");
 
 const requiredMetadata = [
   "id",
-  "order",
   "nav_fr",
   "nav_la",
   "moment_fr",
@@ -163,9 +162,9 @@ function parseFrontMatter(source, filename) {
     throw new Error(`Identifiant invalide dans ${filename} : ${metadata.id}`);
   }
 
-  const order = Number(metadata.order);
+  const order = metadata.order ? Number(metadata.order) : null;
 
-  if (!Number.isFinite(order)) {
+  if (metadata.order && !Number.isFinite(order)) {
     throw new Error(`Ordre invalide dans ${filename} : ${metadata.order}`);
   }
 
@@ -203,7 +202,8 @@ function renderChapterSchedule(chapter) {
     .map((entry) => `          <a class="chapter-schedule-link" href="#${entry.id}"${renderDataAttributes({
               "data-schedule-target": entry.id,
               "data-setting-key": entry.settingKey,
-              "data-default-time": entry.time.replace("h", ":")
+              "data-default-time": entry.time.replace("h", ":"),
+              "data-optional-key": entry.optionalKey
             })}>
             <time datetime="${entry.time.replace("h", ":")}">${escapeHtml(entry.time)}</time>
             <span><span class="ui-fr">${escapeHtml(entry.title_fr || entry.prayer.title_fr)}</span><span class="ui-la">${escapeHtml(entry.title_la || entry.prayer.title_la)}</span></span>
@@ -224,7 +224,9 @@ function renderPrayerEntry(entry) {
           "data-input-name": entry.inputName,
           "data-default-time": entry.time.replace("h", ":"),
           "data-angelus-key": entry.angelusKey,
-          "data-angelus-duration": entry.duration
+          "data-angelus-duration": entry.duration,
+          "data-optional-key": entry.optionalKey,
+          "data-rosary": entry.rosary ? "true" : undefined
         })}>
         <div class="prayer-time-marker" aria-hidden="true">
           <span class="prayer-time-dot">✝</span>
@@ -287,7 +289,7 @@ async function build() {
     return { ...metadata, ...languages };
   }));
 
-  prayers.sort((a, b) => a.order - b.order);
+  prayers.sort((a, b) => (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER));
 
   const ids = prayers.map((prayer) => prayer.id);
   const duplicateId = ids.find((id, index) => ids.indexOf(id) !== index);

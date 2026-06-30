@@ -73,6 +73,21 @@
           </div>
         </div>
       </fieldset>
+      <fieldset class="settings-angelus">
+        <legend>
+          <label class="settings-check">
+            <input type="checkbox" name="rosaryEnabled">
+            <span>Activer le Chapelet</span>
+          </label>
+        </legend>
+        <div class="settings-grid settings-grid-angelus">
+          <div class="settings-field">
+            <label for="rosary-time">Chapelet</label>
+            <input id="rosary-time" type="time" name="rosaryTime" value="20:30">
+          </div>
+        </div>
+        <p class="settings-note">Les mystères suivent automatiquement le jour.</p>
+      </fieldset>
       <fieldset class="settings-angelus settings-notifications">
         <legend>
           <label class="settings-check">
@@ -1592,6 +1607,10 @@
             <time datetime="19:30">19h30</time>
             <span><span class="ui-fr">Bénédicité et action de grâce</span><span class="ui-la">Benedicite et gratiarum actio</span></span>
           </a>
+          <a class="chapter-schedule-link" href="#chapelet-soir" data-schedule-target="chapelet-soir" data-setting-key="rosaryTime" data-default-time="20:30" data-optional-key="rosaryEnabled">
+            <time datetime="20:30">20h30</time>
+            <span><span class="ui-fr">Chapelet</span><span class="ui-la">Rosarium</span></span>
+          </a>
           <a class="chapter-schedule-link" href="#priere-soir" data-schedule-target="priere-soir" data-setting-key="eveningPrayer" data-default-time="21:30">
             <time datetime="21:30">21h30</time>
             <span><span class="ui-fr">Prière du soir</span><span class="ui-la">Oratio vespertina</span></span>
@@ -1832,6 +1851,341 @@
       </div>
         </div>
       </section>
+      <section id="chapelet-soir" class="prayer-section prayer-time" aria-labelledby="titre-chapelet-soir" data-chapter="soir" data-title-fr="Chapelet" data-title-la="Rosarium" data-setting-key="rosaryTime" data-input-name="rosaryTime" data-default-time="20:30" data-optional-key="rosaryEnabled" data-rosary="true">
+        <div class="prayer-time-marker" aria-hidden="true">
+          <span class="prayer-time-dot">✝</span>
+          <time datetime="20:30">20h30</time>
+        </div>
+        <div class="prayer-time-content">
+      <p class="moment"><span class="ui-fr">Méditation du jour</span><span class="ui-la">Meditatio diei</span></p>
+      <div class="prayer-title-row">
+        <h3 id="titre-chapelet-soir"><span class="ui-fr">Chapelet</span><span class="ui-la">Rosarium</span></h3>
+        <button class="speech-toggle" type="button" data-speech-target="chapelet-soir" data-speech-title-fr="Chapelet" data-speech-title-la="Rosarium" aria-label="Écouter Chapelet" aria-pressed="false" title="Écouter Chapelet">
+          <span class="speech-icon" aria-hidden="true">♪</span>
+          <span class="speech-button-text">
+            <span class="ui-fr"><span class="speech-action-fr">Écouter</span> Chapelet</span>
+            <span class="ui-la"><span class="speech-action-la">Audire</span> Rosarium</span>
+          </span>
+        </button>
+      </div>
+      <div class="prayer-text prayer-pair">
+        <div class="prayer-language prayer-fr" lang="fr">
+          <h3 class="prayer-subtitle">Introduction</h3>
+          <p>Au nom du Père, et du Fils, et du Saint-Esprit. Ainsi soit-il.</p>
+          <p>Je crois en Dieu, le Père tout-puissant, Créateur du ciel et de la terre, et en Jésus-Christ, son Fils unique, notre Seigneur, qui a été conçu du Saint-Esprit, est né de la Vierge Marie ; a souffert sous Ponce-Pilate, a été crucifié, est mort et a été enseveli ; est descendu aux enfers, le troisième jour est ressuscité d&#39;entre les morts ; est monté aux cieux, est assis à la droite de Dieu le Père tout-puissant, d&#39;où il viendra pour juger les vivants et les morts.</p>
+          <p>Je crois au Saint-Esprit, la sainte Église catholique, la Communion des Saints, la rémission des péchés, la résurrection de la chair, la vie éternelle.</p>
+          <p>Ainsi soit-il.</p>
+          <p>Notre Père, qui êtes dans les cieux, que votre nom soit sanctifié ; que votre règne arrive ; que votre volonté soit faite sur la terre comme au ciel ; donnez-nous aujourd&#39;hui notre pain de chaque jour ; pardonnez-nous nos offenses comme nous pardonnons à ceux qui nous ont offensés ; et ne nous laissez point succomber à la tentation, mais délivrez-nous du mal.</p>
+          <p>Ainsi soit-il.</p>
+          <p>Je vous salue, Marie, pleine de grâce, le Seigneur est avec vous ; vous êtes bénie entre toutes les femmes, et Jésus, le fruit de vos entrailles, est béni. Sainte Marie, Mère de Dieu, priez pour nous, pauvres pécheurs, maintenant et à l&#39;heure de notre mort.</p>
+          <p>Ainsi soit-il.</p>
+          <p>Gloire au Père, et au Fils, et au Saint-Esprit, comme il était au commencement, maintenant et toujours, et dans les siècles des siècles.</p>
+          <p>Ainsi soit-il.</p>
+          <h3 class="prayer-subtitle">Mystères joyeux</h3>
+          <ul class="prayer-list">
+            <li>L&#39;Annonciation.</li>
+            <li>La Visitation.</li>
+            <li>La Nativité de Notre-Seigneur.</li>
+            <li>La Présentation de Jésus au Temple.</li>
+            <li>Le Recouvrement de Jésus au Temple.</li>
+          </ul>
+          <h3 class="prayer-subtitle">Mystères douloureux</h3>
+          <ul class="prayer-list">
+            <li>L&#39;Agonie de Jésus au jardin des Oliviers.</li>
+            <li>La Flagellation.</li>
+            <li>Le Couronnement d&#39;épines.</li>
+            <li>Le Portement de la Croix.</li>
+            <li>Le Crucifiement et la mort de Jésus.</li>
+          </ul>
+          <h3 class="prayer-subtitle">Mystères glorieux</h3>
+          <ul class="prayer-list">
+            <li>La Résurrection.</li>
+            <li>L&#39;Ascension.</li>
+            <li>La Pentecôte.</li>
+            <li>L&#39;Assomption de la Sainte Vierge.</li>
+            <li>Le Couronnement de Marie dans le ciel.</li>
+          </ul>
+          <h3 class="prayer-subtitle">Décennie</h3>
+          <p>Pour chaque mystère, dire :</p>
+          <ul class="prayer-list">
+            <li>un Notre Père ;</li>
+            <li>dix Je vous salue Marie ;</li>
+            <li>un Gloire au Père.</li>
+          </ul>
+          <h3 class="prayer-subtitle">Prière finale</h3>
+          <p>Ô mon Jésus, pardonnez-nous nos péchés, préservez-nous du feu de l&#39;enfer, conduisez au ciel toutes les âmes, surtout celles qui ont le plus besoin de votre miséricorde.</p>
+        </div>
+        <div class="prayer-language prayer-la" lang="la">
+          <h3 class="prayer-subtitle">Initium</h3>
+          <p>In nomine Patris, et Filii, et Spiritus Sancti. Amen.</p>
+          <p>Credo in Deum Patrem omnipotentem, Creatorem caeli et terrae ; et in Jesum Christum, Filium ejus unicum, Dominum nostrum, qui conceptus est de Spiritu Sancto, natus ex Maria Virgine ; passus sub Pontio Pilato, crucifixus, mortuus et sepultus ; descendit ad inferos, tertia die resurrexit a mortuis ; ascendit ad caelos, sedet ad dexteram Dei Patris omnipotentis ; inde venturus est judicare vivos et mortuos.</p>
+          <p>Credo in Spiritum Sanctum, sanctam Ecclesiam catholicam, Sanctorum communionem, remissionem peccatorum, carnis resurrectionem, vitam aeternam.</p>
+          <p class="amen">Amen.</p>
+          <p>Pater noster, qui es in caelis, sanctificetur nomen tuum ; adveniat regnum tuum ; fiat voluntas tua sicut in caelo et in terra ; panem nostrum quotidianum da nobis hodie ; et dimitte nobis debita nostra, sicut et nos dimittimus debitoribus nostris ; et ne nos inducas in tentationem, sed libera nos a malo.</p>
+          <p class="amen">Amen.</p>
+          <p>Ave, Maria, gratia plena, Dominus tecum ; benedicta tu in mulieribus, et benedictus fructus ventris tui, Jesus. Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostrae.</p>
+          <p class="amen">Amen.</p>
+          <p>Gloria Patri, et Filio, et Spiritui Sancto, sicut erat in principio, et nunc, et semper, et in saecula saeculorum.</p>
+          <p class="amen">Amen.</p>
+          <h3 class="prayer-subtitle">Mysteria gaudiosa</h3>
+          <ul class="prayer-list">
+            <li>Annuntiatio.</li>
+            <li>Visitatio.</li>
+            <li>Nativitas Domini.</li>
+            <li>Praesentatio Jesu in Templo.</li>
+            <li>Inventio Jesu in Templo.</li>
+          </ul>
+          <h3 class="prayer-subtitle">Mysteria dolorosa</h3>
+          <ul class="prayer-list">
+            <li>Agonia Jesu in horto.</li>
+            <li>Flagellatio.</li>
+            <li>Coronatio spinis.</li>
+            <li>Bajulatio Crucis.</li>
+            <li>Crucifixio et mors Jesu.</li>
+          </ul>
+          <h3 class="prayer-subtitle">Mysteria gloriosa</h3>
+          <ul class="prayer-list">
+            <li>Resurrectio.</li>
+            <li>Ascensio.</li>
+            <li>Pentecostes.</li>
+            <li>Assumptio Beatae Mariae Virginis.</li>
+            <li>Coronatio Mariae in caelo.</li>
+          </ul>
+          <h3 class="prayer-subtitle">Decas</h3>
+          <p>Ad unumquodque mysterium dicantur :</p>
+          <ul class="prayer-list">
+            <li>Pater noster ;</li>
+            <li>decem Ave Maria ;</li>
+            <li>Gloria Patri.</li>
+          </ul>
+          <h3 class="prayer-subtitle">Oratio finalis</h3>
+          <p>O mi Jesu, dimitte nobis debita nostra, libera nos ab igne inferni, perduc in caelum omnes animas, praesertim eas quae misericordiae tuae maxime indigent.</p>
+        </div>
+        <div class="prayer-aligned">
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <h3 class="prayer-subtitle">Introduction</h3>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <h3 class="prayer-subtitle">Initium</h3>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Au nom du Père, et du Fils, et du Saint-Esprit. Ainsi soit-il.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>In nomine Patris, et Filii, et Spiritus Sancti. Amen.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Je crois en Dieu, le Père tout-puissant, Créateur du ciel et de la terre, et en Jésus-Christ, son Fils unique, notre Seigneur, qui a été conçu du Saint-Esprit, est né de la Vierge Marie ; a souffert sous Ponce-Pilate, a été crucifié, est mort et a été enseveli ; est descendu aux enfers, le troisième jour est ressuscité d&#39;entre les morts ; est monté aux cieux, est assis à la droite de Dieu le Père tout-puissant, d&#39;où il viendra pour juger les vivants et les morts.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Credo in Deum Patrem omnipotentem, Creatorem caeli et terrae ; et in Jesum Christum, Filium ejus unicum, Dominum nostrum, qui conceptus est de Spiritu Sancto, natus ex Maria Virgine ; passus sub Pontio Pilato, crucifixus, mortuus et sepultus ; descendit ad inferos, tertia die resurrexit a mortuis ; ascendit ad caelos, sedet ad dexteram Dei Patris omnipotentis ; inde venturus est judicare vivos et mortuos.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Je crois au Saint-Esprit, la sainte Église catholique, la Communion des Saints, la rémission des péchés, la résurrection de la chair, la vie éternelle.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Credo in Spiritum Sanctum, sanctam Ecclesiam catholicam, Sanctorum communionem, remissionem peccatorum, carnis resurrectionem, vitam aeternam.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Ainsi soit-il.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p class="amen">Amen.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Notre Père, qui êtes dans les cieux, que votre nom soit sanctifié ; que votre règne arrive ; que votre volonté soit faite sur la terre comme au ciel ; donnez-nous aujourd&#39;hui notre pain de chaque jour ; pardonnez-nous nos offenses comme nous pardonnons à ceux qui nous ont offensés ; et ne nous laissez point succomber à la tentation, mais délivrez-nous du mal.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Pater noster, qui es in caelis, sanctificetur nomen tuum ; adveniat regnum tuum ; fiat voluntas tua sicut in caelo et in terra ; panem nostrum quotidianum da nobis hodie ; et dimitte nobis debita nostra, sicut et nos dimittimus debitoribus nostris ; et ne nos inducas in tentationem, sed libera nos a malo.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Ainsi soit-il.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p class="amen">Amen.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Je vous salue, Marie, pleine de grâce, le Seigneur est avec vous ; vous êtes bénie entre toutes les femmes, et Jésus, le fruit de vos entrailles, est béni. Sainte Marie, Mère de Dieu, priez pour nous, pauvres pécheurs, maintenant et à l&#39;heure de notre mort.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Ave, Maria, gratia plena, Dominus tecum ; benedicta tu in mulieribus, et benedictus fructus ventris tui, Jesus. Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostrae.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Ainsi soit-il.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p class="amen">Amen.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Gloire au Père, et au Fils, et au Saint-Esprit, comme il était au commencement, maintenant et toujours, et dans les siècles des siècles.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Gloria Patri, et Filio, et Spiritui Sancto, sicut erat in principio, et nunc, et semper, et in saecula saeculorum.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Ainsi soit-il.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p class="amen">Amen.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <h3 class="prayer-subtitle">Mystères joyeux</h3>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <h3 class="prayer-subtitle">Mysteria gaudiosa</h3>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <ul class="prayer-list">
+              <li>L&#39;Annonciation.</li>
+              <li>La Visitation.</li>
+              <li>La Nativité de Notre-Seigneur.</li>
+              <li>La Présentation de Jésus au Temple.</li>
+              <li>Le Recouvrement de Jésus au Temple.</li>
+            </ul>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <ul class="prayer-list">
+              <li>Annuntiatio.</li>
+              <li>Visitatio.</li>
+              <li>Nativitas Domini.</li>
+              <li>Praesentatio Jesu in Templo.</li>
+              <li>Inventio Jesu in Templo.</li>
+            </ul>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <h3 class="prayer-subtitle">Mystères douloureux</h3>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <h3 class="prayer-subtitle">Mysteria dolorosa</h3>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <ul class="prayer-list">
+              <li>L&#39;Agonie de Jésus au jardin des Oliviers.</li>
+              <li>La Flagellation.</li>
+              <li>Le Couronnement d&#39;épines.</li>
+              <li>Le Portement de la Croix.</li>
+              <li>Le Crucifiement et la mort de Jésus.</li>
+            </ul>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <ul class="prayer-list">
+              <li>Agonia Jesu in horto.</li>
+              <li>Flagellatio.</li>
+              <li>Coronatio spinis.</li>
+              <li>Bajulatio Crucis.</li>
+              <li>Crucifixio et mors Jesu.</li>
+            </ul>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <h3 class="prayer-subtitle">Mystères glorieux</h3>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <h3 class="prayer-subtitle">Mysteria gloriosa</h3>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <ul class="prayer-list">
+              <li>La Résurrection.</li>
+              <li>L&#39;Ascension.</li>
+              <li>La Pentecôte.</li>
+              <li>L&#39;Assomption de la Sainte Vierge.</li>
+              <li>Le Couronnement de Marie dans le ciel.</li>
+            </ul>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <ul class="prayer-list">
+              <li>Resurrectio.</li>
+              <li>Ascensio.</li>
+              <li>Pentecostes.</li>
+              <li>Assumptio Beatae Mariae Virginis.</li>
+              <li>Coronatio Mariae in caelo.</li>
+            </ul>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <h3 class="prayer-subtitle">Décennie</h3>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <h3 class="prayer-subtitle">Decas</h3>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Pour chaque mystère, dire :</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Ad unumquodque mysterium dicantur :</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <ul class="prayer-list">
+              <li>un Notre Père ;</li>
+              <li>dix Je vous salue Marie ;</li>
+              <li>un Gloire au Père.</li>
+            </ul>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <ul class="prayer-list">
+              <li>Pater noster ;</li>
+              <li>decem Ave Maria ;</li>
+              <li>Gloria Patri.</li>
+            </ul>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <h3 class="prayer-subtitle">Prière finale</h3>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <h3 class="prayer-subtitle">Oratio finalis</h3>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Ô mon Jésus, pardonnez-nous nos péchés, préservez-nous du feu de l&#39;enfer, conduisez au ciel toutes les âmes, surtout celles qui ont le plus besoin de votre miséricorde.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>O mi Jesu, dimitte nobis debita nostra, libera nos ab igne inferni, perduc in caelum omnes animas, praesertim eas quae misericordiae tuae maxime indigent.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </section>
       <section id="priere-soir" class="prayer-section prayer-time" aria-labelledby="titre-priere-soir" data-chapter="soir" data-title-fr="Prière du soir" data-title-la="Oratio vespertina" data-setting-key="eveningPrayer" data-input-name="eveningPrayer" data-default-time="21:30">
         <div class="prayer-time-marker" aria-hidden="true">
           <span class="prayer-time-dot">✝</span>
@@ -1868,16 +2222,56 @@
           <h3 class="prayer-subtitle">Ferme propos</h3>
           <p><em>Faisons un ferme propos de ne plus pécher.</em></p>
           <p>Que je souhaiterais, ô mon Dieu ! ne vous avoir jamais offensé ; mais, puisque j&#39;ai été assez malheureux pour vous déplaire, je renonce dès à présent au péché et à l&#39;occasion du péché, surtout de celui où j&#39;ai la faiblesse de retomber si souvent ; accordez-moi votre grâce, et je tâcherai de remplir fidèlement mes devoirs et de ne rien faire qui puisse vous déplaire. Ainsi soit-il.</p>
-          <h3 class="prayer-subtitle">Prières usuelles</h3>
-          <p>Dire, comme à la prière du matin :</p>
-          <ul class="prayer-list">
-            <li>Notre Père.</li>
-            <li>Je vous salue.</li>
-            <li>Je crois en Dieu.</li>
-            <li>Je confesse.</li>
-            <li>Les commandements de Dieu.</li>
-            <li>Les commandements de l&#39;Église.</li>
-          </ul>
+          <h3 class="prayer-subtitle">Oraison dominicale</h3>
+          <p>Notre Père, qui êtes dans les cieux, que votre nom soit sanctifié ; que votre règne arrive ; que votre volonté soit faite sur la terre comme au ciel ; donnez-nous aujourd&#39;hui notre pain de chaque jour ; pardonnez-nous nos offenses comme nous pardonnons à ceux qui nous ont offensés ; et ne nous laissez point succomber à la tentation, mais délivrez-nous du mal.</p>
+          <p>Ainsi soit-il.</p>
+          <h3 class="prayer-subtitle">Salutation angélique</h3>
+          <p>Je vous salue, Marie, pleine de grâce, le Seigneur est avec vous ; vous êtes bénie entre toutes les femmes, et Jésus, le fruit de vos entrailles, est béni. Sainte Marie, Mère de Dieu, priez pour nous, pauvres pécheurs, maintenant et à l&#39;heure de notre mort.</p>
+          <p>Ainsi soit-il.</p>
+          <h3 class="prayer-subtitle">Symbole des Apôtres</h3>
+          <p>Je crois en Dieu, le Père tout-puissant, Créateur du ciel et de la terre, et en Jésus-Christ, son Fils unique, notre Seigneur, qui a été conçu du Saint-Esprit, est né de la Vierge Marie ; a souffert sous Ponce-Pilate, a été crucifié, est mort et a été enseveli ; est descendu aux enfers, le troisième jour est ressuscité d&#39;entre les morts ; est monté aux cieux, est assis à la droite de Dieu le Père tout-puissant, d&#39;où il viendra pour juger les vivants et les morts.</p>
+          <p>Je crois au Saint-Esprit, la sainte Église catholique, la Communion des Saints, la rémission des péchés, la résurrection de la chair, la vie éternelle.</p>
+          <p>Ainsi soit-il.</p>
+          <h3 class="prayer-subtitle">Confession des péchés</h3>
+          <p>Je confesse à Dieu tout-puissant, à la bienheureuse Marie toujours Vierge, à saint Michel Archange, à saint Jean-Baptiste, aux saints Apôtres Pierre et Paul, à tous les Saints, et à vous, mon Père, que j&#39;ai beaucoup péché par pensées, par paroles et par actions : c&#39;est ma faute, c&#39;est ma faute, c&#39;est ma très grande faute. C&#39;est pourquoi je prie la bienheureuse Marie toujours Vierge, saint Michel Archange, saint Jean-Baptiste, les saints Apôtres Pierre et Paul, tous les Saints, et vous, mon Père, de prier pour moi le Seigneur notre Dieu.</p>
+          <p>Que Dieu tout-puissant nous fasse miséricorde, qu&#39;il nous pardonne nos péchés et nous conduise à la vie éternelle.</p>
+          <p>Ainsi soit-il.</p>
+          <p>Que le Seigneur tout-puissant et miséricordieux nous donne indulgence, absolution et rémission de tous nos péchés !</p>
+          <p>Ainsi soit-il.</p>
+          <h3 class="prayer-subtitle">Les commandements de Dieu</h3>
+          <p>Un seul Dieu tu adoreras<br>
+            Et aimeras parfaitement.<br>
+            Dieu en vain tu ne jureras,<br>
+            Ni autre chose pareillement.<br>
+            Les dimanches tu garderas<br>
+            En servant Dieu dévotement.<br>
+            Tes père et mère honoreras,<br>
+            Afin de vivre longuement.<br>
+            Homicide point ne seras<br>
+            De fait ni volontairement.<br>
+            Luxurieux point ne seras<br>
+            De corps ni de consentement.<br>
+            Le bien d&#39;autrui tu ne prendras,<br>
+            Ni retiendras à ton escient.<br>
+            Faux témoignage ne diras,<br>
+            Ni mentiras aucunement.<br>
+            L&#39;oeuvre de chair ne désireras<br>
+            Qu&#39;en mariage seulement.<br>
+            Biens d&#39;autrui ne convoiteras<br>
+            Pour les avoir injustement.</p>
+          <h3 class="prayer-subtitle">Les commandements de l&#39;Église</h3>
+          <p>Les fêtes tu sanctifieras<br>
+            Qui te sont de commandement.<br>
+            Les dimanches messe ouïras,<br>
+            Et les fêtes pareillement.<br>
+            Tous tes péchés confesseras<br>
+            À tout le moins une fois l&#39;an.<br>
+            Ton Créateur tu recevras<br>
+            Au moins à Pâques humblement.<br>
+            Quatre-Temps, Vigiles jeûneras,<br>
+            Et le Carême entièrement.<br>
+            Vendredi chair ne mangeras,<br>
+            Ni le samedi mêmement.</p>
           <h3 class="prayer-subtitle">Recommandation</h3>
           <p><em>Recommandons-nous à Dieu, à la sainte Vierge et aux Saints.</em></p>
           <p>Bénissez, ô mon Dieu ! le repos que je vais prendre pour réparer mes forces afin de vous mieux servir. Vierge sainte, mère de mon Dieu, après lui mon unique espérance, mon bon ange, mon saint patron, intercédez pour moi, protégez-moi pendant cette nuit, tout le temps de ma vie et à l&#39;heure de ma mort. Ainsi soit-il.</p>
@@ -1952,14 +2346,50 @@
         <div class="prayer-language prayer-la" lang="la">
           <h3 class="prayer-subtitle">Signum crucis</h3>
           <p>In nomine Patris, et Filii, et Spiritus Sancti. Amen.</p>
-          <h3 class="prayer-subtitle">Orationes consuetae</h3>
-          <p>Dicantur sicut in oratione matutina :</p>
-          <ul class="prayer-list">
-            <li>Pater noster.</li>
-            <li>Ave Maria.</li>
-            <li>Credo in unum Deum.</li>
-            <li>Confiteor.</li>
-          </ul>
+          <h3 class="prayer-subtitle">Oratio dominicalis</h3>
+          <p>Pater noster, qui es in caelis, sanctificetur nomen tuum ; adveniat regnum tuum ; fiat voluntas tua sicut in caelo et in terra ; panem nostrum quotidianum da nobis hodie ; et dimitte nobis debita nostra, sicut et nos dimittimus debitoribus nostris ; et ne nos inducas in tentationem, sed libera nos a malo.</p>
+          <p class="amen">Amen.</p>
+          <h3 class="prayer-subtitle">Salutatio angelica</h3>
+          <p>Ave, Maria, gratia plena, Dominus tecum ; benedicta tu in mulieribus, et benedictus fructus ventris tui, Jesus. Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostrae.</p>
+          <p class="amen">Amen.</p>
+          <h3 class="prayer-subtitle">Symbolum Apostolorum</h3>
+          <p>Credo in Deum Patrem omnipotentem, Creatorem caeli et terrae ; et in Jesum Christum, Filium ejus unicum, Dominum nostrum, qui conceptus est de Spiritu Sancto, natus ex Maria Virgine ; passus sub Pontio Pilato, crucifixus, mortuus et sepultus ; descendit ad inferos, tertia die resurrexit a mortuis ; ascendit ad caelos, sedet ad dexteram Dei Patris omnipotentis ; inde venturus est judicare vivos et mortuos.</p>
+          <p>Credo in Spiritum Sanctum, sanctam Ecclesiam catholicam, Sanctorum communionem, remissionem peccatorum, carnis resurrectionem, vitam aeternam.</p>
+          <p class="amen">Amen.</p>
+          <h3 class="prayer-subtitle">Confessio peccatorum</h3>
+          <p>Confiteor Deo omnipotenti, beatae Mariae semper Virgini, beato Michaeli Archangelo, beato Joanni Baptistae, sanctis Apostolis Petro et Paulo, omnibus Sanctis, et tibi, Pater, quia peccavi nimis cogitatione, verbo et opere : mea culpa, mea culpa, mea maxima culpa. Ideo precor beatam Mariam semper Virginem, beatum Michaelem Archangelum, beatum Joannem Baptistum, sanctos Apostolos Petrum et Paulum, omnes Sanctos, et te, Pater, orare pro me ad Dominum Deum nostrum.</p>
+          <p>Misereatur nostri omnipotens Deus, et dimissis peccatis nostris, perducat nos ad vitam aeternam.</p>
+          <p class="amen">Amen.</p>
+          <p>Indulgentiam, absolutionem et remissionem peccatorum nostrorum tribuat nobis omnipotens et misericors Dominus.</p>
+          <p class="amen">Amen.</p>
+          <h3 class="prayer-subtitle">Praecepta Dei</h3>
+          <p>Unum Deum adorabis<br>
+            Et perfecte diliges.<br>
+            Nomen Dei in vanum non usurpabis,<br>
+            Neque quidquam simile.<br>
+            Dies dominicos servabis,<br>
+            Deo devote serviens.<br>
+            Patrem matremque honorabis,<br>
+            Ut diu vivas.<br>
+            Homicidium non facies,<br>
+            Opere neque voluntate.<br>
+            Luxuriosus non eris,<br>
+            Corpore neque consensu.<br>
+            Bonum alienum non auferes,<br>
+            Neque scienter retinebis.<br>
+            Falsum testimonium non dices,<br>
+            Neque ullo modo mentieris.<br>
+            Opus carnis non concupisces,<br>
+            Nisi in matrimonio.<br>
+            Bona aliena non concupisces,<br>
+            Ut iniuste ea possideas.</p>
+          <h3 class="prayer-subtitle">Praecepta Ecclesiae</h3>
+          <p>Festa de praecepto sanctificabis.<br>
+            Dominicis et festis Missam audies.<br>
+            Omnia peccata confiteberis saltem semel in anno.<br>
+            Creatorem tuum recipies saltem in Paschate humiliter.<br>
+            Quattuor Temporibus et Vigiliis ieiunabis, et tota Quadragesima.<br>
+            Feria sexta carnes non manducabis, neque sabbato similiter.</p>
           <h3 class="prayer-subtitle">Litaniae Beatae Mariae Virginis</h3>
           <p>Kyrie, eleison.<br>
             Christe, eleison.<br>
@@ -2047,7 +2477,7 @@
             <h3 class="prayer-subtitle">Adoration</h3>
             </div>
             <div class="prayer-aligned-cell" lang="la">
-            <h3 class="prayer-subtitle">Orationes consuetae</h3>
+            <h3 class="prayer-subtitle">Oratio dominicalis</h3>
             </div>
           </div>
           <div class="prayer-aligned-row">
@@ -2055,7 +2485,7 @@
             <p><em>Mettons-nous en la présence de Dieu et adorons-le.</em></p>
             </div>
             <div class="prayer-aligned-cell" lang="la">
-            <p>Dicantur sicut in oratione matutina :</p>
+            <p>Pater noster, qui es in caelis, sanctificetur nomen tuum ; adveniat regnum tuum ; fiat voluntas tua sicut in caelo et in terra ; panem nostrum quotidianum da nobis hodie ; et dimitte nobis debita nostra, sicut et nos dimittimus debitoribus nostris ; et ne nos inducas in tentationem, sed libera nos a malo.</p>
             </div>
           </div>
           <div class="prayer-aligned-row">
@@ -2063,12 +2493,7 @@
             <p>Je vous adore, ô mon Dieu ! avec le respect que m&#39;inspire la présence de votre adorable majesté. Je crois en vous, parce que vous êtes la vérité même. J&#39;espère en vous, parce que vous êtes infiniment bon. Je vous aime de tout mon coeur, parce que vous êtes souverainement aimable, et j&#39;aime mon prochain comme moi-même pour l&#39;amour de vous.</p>
             </div>
             <div class="prayer-aligned-cell" lang="la">
-            <ul class="prayer-list">
-              <li>Pater noster.</li>
-              <li>Ave Maria.</li>
-              <li>Credo in unum Deum.</li>
-              <li>Confiteor.</li>
-            </ul>
+            <p class="amen">Amen.</p>
             </div>
           </div>
           <div class="prayer-aligned-row">
@@ -2076,12 +2501,172 @@
             <h3 class="prayer-subtitle">Action de grâces</h3>
             </div>
             <div class="prayer-aligned-cell" lang="la">
-            <h3 class="prayer-subtitle">Litaniae Beatae Mariae Virginis</h3>
+            <h3 class="prayer-subtitle">Salutatio angelica</h3>
             </div>
           </div>
           <div class="prayer-aligned-row">
             <div class="prayer-aligned-cell" lang="fr">
             <p><em>Remercions Dieu des grâces qu&#39;il nous a faites.</em></p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Ave, Maria, gratia plena, Dominus tecum ; benedicta tu in mulieribus, et benedictus fructus ventris tui, Jesus. Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostrae.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Que vous rendrai-je, ô mon Dieu ! pour tous les biens que j&#39;ai reçus de vous ? Vous avez songé à moi de toute éternité ; vous m&#39;avez tiré du néant, vous avez donné votre vie pour me racheter, et vous me comblez encore tous les jours de nouvelles faveurs. Hélas ! Seigneur, que puis-je faire en reconnaissance de tant de bontés ? Joignez-vous à moi, esprits bienheureux, pour louer le Dieu des miséricordes, qui ne cesse de faire du bien à la plus indigne et à la plus ingrate de ses créatures.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p class="amen">Amen.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <h3 class="prayer-subtitle">Demande de lumière</h3>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <h3 class="prayer-subtitle">Symbolum Apostolorum</h3>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p><em>Demandons à Dieu la grâce de bien connaître nos péchés.</em></p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Credo in Deum Patrem omnipotentem, Creatorem caeli et terrae ; et in Jesum Christum, Filium ejus unicum, Dominum nostrum, qui conceptus est de Spiritu Sancto, natus ex Maria Virgine ; passus sub Pontio Pilato, crucifixus, mortuus et sepultus ; descendit ad inferos, tertia die resurrexit a mortuis ; ascendit ad caelos, sedet ad dexteram Dei Patris omnipotentis ; inde venturus est judicare vivos et mortuos.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Source éternelle de lumières, Esprit-Saint, dissipez les ténèbres qui me cachent la laideur et la malice du péché ; faites-m&#39;en concevoir une si grande horreur, ô mon Dieu ! que je le haïsse, s&#39;il se peut, autant que vous le haïssez vous-même, et que je ne craigne rien tant que de le commettre à l&#39;avenir.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Credo in Spiritum Sanctum, sanctam Ecclesiam catholicam, Sanctorum communionem, remissionem peccatorum, carnis resurrectionem, vitam aeternam.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <h3 class="prayer-subtitle">Examen</h3>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p class="amen">Amen.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p><em>Examinons-nous avec application sur le mal commis envers Dieu, envers le prochain et envers nous-mêmes.</em></p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <h3 class="prayer-subtitle">Confessio peccatorum</h3>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Me voici, Seigneur, tout couvert de confusion et pénétré de douleur à la vue de mes fautes ; je les déteste devant vous, avec un vrai déplaisir d&#39;avoir offensé un Dieu si bon, si aimable, si digne d&#39;être aimé. Était-ce donc là, ô mon Dieu ! ce que vous deviez attendre de ma reconnaissance, après m&#39;avoir aimé jusqu&#39;à répandre votre sang pour moi ? Je vous demande très humblement pardon de ma malice et de mon ingratitude, et je vous conjure, par cette même bonté dont j&#39;ai ressenti tant de fois les effets, de m&#39;accorder la grâce d&#39;en faire, dès aujourd&#39;hui et jusqu&#39;à la mort, une sincère pénitence.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Confiteor Deo omnipotenti, beatae Mariae semper Virgini, beato Michaeli Archangelo, beato Joanni Baptistae, sanctis Apostolis Petro et Paulo, omnibus Sanctis, et tibi, Pater, quia peccavi nimis cogitatione, verbo et opere : mea culpa, mea culpa, mea maxima culpa. Ideo precor beatam Mariam semper Virginem, beatum Michaelem Archangelum, beatum Joannem Baptistum, sanctos Apostolos Petrum et Paulum, omnes Sanctos, et te, Pater, orare pro me ad Dominum Deum nostrum.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <h3 class="prayer-subtitle">Ferme propos</h3>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Misereatur nostri omnipotens Deus, et dimissis peccatis nostris, perducat nos ad vitam aeternam.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p><em>Faisons un ferme propos de ne plus pécher.</em></p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p class="amen">Amen.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Que je souhaiterais, ô mon Dieu ! ne vous avoir jamais offensé ; mais, puisque j&#39;ai été assez malheureux pour vous déplaire, je renonce dès à présent au péché et à l&#39;occasion du péché, surtout de celui où j&#39;ai la faiblesse de retomber si souvent ; accordez-moi votre grâce, et je tâcherai de remplir fidèlement mes devoirs et de ne rien faire qui puisse vous déplaire. Ainsi soit-il.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Indulgentiam, absolutionem et remissionem peccatorum nostrorum tribuat nobis omnipotens et misericors Dominus.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <h3 class="prayer-subtitle">Oraison dominicale</h3>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p class="amen">Amen.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Notre Père, qui êtes dans les cieux, que votre nom soit sanctifié ; que votre règne arrive ; que votre volonté soit faite sur la terre comme au ciel ; donnez-nous aujourd&#39;hui notre pain de chaque jour ; pardonnez-nous nos offenses comme nous pardonnons à ceux qui nous ont offensés ; et ne nous laissez point succomber à la tentation, mais délivrez-nous du mal.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <h3 class="prayer-subtitle">Praecepta Dei</h3>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Ainsi soit-il.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Unum Deum adorabis<br>
+            Et perfecte diliges.<br>
+            Nomen Dei in vanum non usurpabis,<br>
+            Neque quidquam simile.<br>
+            Dies dominicos servabis,<br>
+            Deo devote serviens.<br>
+            Patrem matremque honorabis,<br>
+            Ut diu vivas.<br>
+            Homicidium non facies,<br>
+            Opere neque voluntate.<br>
+            Luxuriosus non eris,<br>
+            Corpore neque consensu.<br>
+            Bonum alienum non auferes,<br>
+            Neque scienter retinebis.<br>
+            Falsum testimonium non dices,<br>
+            Neque ullo modo mentieris.<br>
+            Opus carnis non concupisces,<br>
+            Nisi in matrimonio.<br>
+            Bona aliena non concupisces,<br>
+            Ut iniuste ea possideas.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <h3 class="prayer-subtitle">Salutation angélique</h3>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <h3 class="prayer-subtitle">Praecepta Ecclesiae</h3>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Je vous salue, Marie, pleine de grâce, le Seigneur est avec vous ; vous êtes bénie entre toutes les femmes, et Jésus, le fruit de vos entrailles, est béni. Sainte Marie, Mère de Dieu, priez pour nous, pauvres pécheurs, maintenant et à l&#39;heure de notre mort.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <p>Festa de praecepto sanctificabis.<br>
+            Dominicis et festis Missam audies.<br>
+            Omnia peccata confiteberis saltem semel in anno.<br>
+            Creatorem tuum recipies saltem in Paschate humiliter.<br>
+            Quattuor Temporibus et Vigiliis ieiunabis, et tota Quadragesima.<br>
+            Feria sexta carnes non manducabis, neque sabbato similiter.</p>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <p>Ainsi soit-il.</p>
+            </div>
+            <div class="prayer-aligned-cell" lang="la">
+            <h3 class="prayer-subtitle">Litaniae Beatae Mariae Virginis</h3>
+            </div>
+          </div>
+          <div class="prayer-aligned-row">
+            <div class="prayer-aligned-cell" lang="fr">
+            <h3 class="prayer-subtitle">Symbole des Apôtres</h3>
             </div>
             <div class="prayer-aligned-cell" lang="la">
             <p>Kyrie, eleison.<br>
@@ -2091,7 +2676,7 @@
           </div>
           <div class="prayer-aligned-row">
             <div class="prayer-aligned-cell" lang="fr">
-            <p>Que vous rendrai-je, ô mon Dieu ! pour tous les biens que j&#39;ai reçus de vous ? Vous avez songé à moi de toute éternité ; vous m&#39;avez tiré du néant, vous avez donné votre vie pour me racheter, et vous me comblez encore tous les jours de nouvelles faveurs. Hélas ! Seigneur, que puis-je faire en reconnaissance de tant de bontés ? Joignez-vous à moi, esprits bienheureux, pour louer le Dieu des miséricordes, qui ne cesse de faire du bien à la plus indigne et à la plus ingrate de ses créatures.</p>
+            <p>Je crois en Dieu, le Père tout-puissant, Créateur du ciel et de la terre, et en Jésus-Christ, son Fils unique, notre Seigneur, qui a été conçu du Saint-Esprit, est né de la Vierge Marie ; a souffert sous Ponce-Pilate, a été crucifié, est mort et a été enseveli ; est descendu aux enfers, le troisième jour est ressuscité d&#39;entre les morts ; est monté aux cieux, est assis à la droite de Dieu le Père tout-puissant, d&#39;où il viendra pour juger les vivants et les morts.</p>
             </div>
             <div class="prayer-aligned-cell" lang="la">
             <p>Christe, audi nos.<br>
@@ -2100,7 +2685,7 @@
           </div>
           <div class="prayer-aligned-row">
             <div class="prayer-aligned-cell" lang="fr">
-            <h3 class="prayer-subtitle">Demande de lumière</h3>
+            <p>Je crois au Saint-Esprit, la sainte Église catholique, la Communion des Saints, la rémission des péchés, la résurrection de la chair, la vie éternelle.</p>
             </div>
             <div class="prayer-aligned-cell" lang="la">
             <p>Pater de caelis Deus, miserere nobis.<br>
@@ -2111,7 +2696,7 @@
           </div>
           <div class="prayer-aligned-row">
             <div class="prayer-aligned-cell" lang="fr">
-            <p><em>Demandons à Dieu la grâce de bien connaître nos péchés.</em></p>
+            <p>Ainsi soit-il.</p>
             </div>
             <div class="prayer-aligned-cell" lang="la">
             <p>Sancta Maria, ora pro nobis.<br>
@@ -2121,7 +2706,7 @@
           </div>
           <div class="prayer-aligned-row">
             <div class="prayer-aligned-cell" lang="fr">
-            <p>Source éternelle de lumières, Esprit-Saint, dissipez les ténèbres qui me cachent la laideur et la malice du péché ; faites-m&#39;en concevoir une si grande horreur, ô mon Dieu ! que je le haïsse, s&#39;il se peut, autant que vous le haïssez vous-même, et que je ne craigne rien tant que de le commettre à l&#39;avenir.</p>
+            <h3 class="prayer-subtitle">Confession des péchés</h3>
             </div>
             <div class="prayer-aligned-cell" lang="la">
             <p>Mater Christi, ora pro nobis.<br>
@@ -2138,7 +2723,7 @@
           </div>
           <div class="prayer-aligned-row">
             <div class="prayer-aligned-cell" lang="fr">
-            <h3 class="prayer-subtitle">Examen</h3>
+            <p>Je confesse à Dieu tout-puissant, à la bienheureuse Marie toujours Vierge, à saint Michel Archange, à saint Jean-Baptiste, aux saints Apôtres Pierre et Paul, à tous les Saints, et à vous, mon Père, que j&#39;ai beaucoup péché par pensées, par paroles et par actions : c&#39;est ma faute, c&#39;est ma faute, c&#39;est ma très grande faute. C&#39;est pourquoi je prie la bienheureuse Marie toujours Vierge, saint Michel Archange, saint Jean-Baptiste, les saints Apôtres Pierre et Paul, tous les Saints, et vous, mon Père, de prier pour moi le Seigneur notre Dieu.</p>
             </div>
             <div class="prayer-aligned-cell" lang="la">
             <p>Virgo prudentissima, ora pro nobis.<br>
@@ -2151,7 +2736,7 @@
           </div>
           <div class="prayer-aligned-row">
             <div class="prayer-aligned-cell" lang="fr">
-            <p><em>Examinons-nous avec application sur le mal commis envers Dieu, envers le prochain et envers nous-mêmes.</em></p>
+            <p>Que Dieu tout-puissant nous fasse miséricorde, qu&#39;il nous pardonne nos péchés et nous conduise à la vie éternelle.</p>
             </div>
             <div class="prayer-aligned-cell" lang="la">
             <p>Speculum justitiae, ora pro nobis.<br>
@@ -2164,7 +2749,7 @@
           </div>
           <div class="prayer-aligned-row">
             <div class="prayer-aligned-cell" lang="fr">
-            <p>Me voici, Seigneur, tout couvert de confusion et pénétré de douleur à la vue de mes fautes ; je les déteste devant vous, avec un vrai déplaisir d&#39;avoir offensé un Dieu si bon, si aimable, si digne d&#39;être aimé. Était-ce donc là, ô mon Dieu ! ce que vous deviez attendre de ma reconnaissance, après m&#39;avoir aimé jusqu&#39;à répandre votre sang pour moi ? Je vous demande très humblement pardon de ma malice et de mon ingratitude, et je vous conjure, par cette même bonté dont j&#39;ai ressenti tant de fois les effets, de m&#39;accorder la grâce d&#39;en faire, dès aujourd&#39;hui et jusqu&#39;à la mort, une sincère pénitence.</p>
+            <p>Ainsi soit-il.</p>
             </div>
             <div class="prayer-aligned-cell" lang="la">
             <p>Rosa mystica, ora pro nobis.<br>
@@ -2182,7 +2767,7 @@
           </div>
           <div class="prayer-aligned-row">
             <div class="prayer-aligned-cell" lang="fr">
-            <h3 class="prayer-subtitle">Ferme propos</h3>
+            <p>Que le Seigneur tout-puissant et miséricordieux nous donne indulgence, absolution et rémission de tous nos péchés !</p>
             </div>
             <div class="prayer-aligned-cell" lang="la">
             <p>Regina Angelorum, ora pro nobis.<br>
@@ -2199,7 +2784,7 @@
           </div>
           <div class="prayer-aligned-row">
             <div class="prayer-aligned-cell" lang="fr">
-            <p><em>Faisons un ferme propos de ne plus pécher.</em></p>
+            <p>Ainsi soit-il.</p>
             </div>
             <div class="prayer-aligned-cell" lang="la">
             <p>Agnus Dei, qui tollis peccata mundi, parce nobis, Domine.<br>
@@ -2209,7 +2794,7 @@
           </div>
           <div class="prayer-aligned-row">
             <div class="prayer-aligned-cell" lang="fr">
-            <p>Que je souhaiterais, ô mon Dieu ! ne vous avoir jamais offensé ; mais, puisque j&#39;ai été assez malheureux pour vous déplaire, je renonce dès à présent au péché et à l&#39;occasion du péché, surtout de celui où j&#39;ai la faiblesse de retomber si souvent ; accordez-moi votre grâce, et je tâcherai de remplir fidèlement mes devoirs et de ne rien faire qui puisse vous déplaire. Ainsi soit-il.</p>
+            <h3 class="prayer-subtitle">Les commandements de Dieu</h3>
             </div>
             <div class="prayer-aligned-cell" lang="la">
             <p>℣. Ora pro nobis, sancta Dei Genitrix.<br>
@@ -2218,7 +2803,26 @@
           </div>
           <div class="prayer-aligned-row">
             <div class="prayer-aligned-cell" lang="fr">
-            <h3 class="prayer-subtitle">Prières usuelles</h3>
+            <p>Un seul Dieu tu adoreras<br>
+            Et aimeras parfaitement.<br>
+            Dieu en vain tu ne jureras,<br>
+            Ni autre chose pareillement.<br>
+            Les dimanches tu garderas<br>
+            En servant Dieu dévotement.<br>
+            Tes père et mère honoreras,<br>
+            Afin de vivre longuement.<br>
+            Homicide point ne seras<br>
+            De fait ni volontairement.<br>
+            Luxurieux point ne seras<br>
+            De corps ni de consentement.<br>
+            Le bien d&#39;autrui tu ne prendras,<br>
+            Ni retiendras à ton escient.<br>
+            Faux témoignage ne diras,<br>
+            Ni mentiras aucunement.<br>
+            L&#39;oeuvre de chair ne désireras<br>
+            Qu&#39;en mariage seulement.<br>
+            Biens d&#39;autrui ne convoiteras<br>
+            Pour les avoir injustement.</p>
             </div>
             <div class="prayer-aligned-cell" lang="la">
             <h3 class="prayer-subtitle">Oremus</h3>
@@ -2226,7 +2830,7 @@
           </div>
           <div class="prayer-aligned-row">
             <div class="prayer-aligned-cell" lang="fr">
-            <p>Dire, comme à la prière du matin :</p>
+            <h3 class="prayer-subtitle">Les commandements de l&#39;Église</h3>
             </div>
             <div class="prayer-aligned-cell" lang="la">
             <p>Gratiam tuam, quaesumus, Domine, mentibus nostris infunde ; ut qui, Angelo nuntiante, Christi Filii tui Incarnationem cognovimus, per Passionem ejus et Crucem ad Resurrectionis gloriam perducamur. Per eumdem Christum Dominum nostrum.</p>
@@ -2234,14 +2838,18 @@
           </div>
           <div class="prayer-aligned-row">
             <div class="prayer-aligned-cell" lang="fr">
-            <ul class="prayer-list">
-              <li>Notre Père.</li>
-              <li>Je vous salue.</li>
-              <li>Je crois en Dieu.</li>
-              <li>Je confesse.</li>
-              <li>Les commandements de Dieu.</li>
-              <li>Les commandements de l&#39;Église.</li>
-            </ul>
+            <p>Les fêtes tu sanctifieras<br>
+            Qui te sont de commandement.<br>
+            Les dimanches messe ouïras,<br>
+            Et les fêtes pareillement.<br>
+            Tous tes péchés confesseras<br>
+            À tout le moins une fois l&#39;an.<br>
+            Ton Créateur tu recevras<br>
+            Au moins à Pâques humblement.<br>
+            Quatre-Temps, Vigiles jeûneras,<br>
+            Et le Carême entièrement.<br>
+            Vendredi chair ne mangeras,<br>
+            Ni le samedi mêmement.</p>
             </div>
             <div class="prayer-aligned-cell" lang="la">
             <p class="amen">Amen.</p>

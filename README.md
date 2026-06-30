@@ -9,6 +9,7 @@ Site statique de prières catholiques en français et en latin, pensé comme un 
 - Indication discrète de la prière active.
 - Horaires personnalisables depuis le panneau de paramètres.
 - Angélus activable ou masquable selon l’usage.
+- Chapelet optionnel avec mystères adaptés au jour.
 - Notifications locales optionnelles, tant que la page reste ouverte.
 - Lecture vocale via les capacités du navigateur.
 - Génération statique dans `public/` pour Cloudflare Pages ou Workers Builds.
@@ -74,7 +75,6 @@ Les fichiers Markdown de `prieres/` commencent par un bloc de métadonnées :
 ```md
 ---
 id: matin
-order: 1
 nav_fr: Matin
 nav_la: Mane
 moment_fr: Au commencement du jour
@@ -83,6 +83,8 @@ title_fr: Prière du matin
 title_la: Oratio matutina
 ---
 ```
+
+La métadonnée `order` n'est plus obligatoire. L'ordre d'affichage public vient du fichier `prayer-schedule.json`. Elle peut rester dans d'anciens fichiers comme repère interne, mais elle n'est pas nécessaire pour ajouter une prière.
 
 Chaque fichier doit ensuite contenir deux sections dans cet ordre :
 
@@ -118,7 +120,15 @@ Chaque entrée indique :
 - `time` : horaire par défaut au format `HHhMM` ;
 - `settingKey` : clé utilisée par le JavaScript pour les réglages ;
 - `inputName` : champ correspondant dans le panneau de paramètres ;
-- `angelusKey` et `duration` pour les entrées d’Angélus.
+- `angelusKey` et `duration` pour les entrées d’Angélus ;
+- `optionalKey` pour masquer une prière tant que son option n'est pas activée ;
+- `rosary` pour indiquer que l'entrée doit afficher les mystères du Chapelet selon le jour.
+
+Le Chapelet est déclaré dans `prieres/05-chapelet.md` et branché au soir dans `prayer-schedule.json`. Les mystères affichés automatiquement sont :
+
+- lundi et mercredi : joyeux ;
+- mardi et vendredi : douloureux ;
+- jeudi, samedi et dimanche : glorieux.
 
 Après une modification :
 
@@ -134,6 +144,7 @@ Le site mémorise localement :
 - le mode de langue choisi ;
 - les horaires personnalisés ;
 - l’activation de l’Angélus ;
+- l'activation du Chapelet ;
 - l’activation des notifications ;
 - le fait que la première visite a déjà eu lieu.
 

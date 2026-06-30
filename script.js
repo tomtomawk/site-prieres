@@ -31,14 +31,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const defaultPrayerSettings = {
     enabled: false,
+    rosaryEnabled: false,
     notificationsEnabled: false
   };
 
   const timeInputsBySettingKey = {};
   const angelusEntries = {};
+  const optionalEntries = [];
 
   sections.forEach((section) => {
-    const { settingKey, inputName, defaultTime, angelusKey, angelusDuration } = section.dataset;
+    const { settingKey, inputName, defaultTime, angelusKey, angelusDuration, optionalKey } = section.dataset;
 
     if (!settingKey || !inputName || parseTimeToMinutes(defaultTime) === null) {
       return;
@@ -53,6 +55,13 @@ document.addEventListener("DOMContentLoaded", () => {
         inputName,
         duration: Number(angelusDuration) || 0
       };
+    }
+
+    if (optionalKey) {
+      optionalEntries.push({
+        id: section.id,
+        optionalKey
+      });
     }
   });
 
@@ -318,6 +327,66 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  function getRosaryMysteryForDate(date) {
+    const day = date.getDay();
+
+    if (day === 2 || day === 5) {
+      return "douloureux";
+    }
+
+    if (day === 1 || day === 3) {
+      return "joyeux";
+    }
+
+    return "glorieux";
+  }
+
+  function getMysteryKeyFromText(text) {
+    if (/joyeux|gaudiosa/i.test(text)) {
+      return "joyeux";
+    }
+
+    if (/douloureux|dolorosa/i.test(text)) {
+      return "douloureux";
+    }
+
+    if (/glorieux|gloriosa/i.test(text)) {
+      return "glorieux";
+    }
+
+    return "";
+  }
+
+  function applyMysteryVisibility(container, activeMystery) {
+    let currentMystery = "";
+
+    [...container.children].forEach((child) => {
+      const heading = child.matches(".prayer-subtitle")
+        ? child
+        : child.querySelector(".prayer-subtitle");
+      const mystery = heading ? getMysteryKeyFromText(heading.textContent) : "";
+
+      if (mystery) {
+        currentMystery = mystery;
+      } else if (heading && currentMystery) {
+        currentMystery = "";
+      }
+
+      child.hidden = Boolean(currentMystery && currentMystery !== activeMystery);
+    });
+  }
+
+  function applyRosaryMysteries(date = new Date()) {
+    const activeMystery = getRosaryMysteryForDate(date);
+
+    document.querySelectorAll('[data-rosary="true"]').forEach((section) => {
+      section.dataset.rosaryMystery = activeMystery;
+      section.querySelectorAll(".prayer-language, .prayer-aligned").forEach((container) => {
+        applyMysteryVisibility(container, activeMystery);
+      });
+    });
+  }
+
   function speakPrayer(section, button) {
     if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) {
       const actionFr = button.querySelector(".speech-action-fr");
@@ -353,6 +422,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function applyAngelusSettings() {
     settingsForm.elements.angelusEnabled.checked = prayerSettings.enabled;
+    if (settingsForm.elements.rosaryEnabled) {
+      settingsForm.elements.rosaryEnabled.checked = prayerSettings.rosaryEnabled;
+    }
     settingsForm.elements.notificationsEnabled.checked = prayerSettings.notificationsEnabled;
 
     Object.entries(timeInputsBySettingKey).forEach(([settingKey, inputName]) => {
@@ -370,10 +442,20 @@ document.addEventListener("DOMContentLoaded", () => {
       updatePrayerTime(entry.id, prayerSettings[key]);
     });
 
+    optionalEntries.forEach((entry) => {
+      const section = document.getElementById(entry.id);
+      const scheduleLink = document.querySelector(`.chapter-schedule-link[href="#${entry.id}"]`);
+      const isEnabled = Boolean(prayerSettings[entry.optionalKey]);
+
+      section?.classList.toggle("is-hidden-by-settings", !isEnabled);
+      scheduleLink?.classList.toggle("is-hidden-by-settings", !isEnabled);
+    });
+
     sections.forEach((section) => {
       updatePrayerTime(section.id, getPrayerTime(section));
     });
 
+    applyRosaryMysteries();
     sortPrayersBySettings();
     restartNotificationTimer();
   }
@@ -454,6 +536,7 @@ document.addEventListener("DOMContentLoaded", () => {
   settingsForm.addEventListener("input", () => {
     const nextSettings = {
       enabled: settingsForm.elements.angelusEnabled.checked,
+      rosaryEnabled: settingsForm.elements.rosaryEnabled?.checked || false,
       notificationsEnabled: settingsForm.elements.notificationsEnabled.checked
     };
 

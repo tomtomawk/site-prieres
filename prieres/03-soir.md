@@ -45,16 +45,75 @@ Me voici, Seigneur, tout couvert de confusion et pénétré de douleur à la vue
 
 Que je souhaiterais, ô mon Dieu ! ne vous avoir jamais offensé ; mais, puisque j'ai été assez malheureux pour vous déplaire, je renonce dès à présent au péché et à l'occasion du péché, surtout de celui où j'ai la faiblesse de retomber si souvent ; accordez-moi votre grâce, et je tâcherai de remplir fidèlement mes devoirs et de ne rien faire qui puisse vous déplaire. Ainsi soit-il.
 
-### Prières usuelles
+### Oraison dominicale
 
-Dire, comme à la prière du matin :
+Notre Père, qui êtes dans les cieux, que votre nom soit sanctifié ; que votre règne arrive ; que votre volonté soit faite sur la terre comme au ciel ; donnez-nous aujourd'hui notre pain de chaque jour ; pardonnez-nous nos offenses comme nous pardonnons à ceux qui nous ont offensés ; et ne nous laissez point succomber à la tentation, mais délivrez-nous du mal.
 
-- Notre Père.
-- Je vous salue.
-- Je crois en Dieu.
-- Je confesse.
-- Les commandements de Dieu.
-- Les commandements de l'Église.
+Ainsi soit-il.
+
+### Salutation angélique
+
+Je vous salue, Marie, pleine de grâce, le Seigneur est avec vous ; vous êtes bénie entre toutes les femmes, et Jésus, le fruit de vos entrailles, est béni. Sainte Marie, Mère de Dieu, priez pour nous, pauvres pécheurs, maintenant et à l'heure de notre mort.
+
+Ainsi soit-il.
+
+### Symbole des Apôtres
+
+Je crois en Dieu, le Père tout-puissant, Créateur du ciel et de la terre, et en Jésus-Christ, son Fils unique, notre Seigneur, qui a été conçu du Saint-Esprit, est né de la Vierge Marie ; a souffert sous Ponce-Pilate, a été crucifié, est mort et a été enseveli ; est descendu aux enfers, le troisième jour est ressuscité d'entre les morts ; est monté aux cieux, est assis à la droite de Dieu le Père tout-puissant, d'où il viendra pour juger les vivants et les morts.
+
+Je crois au Saint-Esprit, la sainte Église catholique, la Communion des Saints, la rémission des péchés, la résurrection de la chair, la vie éternelle.
+
+Ainsi soit-il.
+
+### Confession des péchés
+
+Je confesse à Dieu tout-puissant, à la bienheureuse Marie toujours Vierge, à saint Michel Archange, à saint Jean-Baptiste, aux saints Apôtres Pierre et Paul, à tous les Saints, et à vous, mon Père, que j'ai beaucoup péché par pensées, par paroles et par actions : c'est ma faute, c'est ma faute, c'est ma très grande faute. C'est pourquoi je prie la bienheureuse Marie toujours Vierge, saint Michel Archange, saint Jean-Baptiste, les saints Apôtres Pierre et Paul, tous les Saints, et vous, mon Père, de prier pour moi le Seigneur notre Dieu.
+
+Que Dieu tout-puissant nous fasse miséricorde, qu'il nous pardonne nos péchés et nous conduise à la vie éternelle.
+
+Ainsi soit-il.
+
+Que le Seigneur tout-puissant et miséricordieux nous donne indulgence, absolution et rémission de tous nos péchés !
+
+Ainsi soit-il.
+
+### Les commandements de Dieu
+
+Un seul Dieu tu adoreras
+Et aimeras parfaitement.
+Dieu en vain tu ne jureras,
+Ni autre chose pareillement.
+Les dimanches tu garderas
+En servant Dieu dévotement.
+Tes père et mère honoreras,
+Afin de vivre longuement.
+Homicide point ne seras
+De fait ni volontairement.
+Luxurieux point ne seras
+De corps ni de consentement.
+Le bien d'autrui tu ne prendras,
+Ni retiendras à ton escient.
+Faux témoignage ne diras,
+Ni mentiras aucunement.
+L'oeuvre de chair ne désireras
+Qu'en mariage seulement.
+Biens d'autrui ne convoiteras
+Pour les avoir injustement.
+
+### Les commandements de l'Église
+
+Les fêtes tu sanctifieras
+Qui te sont de commandement.
+Les dimanches messe ouïras,
+Et les fêtes pareillement.
+Tous tes péchés confesseras
+À tout le moins une fois l'an.
+Ton Créateur tu recevras
+Au moins à Pâques humblement.
+Quatre-Temps, Vigiles jeûneras,
+Et le Carême entièrement.
+Vendredi chair ne mangeras,
+Ni le samedi mêmement.
 
 ### Recommandation
 
@@ -153,14 +212,69 @@ Ainsi soit-il.
 
 In nomine Patris, et Filii, et Spiritus Sancti. Amen.
 
-### Orationes consuetae
+### Oratio dominicalis
 
-Dicantur sicut in oratione matutina :
+Pater noster, qui es in caelis, sanctificetur nomen tuum ; adveniat regnum tuum ; fiat voluntas tua sicut in caelo et in terra ; panem nostrum quotidianum da nobis hodie ; et dimitte nobis debita nostra, sicut et nos dimittimus debitoribus nostris ; et ne nos inducas in tentationem, sed libera nos a malo.
 
-- Pater noster.
-- Ave Maria.
-- Credo in unum Deum.
-- Confiteor.
+Amen.
+
+### Salutatio angelica
+
+Ave, Maria, gratia plena, Dominus tecum ; benedicta tu in mulieribus, et benedictus fructus ventris tui, Jesus. Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostrae.
+
+Amen.
+
+### Symbolum Apostolorum
+
+Credo in Deum Patrem omnipotentem, Creatorem caeli et terrae ; et in Jesum Christum, Filium ejus unicum, Dominum nostrum, qui conceptus est de Spiritu Sancto, natus ex Maria Virgine ; passus sub Pontio Pilato, crucifixus, mortuus et sepultus ; descendit ad inferos, tertia die resurrexit a mortuis ; ascendit ad caelos, sedet ad dexteram Dei Patris omnipotentis ; inde venturus est judicare vivos et mortuos.
+
+Credo in Spiritum Sanctum, sanctam Ecclesiam catholicam, Sanctorum communionem, remissionem peccatorum, carnis resurrectionem, vitam aeternam.
+
+Amen.
+
+### Confessio peccatorum
+
+Confiteor Deo omnipotenti, beatae Mariae semper Virgini, beato Michaeli Archangelo, beato Joanni Baptistae, sanctis Apostolis Petro et Paulo, omnibus Sanctis, et tibi, Pater, quia peccavi nimis cogitatione, verbo et opere : mea culpa, mea culpa, mea maxima culpa. Ideo precor beatam Mariam semper Virginem, beatum Michaelem Archangelum, beatum Joannem Baptistum, sanctos Apostolos Petrum et Paulum, omnes Sanctos, et te, Pater, orare pro me ad Dominum Deum nostrum.
+
+Misereatur nostri omnipotens Deus, et dimissis peccatis nostris, perducat nos ad vitam aeternam.
+
+Amen.
+
+Indulgentiam, absolutionem et remissionem peccatorum nostrorum tribuat nobis omnipotens et misericors Dominus.
+
+Amen.
+
+### Praecepta Dei
+
+Unum Deum adorabis
+Et perfecte diliges.
+Nomen Dei in vanum non usurpabis,
+Neque quidquam simile.
+Dies dominicos servabis,
+Deo devote serviens.
+Patrem matremque honorabis,
+Ut diu vivas.
+Homicidium non facies,
+Opere neque voluntate.
+Luxuriosus non eris,
+Corpore neque consensu.
+Bonum alienum non auferes,
+Neque scienter retinebis.
+Falsum testimonium non dices,
+Neque ullo modo mentieris.
+Opus carnis non concupisces,
+Nisi in matrimonio.
+Bona aliena non concupisces,
+Ut iniuste ea possideas.
+
+### Praecepta Ecclesiae
+
+Festa de praecepto sanctificabis.
+Dominicis et festis Missam audies.
+Omnia peccata confiteberis saltem semel in anno.
+Creatorem tuum recipies saltem in Paschate humiliter.
+Quattuor Temporibus et Vigiliis ieiunabis, et tota Quadragesima.
+Feria sexta carnes non manducabis, neque sabbato similiter.
 
 ### Litaniae Beatae Mariae Virginis
 

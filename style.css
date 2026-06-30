@@ -1005,11 +1005,13 @@ html[data-language-mode="parallel"] .prayer-language {
   }
 
   .prayer-book {
-    width: min(calc(100% - 1rem), var(--reading-width));
+    width: min(calc(100% - 0.5rem), var(--reading-width));
   }
 
   .prayer-section {
     min-height: 65vh;
+    padding-right: 0.8rem;
+    padding-left: 0.55rem;
   }
 
   .back-to-top span:last-child {

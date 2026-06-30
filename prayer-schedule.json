@@ -81,6 +81,15 @@
           "title_la": "Benedicite et gratiarum actio"
         },
         {
+          "id": "chapelet-soir",
+          "prayerId": "chapelet",
+          "time": "20h30",
+          "settingKey": "rosaryTime",
+          "inputName": "rosaryTime",
+          "optionalKey": "rosaryEnabled",
+          "rosary": true
+        },
+        {
           "id": "priere-soir",
           "prayerId": "soir",
           "time": "21h30",
