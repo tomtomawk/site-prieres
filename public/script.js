@@ -197,6 +197,42 @@ document.addEventListener("DOMContentLoaded", () => {
     return prayerSettings[section.dataset.settingKey] || section.dataset.defaultTime || "23:59";
   }
 
+  function getChapterIdForTime(value) {
+    const minutes = parseTimeToMinutes(value);
+
+    if (minutes === null) {
+      return "soir";
+    }
+
+    if (minutes >= 5 * 60 && minutes < 12 * 60) {
+      return "matin";
+    }
+
+    if (minutes >= 12 * 60 && minutes < 19 * 60) {
+      return "midi";
+    }
+
+    return "soir";
+  }
+
+  function movePrayerToChapter(section) {
+    const targetChapterId = getChapterIdForTime(getPrayerTime(section));
+    const targetChapter = document.getElementById(targetChapterId);
+    const targetSchedule = targetChapter?.querySelector(".chapter-schedule");
+    const scheduleLink = document.querySelector(`.chapter-schedule-link[href="#${section.id}"]`);
+
+    if (!targetChapter || !targetSchedule) {
+      return;
+    }
+
+    section.dataset.chapter = targetChapterId;
+    targetChapter.append(section);
+
+    if (scheduleLink) {
+      targetSchedule.append(scheduleLink);
+    }
+  }
+
   function sortChapterPrayers(chapter) {
     const header = chapter.querySelector(".chapter-header");
     const schedule = chapter.querySelector(".chapter-schedule");
@@ -219,6 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function sortPrayersBySettings() {
+    sections.forEach(movePrayerToChapter);
     document.querySelectorAll(".day-chapter").forEach(sortChapterPrayers);
   }
 
