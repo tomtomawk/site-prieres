@@ -565,8 +565,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const getPosition = (elementIndex) => {
         const ratio = elementIndex / (elementCount - 1);
         return {
-          x: 40 + ratio * 600,
-          y: 60 + 115 * Math.sin(Math.PI * ratio)
+          x: 34 + ratio * 692,
+          y: 82 + 205 * Math.sin(Math.PI * ratio)
         };
       };
       const chain = createSvgElement("path");
@@ -602,9 +602,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (definition.label) {
           const label = createSvgElement("text");
-          label.setAttribute("x", point.x);
+          const labelIsNearStart = point.x < 90;
+          const labelIsNearEnd = point.x > 670;
+          label.setAttribute("x", labelIsNearStart ? point.x + 6 : labelIsNearEnd ? point.x - 6 : point.x);
           label.setAttribute("y", point.y - definition.r - 9);
-          label.setAttribute("text-anchor", "middle");
+          label.setAttribute("text-anchor", labelIsNearStart ? "start" : labelIsNearEnd ? "end" : "middle");
           label.setAttribute("class", "virtual-rosary-label");
           label.textContent = definition.label;
           group.append(label);
