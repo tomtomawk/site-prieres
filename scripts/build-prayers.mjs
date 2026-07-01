@@ -111,14 +111,130 @@ function renderMarkdown(markdown) {
   return getMarkdownBlocks(markdown).map((block) => renderMarkdownBlock(block)).join("\n");
 }
 
-function renderAlignedMarkdown(french, latin) {
-  const frenchBlocks = getMarkdownBlocks(french);
-  const latinBlocks = getMarkdownBlocks(latin);
-  const rowCount = Math.max(frenchBlocks.length, latinBlocks.length);
+const alignmentKeys = new Map([
+  ["signe de la croix", "signum-crucis"],
+  ["signum crucis", "signum-crucis"],
+  ["adoration", "adoration"],
+  ["action de graces et offrande", "gratiarum-actio-oblatio"],
+  ["gratiarum actio et oblatio", "gratiarum-actio-oblatio"],
+  ["action de graces", "gratiarum-actio"],
+  ["demande de lumiere", "petitio-luminis"],
+  ["examen", "examen"],
+  ["ferme propos", "propositum"],
+  ["resolution", "propositum"],
+  ["propositum", "propositum"],
+  ["demande des graces necessaires", "petitio-gratiarum"],
+  ["petitio gratiarum necessariarum", "petitio-gratiarum"],
+  ["oraison dominicale", "oratio-dominicalis"],
+  ["oratio dominicalis", "oratio-dominicalis"],
+  ["salutation angelique", "salutatio-angelica"],
+  ["salutatio angelica", "salutatio-angelica"],
+  ["symbole des apotres", "symbolum-apostolorum"],
+  ["symbolum apostolorum", "symbolum-apostolorum"],
+  ["confession des peches", "confessio-peccatorum"],
+  ["confessio peccatorum", "confessio-peccatorum"],
+  ["invocation de la sainte vierge de notre bon ange et de notre saint patron", "invocatio-sanctorum"],
+  ["invocatio sanctae virginis boni angeli nostri et sancti patroni", "invocatio-sanctorum"],
+  ["acte de foi", "actus-fidei"],
+  ["actus fidei", "actus-fidei"],
+  ["acte desperance", "actus-spei"],
+  ["actus spei", "actus-spei"],
+  ["acte de charite", "actus-caritatis"],
+  ["actus caritatis", "actus-caritatis"],
+  ["les commandements de dieu", "praecepta-dei"],
+  ["praecepta dei", "praecepta-dei"],
+  ["les commandements de leglise", "praecepta-ecclesiae"],
+  ["praecepta ecclesiae", "praecepta-ecclesiae"],
+  ["recommandation", "recommendatio"],
+  ["priere pour les vivants et pour les trepasses", "oratio-pro-vivis-defunctis"],
+  ["litanies de la sainte vierge", "litaniae-bmv"],
+  ["litaniae beatae mariae virginis", "litaniae-bmv"],
+  ["litanies du saint nom de jesus", "litaniae-nominis-jesu"],
+  ["litaniae sanctissimi nominis jesu", "litaniae-nominis-jesu"],
+  ["oraison", "oratio"],
+  ["prions", "oratio"],
+  ["oratio", "oratio"],
+  ["oremus", "oratio"]
+]);
 
-  return Array.from({ length: rowCount }, (_, index) => {
-    const frenchBlock = frenchBlocks[index] ? renderMarkdownBlock(frenchBlocks[index], "            ") : "";
-    const latinBlock = latinBlocks[index] ? renderMarkdownBlock(latinBlocks[index], "            ") : "";
+function normalizeAlignmentTitle(value) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[’']/g, "")
+    .replace(/[^a-zA-Z0-9\s-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
+function getAlignmentKey(block) {
+  const match = block.match(/^###\s+([^\r\n]+)$/);
+
+  if (!match) {
+    return "";
+  }
+
+  const normalizedTitle = normalizeAlignmentTitle(match[1]);
+  return alignmentKeys.get(normalizedTitle) || normalizedTitle;
+}
+
+function getAlignedSections(markdown) {
+  const sections = [];
+
+  getMarkdownBlocks(markdown).forEach((block) => {
+    const key = getAlignmentKey(block);
+
+    if (key || sections.length === 0) {
+      sections.push({ key, blocks: [block] });
+      return;
+    }
+
+    sections.at(-1).blocks.push(block);
+  });
+
+  return sections;
+}
+
+function alignSections(frenchSections, latinSections) {
+  const rows = [];
+  const usedLatinIndexes = new Set();
+
+  frenchSections.forEach((frenchSection) => {
+    const latinIndex = latinSections.findIndex((latinSection, index) => (
+      !usedLatinIndexes.has(index) && latinSection.key && latinSection.key === frenchSection.key
+    ));
+
+    if (latinIndex === -1) {
+      rows.push({ french: frenchSection, latin: null });
+      return;
+    }
+
+    usedLatinIndexes.add(latinIndex);
+    rows.push({ french: frenchSection, latin: latinSections[latinIndex] });
+  });
+
+  latinSections.forEach((latinSection, index) => {
+    if (!usedLatinIndexes.has(index)) {
+      rows.push({ french: null, latin: latinSection });
+    }
+  });
+
+  return rows;
+}
+
+function renderAlignedSection(section) {
+  return section
+    ? section.blocks.map((block) => renderMarkdownBlock(block, "            ")).join("\n")
+    : "";
+}
+
+function renderAlignedMarkdown(french, latin) {
+  const rows = alignSections(getAlignedSections(french), getAlignedSections(latin));
+
+  return rows.map((row) => {
+    const frenchBlock = renderAlignedSection(row.french);
+    const latinBlock = renderAlignedSection(row.latin);
 
     return `          <div class="prayer-aligned-row">
             <div class="prayer-aligned-cell" lang="fr">

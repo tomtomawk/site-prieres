@@ -244,6 +244,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let notificationTimer = null;
   let lastNotificationKey = "";
+  let speechSessionId = 0;
 
   function updateNotificationPermissionState() {
     const isSupported = "Notification" in window;
@@ -302,6 +303,42 @@ document.addEventListener("DOMContentLoaded", () => {
       .map((selector) => section.querySelector(selector)?.textContent.trim())
       .filter(Boolean)
       .join("\n\n");
+  }
+
+  function getSpeechChunks(text, maxLength = 2800) {
+    const chunks = [];
+    const parts = text.replace(/\s+/g, " ").match(/[^.!?;:]+[.!?;:]?/g) || [];
+    let currentChunk = "";
+
+    parts.forEach((part) => {
+      const nextChunk = currentChunk ? `${currentChunk} ${part}` : part;
+
+      if (nextChunk.length <= maxLength) {
+        currentChunk = nextChunk;
+        return;
+      }
+
+      if (currentChunk) {
+        chunks.push(currentChunk);
+      }
+
+      if (part.length <= maxLength) {
+        currentChunk = part;
+        return;
+      }
+
+      for (let index = 0; index < part.length; index += maxLength) {
+        chunks.push(part.slice(index, index + maxLength));
+      }
+
+      currentChunk = "";
+    });
+
+    if (currentChunk) {
+      chunks.push(currentChunk);
+    }
+
+    return chunks;
   }
 
   function updateSpeechButtons(activeButton = null) {
@@ -405,19 +442,42 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (button.classList.contains("is-speaking")) {
+      speechSessionId += 1;
       window.speechSynthesis.cancel();
       updateSpeechButtons();
       return;
     }
 
+    const chunks = getSpeechChunks(getSpeechText(section));
+
+    if (chunks.length === 0) {
+      return;
+    }
+
+    const sessionId = speechSessionId + 1;
+    speechSessionId = sessionId;
     window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(getSpeechText(section));
-    utterance.lang = document.documentElement.dataset.languageMode === "latin" ? "la" : "fr-FR";
-    utterance.rate = 0.92;
-    utterance.onend = () => updateSpeechButtons();
-    utterance.onerror = () => updateSpeechButtons();
     updateSpeechButtons(button);
-    window.speechSynthesis.speak(utterance);
+
+    const speakChunk = (index = 0) => {
+      if (speechSessionId !== sessionId) {
+        return;
+      }
+
+      if (index >= chunks.length) {
+        updateSpeechButtons();
+        return;
+      }
+
+      const utterance = new SpeechSynthesisUtterance(chunks[index]);
+      utterance.lang = document.documentElement.dataset.languageMode === "latin" ? "la" : "fr-FR";
+      utterance.rate = 0.92;
+      utterance.onend = () => speakChunk(index + 1);
+      utterance.onerror = () => updateSpeechButtons();
+      window.speechSynthesis.speak(utterance);
+    };
+
+    speakChunk();
   }
 
   function applyAngelusSettings() {
@@ -487,6 +547,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if ("speechSynthesis" in window) {
+      speechSessionId += 1;
       window.speechSynthesis.cancel();
     }
 
