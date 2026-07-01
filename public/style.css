@@ -606,6 +606,44 @@ h1 {
   text-align: center;
 }
 
+.prayer-time[data-rosary="true"] {
+  display: block;
+  width: min(100%, 64rem);
+  margin-inline: auto;
+  padding-top: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.prayer-time[data-rosary="true"]::before {
+  display: none;
+}
+
+.prayer-time[data-rosary="true"] .prayer-time-marker {
+  position: static;
+  display: inline-flex;
+  margin-bottom: 0.45rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  color: var(--rubric);
+  font-size: 0.78rem;
+}
+
+.prayer-time[data-rosary="true"] .prayer-time-dot {
+  width: auto;
+  height: auto;
+  color: var(--gold);
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  transform: none;
+}
+
+.prayer-time[data-rosary="true"].is-active .prayer-time-dot {
+  color: var(--gold);
+  border-color: transparent;
+  transform: none;
+}
+
 .ornament {
   margin-bottom: 1rem;
   color: var(--gold);
@@ -671,7 +709,7 @@ h3 {
 
 .virtual-rosary {
   display: grid;
-  width: min(100%, 52rem);
+  width: min(100%, 62rem);
   max-width: calc(100vw - 1.5rem);
   margin: 0 auto clamp(2rem, 6vw, 3.75rem);
   justify-items: center;
@@ -771,7 +809,7 @@ h3 {
 
 .virtual-rosary-stage {
   width: 100%;
-  max-width: 52rem;
+  max-width: 62rem;
   margin: 0.65rem 0 0.25rem;
   padding: 0;
   background: transparent;
