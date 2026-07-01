@@ -249,6 +249,10 @@ a {
   display: none !important;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 .translation-toggle:focus-within,
 .translation-toggle:hover {
   background: #fff;
