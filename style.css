@@ -675,6 +675,8 @@ h3 {
   margin: 0 auto clamp(2rem, 6vw, 3.75rem);
   justify-items: center;
   text-align: center;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
   user-select: none;
 }
 
@@ -774,6 +776,11 @@ h3 {
   background: transparent;
   border: 0;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  appearance: none;
+  user-select: none;
+  touch-action: manipulation;
 }
 
 .virtual-rosary-stage:focus-visible {
@@ -785,6 +792,8 @@ h3 {
   display: block;
   width: 100%;
   height: auto;
+  pointer-events: none;
+  user-select: none;
 }
 
 .virtual-rosary-chain {
