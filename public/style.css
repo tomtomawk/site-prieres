@@ -669,6 +669,214 @@ h3 {
   border-color: var(--rubric-dark);
 }
 
+.virtual-rosary {
+  display: grid;
+  max-width: 40rem;
+  margin: 0 auto clamp(2rem, 6vw, 3.75rem);
+  justify-items: center;
+  text-align: center;
+  user-select: none;
+}
+
+.virtual-rosary-day {
+  margin-bottom: 1.1rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.virtual-rosary-mystery {
+  display: grid;
+  max-width: 34rem;
+  gap: 0.45rem;
+  justify-items: center;
+}
+
+.virtual-rosary-mystery-nav {
+  display: grid;
+  grid-template-columns: 2.4rem minmax(0, 1fr) 2.4rem;
+  width: 100%;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.virtual-rosary-arrow {
+  min-width: 2.2rem;
+  min-height: 2.2rem;
+  padding: 0;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.virtual-rosary-arrow:hover,
+.virtual-rosary-arrow:focus-visible {
+  color: var(--rubric-dark);
+  outline: 1px solid rgb(185 154 98 / 50%);
+  outline-offset: 0.08rem;
+}
+
+.virtual-rosary-ordinal,
+.virtual-rosary-title,
+.virtual-rosary-verse,
+.virtual-rosary-fruit,
+.virtual-rosary-prayer-name,
+.virtual-rosary-prayer-text {
+  margin: 0;
+}
+
+.virtual-rosary-ordinal {
+  color: var(--rubric);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.virtual-rosary-title {
+  margin-top: 0.18rem;
+  color: var(--rubric-dark);
+  font-size: clamp(1.35rem, 5vw, 1.85rem);
+  font-weight: 400;
+  line-height: 1.18;
+}
+
+.virtual-rosary-verse {
+  max-width: 31rem;
+  color: var(--ink);
+  font-size: 1.02rem;
+  font-style: italic;
+  line-height: 1.48;
+}
+
+.virtual-rosary-fruit {
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.virtual-rosary-stage {
+  width: 100%;
+  max-width: 39rem;
+  margin: 0.4rem 0 0.2rem;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.virtual-rosary-stage:focus-visible {
+  outline: 1px solid rgb(185 154 98 / 36%);
+  outline-offset: 0.12rem;
+}
+
+.virtual-rosary-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.virtual-rosary-chain {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.virtual-rosary-bead {
+  fill: var(--paper);
+  stroke: var(--line);
+  stroke-width: 1.2;
+  transition: fill 220ms ease, stroke 220ms ease, filter 220ms ease;
+}
+
+.virtual-rosary-bead.is-done {
+  fill: #d5c29e;
+  stroke: var(--gold);
+}
+
+.virtual-rosary-bead.is-current {
+  fill: var(--rubric);
+  stroke: var(--gold);
+  stroke-width: 1.8;
+  filter: drop-shadow(0 0 5px rgb(185 154 98 / 70%));
+}
+
+.virtual-rosary-cross {
+  fill: none;
+  stroke: var(--line);
+  stroke-linecap: round;
+  stroke-width: 3;
+  transition: stroke 220ms ease, filter 220ms ease;
+}
+
+.virtual-rosary-cross.is-done {
+  stroke: var(--gold);
+}
+
+.virtual-rosary-cross.is-current {
+  stroke: var(--rubric);
+  filter: drop-shadow(0 0 5px rgb(185 154 98 / 70%));
+}
+
+.virtual-rosary-label {
+  fill: var(--muted);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.virtual-rosary-prayer {
+  display: grid;
+  min-height: 10.5rem;
+  max-width: 34rem;
+  gap: 0.65rem;
+  align-content: start;
+}
+
+.virtual-rosary-prayer-name {
+  color: var(--rubric);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.virtual-rosary-prayer-text {
+  color: var(--ink);
+  font-size: clamp(1.02rem, 3vw, 1.18rem);
+  line-height: 1.6;
+  text-align: center;
+  transition: opacity 180ms ease;
+}
+
+.virtual-rosary-prayer-text.is-hint {
+  color: var(--muted);
+  font-size: 1.02rem;
+  font-style: italic;
+}
+
+.virtual-rosary-prayer-text.is-long {
+  font-size: 0.98rem;
+  line-height: 1.52;
+}
+
+.virtual-rosary-prayer-text.is-fading {
+  opacity: 0;
+}
+
 .prayer-text {
   max-width: 36rem;
   margin: 0 auto;
@@ -784,6 +992,14 @@ html[data-language-mode="parallel"] .prayer-language {
   color: var(--rubric);
   font-size: 3.15em;
   line-height: 0.78;
+}
+
+.prayer-text .virtual-rosary p::first-letter {
+  float: none;
+  margin: 0;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
 }
 
 .prayer-text .amen {

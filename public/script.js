@@ -371,11 +371,324 @@ document.addEventListener("DOMContentLoaded", () => {
       return "douloureux";
     }
 
-    if (day === 1 || day === 3) {
+    if (day === 1 || day === 4) {
       return "joyeux";
     }
 
     return "glorieux";
+  }
+
+  const virtualRosaryPrayers = {
+    signe: {
+      name: "Signe de la Croix",
+      text: "Au nom du Père, et du Fils, et du Saint-Esprit. Ainsi soit-il."
+    },
+    credo: {
+      name: "Je crois en Dieu",
+      long: true,
+      text: "Je crois en Dieu, le Père tout-puissant, créateur du ciel et de la terre ; et en Jésus-Christ, son Fils unique, notre Seigneur, qui a été conçu du Saint-Esprit, est né de la Vierge Marie, a souffert sous Ponce Pilate, a été crucifié, est mort et a été enseveli, est descendu aux enfers, le troisième jour est ressuscité des morts, est monté aux cieux, est assis à la droite de Dieu le Père tout-puissant, d'où il viendra juger les vivants et les morts. Je crois au Saint-Esprit, à la sainte Église catholique, à la communion des saints, à la rémission des péchés, à la résurrection de la chair, à la vie éternelle. Ainsi soit-il."
+    },
+    pater: {
+      name: "Notre Père",
+      text: "Notre Père, qui êtes aux cieux, que votre nom soit sanctifié, que votre règne arrive, que votre volonté soit faite sur la terre comme au ciel. Donnez-nous aujourd'hui notre pain de chaque jour. Pardonnez-nous nos offenses, comme nous pardonnons à ceux qui nous ont offensés. Et ne nous laissez pas succomber à la tentation. Mais délivrez-nous du mal. Ainsi soit-il."
+    },
+    ave: {
+      name: "Je vous salue Marie",
+      text: "Je vous salue, Marie, pleine de grâce, le Seigneur est avec vous. Vous êtes bénie entre toutes les femmes, et Jésus, le fruit de vos entrailles, est béni. Sainte Marie, Mère de Dieu, priez pour nous, pauvres pécheurs, maintenant et à l'heure de notre mort. Ainsi soit-il."
+    },
+    gloria: {
+      name: "Gloire au Père",
+      text: "Gloire soit au Père, et au Fils, et au Saint-Esprit. Comme il était au commencement, maintenant et toujours, et dans les siècles des siècles. Ainsi soit-il."
+    },
+    domine: {
+      name: "Ô mon Jésus",
+      text: "Ô mon Jésus, pardonnez-nous nos péchés, préservez-nous du feu de l'enfer, conduisez au Ciel toutes les âmes, surtout celles qui ont le plus besoin de votre miséricorde. Ainsi soit-il."
+    }
+  };
+
+  const virtualRosaryMysteries = {
+    joyeux: {
+      label: "Joyeux",
+      items: [
+        { title: "L'Annonciation", verse: "« Voici la servante du Seigneur ; que tout m'advienne selon ta parole. » (Lc 1, 38)", fruit: "Fruit du mystère : l'humilité" },
+        { title: "La Visitation", verse: "« Tu es bénie entre toutes les femmes, et le fruit de tes entrailles est béni. » (Lc 1, 42)", fruit: "Fruit du mystère : la charité fraternelle" },
+        { title: "La Nativité", verse: "« Elle mit au monde son fils premier-né ; elle l'emmaillota et le coucha dans une mangeoire. » (Lc 2, 7)", fruit: "Fruit du mystère : l'esprit de pauvreté" },
+        { title: "La Présentation au Temple", verse: "« Mes yeux ont vu le salut que tu préparais à la face des peuples. » (Lc 2, 30-31)", fruit: "Fruit du mystère : l'obéissance et la pureté" },
+        { title: "Le Recouvrement de Jésus au Temple", verse: "« Ne saviez-vous pas qu'il me faut être aux affaires de mon Père ? » (Lc 2, 49)", fruit: "Fruit du mystère : la recherche de Dieu" }
+      ]
+    },
+    douloureux: {
+      label: "Douloureux",
+      items: [
+        { title: "L'Agonie à Gethsémani", verse: "« Père, s'il est possible, que cette coupe passe loin de moi ! Cependant, non pas comme moi je veux, mais comme toi tu veux. » (Mt 26, 39)", fruit: "Fruit du mystère : la contrition" },
+        { title: "La Flagellation", verse: "« Pilate prit alors Jésus et le fit flageller. » (Jn 19, 1)", fruit: "Fruit du mystère : la mortification des sens" },
+        { title: "Le Couronnement d'épines", verse: "« Les soldats tressèrent une couronne avec des épines et la lui mirent sur la tête. » (Jn 19, 2)", fruit: "Fruit du mystère : le courage dans l'épreuve" },
+        { title: "Le Portement de croix", verse: "« Portant lui-même sa croix, il sortit vers le lieu dit du Crâne. » (Jn 19, 17)", fruit: "Fruit du mystère : la patience" },
+        { title: "La Crucifixion", verse: "« Père, entre tes mains je remets mon esprit. » (Lc 23, 46)", fruit: "Fruit du mystère : l'amour de Dieu et le salut des âmes" }
+      ]
+    },
+    glorieux: {
+      label: "Glorieux",
+      items: [
+        { title: "La Résurrection", verse: "« Pourquoi cherchez-vous le Vivant parmi les morts ? Il n'est pas ici, il est ressuscité. » (Lc 24, 5-6)", fruit: "Fruit du mystère : la foi" },
+        { title: "L'Ascension", verse: "« Il fut emporté au ciel et s'assit à la droite de Dieu. » (Mc 16, 19)", fruit: "Fruit du mystère : l'espérance" },
+        { title: "La Pentecôte", verse: "« Tous furent remplis d'Esprit Saint. » (Ac 2, 4)", fruit: "Fruit du mystère : la charité et le zèle apostolique" },
+        { title: "L'Assomption de Marie", verse: "« Le Puissant fit pour moi des merveilles ; saint est son nom. » (Lc 1, 49)", fruit: "Fruit du mystère : la grâce d'une bonne mort" },
+        { title: "Le Couronnement de Marie", verse: "« Un signe grandiose apparut dans le ciel : une femme, ayant le soleil pour manteau, la lune sous les pieds, et sur la tête une couronne de douze étoiles. » (Ap 12, 1)", fruit: "Fruit du mystère : la persévérance et la confiance en Marie" }
+      ]
+    }
+  };
+
+  const virtualRosaryOrdinals = [
+    "Premier mystère",
+    "Deuxième mystère",
+    "Troisième mystère",
+    "Quatrième mystère",
+    "Cinquième mystère"
+  ];
+
+  const virtualRosaryDayNames = [
+    "dimanche",
+    "lundi",
+    "mardi",
+    "mercredi",
+    "jeudi",
+    "vendredi",
+    "samedi"
+  ];
+
+  const virtualRosaryCategoryOrder = ["joyeux", "douloureux", "glorieux"];
+  const virtualRosaryIntroSteps = [
+    { type: "signe", shape: "cross" },
+    { type: "credo", sameEl: true },
+    { type: "pater", r: 10 },
+    { type: "ave", r: 7, intention: "pour la foi" },
+    { type: "ave", r: 7, intention: "pour l'espérance" },
+    { type: "ave", r: 7, intention: "pour la charité" },
+    { type: "gloria", r: 8 }
+  ];
+  const virtualRosaryDecadeSteps = [
+    { type: "pater", r: 12, label: "Pater" },
+    ...Array.from({ length: 10 }, (_, index) => ({ type: "ave", r: 8, ave: index + 1 })),
+    { type: "gloria", r: 10, label: "Gloria" },
+    { type: "domine", r: 9, label: "Domine Jesu" }
+  ];
+
+  function initVirtualRosary(root, date = new Date()) {
+    const svg = root.querySelector("[data-rosary-svg]");
+    const stage = root.querySelector("[data-rosary-stage]");
+    const dayLabel = root.querySelector("[data-rosary-day]");
+    const ordinal = root.querySelector("[data-rosary-ordinal]");
+    const title = root.querySelector("[data-rosary-title]");
+    const verse = root.querySelector("[data-rosary-verse]");
+    const fruit = root.querySelector("[data-rosary-fruit]");
+    const prayerName = root.querySelector("[data-rosary-prayer-name]");
+    const prayerText = root.querySelector("[data-rosary-prayer-text]");
+    const previousButton = root.querySelector("[data-rosary-previous]");
+    const nextButton = root.querySelector("[data-rosary-next]");
+    const svgNamespace = "http://www.w3.org/2000/svg";
+    let categoryOrderIndex = virtualRosaryCategoryOrder.indexOf(getRosaryMysteryForDate(date));
+    let category = virtualRosaryCategoryOrder[categoryOrderIndex];
+    let mysteryIndex = 0;
+    let introActive = true;
+    let rosaryDone = false;
+    let sequence = [];
+    let stepToElement = [];
+    let elementFirstStep = [];
+    let elementShapes = [];
+    let step = -1;
+
+    function buildSequence() {
+      sequence = introActive
+        ? [...virtualRosaryIntroSteps, ...virtualRosaryDecadeSteps]
+        : [...virtualRosaryDecadeSteps];
+      stepToElement = [];
+      elementFirstStep = [];
+      let elementIndex = -1;
+
+      sequence.forEach((definition, index) => {
+        if (!definition.sameEl) {
+          elementIndex += 1;
+          elementFirstStep[elementIndex] = index;
+        }
+
+        stepToElement[index] = elementIndex;
+      });
+    }
+
+    function createSvgElement(name) {
+      return document.createElementNS(svgNamespace, name);
+    }
+
+    function buildRosary() {
+      buildSequence();
+      svg.innerHTML = "";
+      elementShapes = [];
+      const elementCount = elementFirstStep.length;
+      const getPosition = (elementIndex) => {
+        const ratio = elementIndex / (elementCount - 1);
+        return {
+          x: 40 + ratio * 600,
+          y: 60 + 115 * Math.sin(Math.PI * ratio)
+        };
+      };
+      const chain = createSvgElement("path");
+      const chainPath = Array.from({ length: elementCount }, (_, elementIndex) => {
+        const point = getPosition(elementIndex);
+        return `${elementIndex === 0 ? "M" : "L"} ${point.x} ${point.y}`;
+      }).join(" ");
+
+      chain.setAttribute("d", chainPath);
+      chain.setAttribute("class", "virtual-rosary-chain");
+      svg.append(chain);
+
+      elementFirstStep.forEach((firstStep, elementIndex) => {
+        const definition = sequence[firstStep];
+        const point = getPosition(elementIndex);
+        const group = createSvgElement("g");
+        let shape;
+
+        if (definition.shape === "cross") {
+          shape = createSvgElement("path");
+          shape.setAttribute("d", `M ${point.x} ${point.y - 15} L ${point.x} ${point.y + 15} M ${point.x - 9} ${point.y - 4} L ${point.x + 9} ${point.y - 4}`);
+          shape.setAttribute("class", "virtual-rosary-cross");
+        } else {
+          shape = createSvgElement("circle");
+          shape.setAttribute("cx", point.x);
+          shape.setAttribute("cy", point.y);
+          shape.setAttribute("r", definition.r);
+          shape.setAttribute("class", "virtual-rosary-bead");
+        }
+
+        group.append(shape);
+        elementShapes.push(shape);
+
+        if (definition.label) {
+          const label = createSvgElement("text");
+          label.setAttribute("x", point.x);
+          label.setAttribute("y", point.y - definition.r - 9);
+          label.setAttribute("text-anchor", "middle");
+          label.setAttribute("class", "virtual-rosary-label");
+          label.textContent = definition.label;
+          group.append(label);
+        }
+
+        svg.append(group);
+      });
+    }
+
+    function setPrayer(name, text, options = {}) {
+      prayerText.classList.add("is-fading");
+
+      window.setTimeout(() => {
+        prayerName.textContent = name;
+        prayerText.textContent = text;
+        prayerText.classList.toggle("is-hint", Boolean(options.hint));
+        prayerText.classList.toggle("is-long", Boolean(options.long));
+        prayerText.classList.remove("is-fading");
+      }, prefersReducedMotion ? 0 : 160);
+    }
+
+    function renderMystery() {
+      const mystery = virtualRosaryMysteries[category].items[mysteryIndex];
+      dayLabel.textContent = `Aujourd'hui ${virtualRosaryDayNames[date.getDay()]} — mystères ${virtualRosaryMysteries[category].label.toLowerCase()}`;
+      ordinal.textContent = `${virtualRosaryOrdinals[mysteryIndex]} ${virtualRosaryMysteries[category].label.toLowerCase()}`;
+      title.textContent = mystery.title;
+      verse.textContent = mystery.verse;
+      fruit.textContent = mystery.fruit;
+    }
+
+    function render() {
+      const currentElement = step >= 0 && step < sequence.length ? stepToElement[step] : -1;
+
+      elementShapes.forEach((shape, elementIndex) => {
+        const lastStepOfElement = stepToElement.lastIndexOf(elementIndex);
+        shape.classList.toggle("is-done", step > lastStepOfElement);
+        shape.classList.toggle("is-current", elementIndex === currentElement);
+      });
+
+      if (step === -1) {
+        setPrayer("", introActive ? "Touchez la croix pour commencer." : "Touchez la première perle pour commencer la dizaine.", { hint: true });
+        return;
+      }
+
+      if (step >= sequence.length) {
+        if (mysteryIndex < 4) {
+          shiftMystery(1);
+          return;
+        }
+
+        rosaryDone = true;
+        const nextCategory = virtualRosaryCategoryOrder[(categoryOrderIndex + 1) % virtualRosaryCategoryOrder.length];
+        setPrayer("", `Chapelet terminé. Touchez pour poursuivre avec les mystères ${virtualRosaryMysteries[nextCategory].label.toLowerCase()}.`, { hint: true });
+        return;
+      }
+
+      const stepDefinition = sequence[step];
+      const prayer = virtualRosaryPrayers[stepDefinition.type];
+      let name = prayer.name;
+
+      if (stepDefinition.ave) {
+        name += ` — ${stepDefinition.ave} / 10`;
+      }
+
+      if (stepDefinition.intention) {
+        name += ` — ${stepDefinition.intention}`;
+      }
+
+      setPrayer(name, prayer.text, { long: prayer.long });
+    }
+
+    function goToStep(index) {
+      if (index === step) {
+        return;
+      }
+
+      step = Math.max(0, Math.min(index, sequence.length));
+      render();
+    }
+
+    function resetDecade() {
+      step = -1;
+      buildRosary();
+      renderMystery();
+      render();
+    }
+
+    function shiftMystery(delta) {
+      introActive = false;
+      rosaryDone = false;
+      mysteryIndex = (mysteryIndex + delta + 5) % 5;
+      resetDecade();
+    }
+
+    function goToNextCategory() {
+      categoryOrderIndex = (categoryOrderIndex + 1) % virtualRosaryCategoryOrder.length;
+      category = virtualRosaryCategoryOrder[categoryOrderIndex];
+      mysteryIndex = 0;
+      rosaryDone = false;
+      resetDecade();
+    }
+
+    stage.addEventListener("click", () => {
+      if (rosaryDone) {
+        goToNextCategory();
+        return;
+      }
+
+      goToStep(step + 1);
+    });
+
+    previousButton.addEventListener("click", () => shiftMystery(-1));
+    nextButton.addEventListener("click", () => shiftMystery(1));
+
+    buildRosary();
+    renderMystery();
+    render();
+  }
+
+  function initVirtualRosaries() {
+    document.querySelectorAll("[data-virtual-rosary]").forEach((root) => initVirtualRosary(root));
   }
 
   function getMysteryKeyFromText(text) {
@@ -565,6 +878,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setLanguageMode(savedLanguageMode);
   applyAngelusSettings();
+  initVirtualRosaries();
   updateNotificationPermissionState();
 
   settingsToggle.addEventListener("click", () => {

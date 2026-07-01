@@ -259,6 +259,31 @@ ${latinBlock}
   }).join("\n");
 }
 
+function renderVirtualRosary() {
+  return `        <div class="virtual-rosary" data-virtual-rosary>
+          <div class="virtual-rosary-day" data-rosary-day></div>
+          <div class="virtual-rosary-mystery" aria-live="polite">
+            <div class="virtual-rosary-mystery-nav">
+              <button class="virtual-rosary-arrow" type="button" data-rosary-previous aria-label="Mystère précédent">‹</button>
+              <div>
+                <p class="virtual-rosary-ordinal" data-rosary-ordinal></p>
+                <p class="virtual-rosary-title" data-rosary-title></p>
+              </div>
+              <button class="virtual-rosary-arrow" type="button" data-rosary-next aria-label="Mystère suivant">›</button>
+            </div>
+            <p class="virtual-rosary-verse" data-rosary-verse></p>
+            <p class="virtual-rosary-fruit" data-rosary-fruit></p>
+          </div>
+          <button class="virtual-rosary-stage" type="button" data-rosary-stage aria-label="Avancer dans le chapelet">
+            <svg class="virtual-rosary-svg" viewBox="0 0 680 250" role="img" aria-label="Chapelet interactif" focusable="false" data-rosary-svg></svg>
+          </button>
+          <div class="virtual-rosary-prayer" aria-live="polite">
+            <p class="virtual-rosary-prayer-name" data-rosary-prayer-name></p>
+            <p class="virtual-rosary-prayer-text is-hint" data-rosary-prayer-text></p>
+          </div>
+        </div>`;
+}
+
 function parseFrontMatter(source, filename) {
   const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
 
@@ -364,16 +389,16 @@ function renderPrayerEntry(entry) {
       <p class="moment"><span class="ui-fr">${escapeHtml(prayer.moment_fr)}</span><span class="ui-la">${escapeHtml(prayer.moment_la)}</span></p>
       <div class="prayer-title-row">
         <h3 id="titre-${entry.id}"><span class="ui-fr">${escapeHtml(titleFr)}</span><span class="ui-la">${escapeHtml(titleLa)}</span></h3>
-        <button class="speech-toggle" type="button" data-speech-target="${entry.id}" data-speech-title-fr="${escapeHtml(titleFr)}" data-speech-title-la="${escapeHtml(titleLa)}" aria-label="Écouter ${escapeHtml(titleFr)}" aria-pressed="false" title="Écouter ${escapeHtml(titleFr)}">
+${entry.rosary ? "" : `        <button class="speech-toggle" type="button" data-speech-target="${entry.id}" data-speech-title-fr="${escapeHtml(titleFr)}" data-speech-title-la="${escapeHtml(titleLa)}" aria-label="Écouter ${escapeHtml(titleFr)}" aria-pressed="false" title="Écouter ${escapeHtml(titleFr)}">
           <span class="speech-icon" aria-hidden="true">♪</span>
           <span class="speech-button-text">
             <span class="ui-fr"><span class="speech-action-fr">Écouter</span> ${escapeHtml(titleFr)}</span>
             <span class="ui-la"><span class="speech-action-la">Audire</span> ${escapeHtml(titleLa)}</span>
           </span>
-        </button>
+        </button>`}
       </div>
       <div class="prayer-text prayer-pair">
-        <div class="prayer-language prayer-fr" lang="fr">
+${entry.rosary ? renderVirtualRosary() : `        <div class="prayer-language prayer-fr" lang="fr">
 ${renderMarkdown(prayer.french)}
         </div>
         <div class="prayer-language prayer-la" lang="la">
@@ -381,7 +406,7 @@ ${renderMarkdown(prayer.latin)}
         </div>
         <div class="prayer-aligned">
 ${renderAlignedMarkdown(prayer.french, prayer.latin)}
-        </div>
+        </div>`}
       </div>
         </div>
       </section>`;
