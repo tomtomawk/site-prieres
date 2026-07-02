@@ -610,7 +610,7 @@ h1 {
   display: block;
   width: 100%;
   margin-inline: 0;
-  padding-top: clamp(2.5rem, 6vw, 4.5rem);
+  padding-top: clamp(1.35rem, 4vw, 2.75rem);
 }
 
 .prayer-time[data-rosary="true"]::before {
@@ -621,7 +621,7 @@ h1 {
   position: static;
   display: grid;
   width: max-content;
-  margin: 0 0 0.65rem;
+  margin: 0 0 0.25rem;
   gap: 0.45rem;
   justify-items: center;
 }
@@ -632,6 +632,18 @@ h1 {
 
 .prayer-time[data-rosary="true"].is-active .prayer-time-dot {
   transform: none;
+}
+
+.prayer-time[data-rosary="true"] .prayer-title-row {
+  margin-top: clamp(-3.15rem, -5vw, -2.2rem);
+}
+
+.prayer-time[data-rosary="true"] .moment {
+  margin-bottom: 0.2rem;
+}
+
+.prayer-time[data-rosary="true"] h3 {
+  margin-bottom: clamp(1rem, 3vw, 1.6rem);
 }
 
 .ornament {
@@ -710,11 +722,11 @@ h3 {
 }
 
 .virtual-rosary-day {
-  margin-bottom: 1.1rem;
+  margin-bottom: 0.55rem;
   color: var(--muted);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.11em;
   line-height: 1.3;
   text-transform: uppercase;
 }
@@ -722,7 +734,7 @@ h3 {
 .virtual-rosary-mystery {
   display: grid;
   max-width: 34rem;
-  gap: 0.45rem;
+  gap: 0.32rem;
   justify-items: center;
 }
 
@@ -1242,6 +1254,7 @@ html[data-language-mode="parallel"] .prayer-language {
   }
 
   .prayer-time[data-rosary="true"] {
+    padding-top: 1.15rem;
     padding-right: 0;
     padding-left: 0;
   }
@@ -1254,11 +1267,15 @@ html[data-language-mode="parallel"] .prayer-language {
     position: static;
     display: grid;
     width: max-content;
-    margin: 0 0 0.65rem;
+    margin: 0 0 0.2rem;
     gap: 0.28rem;
     justify-items: center;
     font-size: 0.58rem;
     letter-spacing: 0.03em;
+  }
+
+  .prayer-time[data-rosary="true"] .prayer-title-row {
+    margin-top: -2.25rem;
   }
 
   html[data-language-mode="parallel"] .prayer-book {
