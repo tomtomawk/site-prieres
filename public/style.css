@@ -635,7 +635,7 @@ h1 {
 }
 
 .prayer-time[data-rosary="true"] .prayer-title-row {
-  margin-top: clamp(-3.15rem, -5vw, -2.2rem);
+  margin-top: 0;
 }
 
 .prayer-time[data-rosary="true"] .moment {
@@ -1275,7 +1275,7 @@ html[data-language-mode="parallel"] .prayer-language {
   }
 
   .prayer-time[data-rosary="true"] .prayer-title-row {
-    margin-top: -2.25rem;
+    margin-top: 0;
   }
 
   html[data-language-mode="parallel"] .prayer-book {
