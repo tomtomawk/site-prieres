@@ -602,11 +602,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (definition.label) {
           const label = createSvgElement("text");
-          const labelIsNearStart = point.x < 90;
-          const labelIsNearEnd = point.x > 670;
-          label.setAttribute("x", labelIsNearStart ? point.x + 6 : labelIsNearEnd ? point.x - 6 : point.x);
-          label.setAttribute("y", point.y - definition.r - 9);
-          label.setAttribute("text-anchor", labelIsNearStart ? "start" : labelIsNearEnd ? "end" : "middle");
+          const labelOffset = definition.label === "Pater" ? 20 : 26;
+          const labelX = Math.max(64, Math.min(696, point.x));
+          label.setAttribute("x", labelX);
+          label.setAttribute("y", point.y - definition.r - labelOffset);
+          label.setAttribute("text-anchor", "middle");
           label.setAttribute("class", "virtual-rosary-label");
           label.textContent = definition.label;
           group.append(label);

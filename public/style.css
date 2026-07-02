@@ -843,14 +843,16 @@ h3 {
 
 .virtual-rosary-chain {
   fill: none;
-  stroke: var(--line);
-  stroke-width: 1;
+  stroke: rgb(185 154 98 / 58%);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.35;
 }
 
 .virtual-rosary-bead {
-  fill: var(--paper);
-  stroke: var(--line);
-  stroke-width: 1.2;
+  fill: #fffaf0;
+  stroke: rgb(185 154 98 / 72%);
+  stroke-width: 2;
   transition: fill 220ms ease, stroke 220ms ease, filter 220ms ease;
 }
 
@@ -868,9 +870,9 @@ h3 {
 
 .virtual-rosary-cross {
   fill: none;
-  stroke: var(--line);
+  stroke: rgb(185 154 98 / 68%);
   stroke-linecap: round;
-  stroke-width: 3;
+  stroke-width: 4;
   transition: stroke 220ms ease, filter 220ms ease;
 }
 
@@ -885,13 +887,13 @@ h3 {
 
 .virtual-rosary-label {
   fill: var(--rubric-dark);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.055em;
   paint-order: stroke;
   stroke: var(--paper);
   stroke-linejoin: round;
-  stroke-width: 3px;
+  stroke-width: 4px;
   text-transform: uppercase;
 }
 
